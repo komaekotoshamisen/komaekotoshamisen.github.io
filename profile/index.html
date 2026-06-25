@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>講師プロフィール | 狛江箏・三味線教室</title>
+<link rel="stylesheet" href="../style.css" />
+<style>
+.profile-grid { display: grid; grid-template-columns: 380px 1fr; gap: 64px; align-items: start; }
+.profile-img-wrap { position: relative; position: sticky; top: 84px; }
+.profile-img-frame { position: absolute; top:-14px; left:-14px; right:14px; bottom:14px; border:1px solid var(--green-mid); }
+.profile-img { width:100%; display:block; position:relative; z-index:1; box-shadow:0 22px 55px rgba(46,38,32,0.28); }
+.profile-ss { position:relative; z-index:1; width:100%; aspect-ratio:3/4; overflow:hidden; box-shadow:0 22px 55px rgba(46,38,32,0.28); }
+.profile-ss .ps { position:absolute; inset:0; background-size:cover; background-position:center 22%; opacity:0; animation:pfade 12s ease-in-out infinite; }
+.profile-ss .ps1 { background-image:url('../images/hero_shamisen.jpg'); animation-delay:0s; }
+.profile-ss .ps2 { background-image:url('../images/profile_enso.jpg'); animation-delay:6s; }
+@keyframes pfade { 0%{opacity:0;} 5%{opacity:1;} 45%{opacity:1;} 50%{opacity:0;} 100%{opacity:0;} }
+@media (prefers-reduced-motion: reduce){ .profile-ss .ps{animation:none;} .profile-ss .ps1{opacity:1;} }
+.profile-name { font-family:'Shippori Mincho',serif; font-size:30px; font-weight:700; letter-spacing:.2em; color:var(--green-dark); margin-bottom:4px; }
+.profile-name-en { font-family:'Cormorant Garamond',serif; font-size:14px; font-style:italic; letter-spacing:.25em; color:var(--green-mid); display:block; margin-bottom:28px; }
+.profile-text { font-size:13px; line-height:2.3; color:var(--ink-mid); margin-bottom:16px; }
+.profile-section-title { font-family:'Shippori Mincho',serif; font-size:16px; font-weight:600; color:var(--green-dark); border-left:3px solid var(--green); padding-left:12px; margin:32px 0 16px; }
+.career-list { list-style:none; }
+.career-list li { display:flex; gap:20px; font-size:13px; line-height:1.9; color:var(--ink-mid); padding:8px 0; border-bottom:1px solid var(--border); }
+.career-list li:last-child { border-bottom:none; }
+.career-year { color:var(--green-mid); white-space:nowrap; min-width:60px; font-weight:500; }
+@media(max-width:768px){ .profile-grid{grid-template-columns:1fr;gap:36px;} .profile-img-wrap{position:relative;top:0;max-width:300px;margin:0 auto;} }
+</style>
+</head>
+<body>
+<nav class="global-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-jp">狛江箏・三味線教室</span>
+      <span class="nav-logo-en">Komae Koto &amp; Shamisen School</span>
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">トップ</a></li>
+        <li><a href="../lesson/index.html">レッスン</a></li>
+        <li><a href="../hajimete/index.html">はじめての方へ</a></li>
+        <li><a href="../faq/index.html">よくあるご質問</a></li>
+        <li><a href="../profile/index.html">講師紹介</a></li>
+        <li><a href="../contact/index.html" class="nav-cta">体験レッスン申込</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-img" style="background-image:url('../images/masako_topimg.jpg');"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-en">Profile</span>
+    <h1 class="page-hero-title">講師プロフィール</h1>
+  </div>
+</div>
+<section class="section">
+  <div class="container">
+    <div class="profile-grid" data-anim>
+      <div class="profile-img-wrap">
+        <div class="profile-img-frame"></div>
+        <div class="profile-ss">
+          <div class="ps ps1"></div>
+          <div class="ps ps2"></div>
+        </div>
+      </div>
+      <div>
+        <h2 class="profile-name">渡辺 正子</h2>
+        <span class="profile-name-en">Masako Watanabe</span>
+        <div id="profile-bio"></div>
+        <div class="profile-section-title" data-anim>経歴</div>
+        <ul class="career-list" id="profile-career"></ul>
+        <div class="profile-section-title" data-anim>所属・活動</div>
+        <ul class="career-list" id="profile-affiliations"></ul>
+        <div class="profile-section-title" data-anim>NHK出演歴</div>
+        <ul class="career-list" id="profile-nhk"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="unified-cta">
+  <div class="unified-cta-inner">
+    <div class="ucta-col">
+      <span class="ucta-label">Instagram</span>
+      <a href="https://www.instagram.com/masako_w112/" target="_blank" rel="noopener" class="ucta-ig">📷 @masako_w112</a>
+      <p class="ucta-sub">最新情報はInstagramで</p>
+    </div>
+    <div class="ucta-div"></div>
+    <div class="ucta-col">
+      <span class="ucta-label">Contact</span>
+      <a href="../contact/index.html" class="ucta-btn">お問い合わせフォーム</a>
+      <p class="ucta-sub" style="margin-top:8px;">レッスン申込・公演依頼など</p>
+    </div>
+    <div class="ucta-div"></div>
+    <div class="ucta-col">
+      <span class="ucta-label">Phone</span>
+      <span class="ucta-tel">070-3847-6962</span>
+      <p class="ucta-sub">教室・問い合わせ専用</p>
+    </div>
+  </div>
+</section>
+
+<footer class="global-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div><p class="footer-logo-jp">狛江箏・三味線教室</p><span class="footer-logo-en">Masako Watanabe — Komae Koto &amp; Shamisen School</span></div>
+            <nav class="footer-nav">
+        <a href="../lesson/index.html">レッスン</a>
+        <a href="../hajimete/index.html">はじめての方へ</a>
+        <a href="../faq/index.html">よくあるご質問</a>
+        <a href="../profile/index.html">講師紹介</a>
+        <a href="../cd/index.html">楽譜・CD・DVD</a>
+        <a href="../contact/index.html">お問い合わせ</a>
+        <a href="../privacy/index.html">個人情報の取扱い</a>
+      </nav>
+    </div>
+    <p class="footer-copy">Copyright &copy; 狛江箏・三味線教室 Masako Watanabe. All Rights Reserved.</p>
+  </div>
+</footer>
+<script src="../data/site-data.js"></script>
+<script>
+(function(){
+  if(typeof SITE_DATA === 'undefined' || !SITE_DATA.profile) return;
+  var p = SITE_DATA.profile;
+  function escH(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  // 自己紹介文
+  var bioEl = document.getElementById('profile-bio');
+  (p.bio||[]).forEach(function(t){
+    var el = document.createElement('p');
+    el.className = 'profile-text';
+    el.textContent = t;
+    bioEl.appendChild(el);
+  });
+
+  // 経歴・所属・NHKリスト共通
+  function renderList(id, arr) {
+    var ul = document.getElementById(id);
+    if (!ul) return;
+    ul.innerHTML = (arr||[]).map(function(r){
+      return '<li><span class="career-year">' + escH(r.year) + '</span><span>' + escH(r.desc) + '</span></li>';
+    }).join('');
+  }
+  renderList('profile-career', p.career);
+  renderList('profile-affiliations', p.affiliations);
+  renderList('profile-nhk', p.nhk);
+})();
+</script>
+<script src="../common.js"></script>
+</body>
+</html>

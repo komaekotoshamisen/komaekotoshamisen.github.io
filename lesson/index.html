@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>レッスン | 箏演奏家 渡辺正子</title>
+<link rel="stylesheet" href="../style.css" />
+<style>
+.lesson-intro { font-size:14px; line-height:2.4; color:var(--ink-mid); max-width:700px; margin:0 auto 56px; text-align:center; }
+.lesson-block { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; margin-bottom:64px; }
+.lesson-block.reverse { direction:rtl; }
+.lesson-block.reverse > * { direction:ltr; }
+.lesson-block-img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; border:1px solid var(--border); }
+.lesson-block-img-placeholder { width:100%; aspect-ratio:4/3; background:var(--green-bg); display:flex; align-items:center; justify-content:center; color:var(--green-mid); font-size:12px; border:1px solid var(--border); }
+.lesson-tag { font-size:11px; letter-spacing:.2em; color:var(--green-mid); display:block; margin-bottom:8px; }
+.lesson-h2 { font-family:'Shippori Mincho',serif; font-size:22px; font-weight:600; letter-spacing:.15em; color:var(--green-dark); margin-bottom:16px; }
+.lesson-text { font-size:13px; line-height:2.3; color:var(--ink-mid); margin-bottom:12px; }
+.lesson-detail { background:var(--green-pale); border:1px solid var(--border); padding:20px 24px; margin-top:16px; }
+.lesson-detail dl { display:grid; grid-template-columns:80px 1fr; gap:8px 16px; font-size:13px; }
+.lesson-detail dt { color:var(--green-dark); font-weight:500; }
+.lesson-detail dd { color:var(--ink-mid); }
+.divider { border:none; border-top:1px solid var(--border); margin:56px 0; }
+.photo-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:32px; }
+.photo-row img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; border:1px solid var(--border); }
+.cta-box { background:var(--green-dark); color:var(--white); padding:40px; text-align:center; margin-top:64px; }
+.cta-box h3 { font-family:'Shippori Mincho',serif; font-size:20px; letter-spacing:.2em; margin-bottom:12px; }
+.cta-box p { font-size:13px; line-height:2.2; color:rgba(255,255,255,.8); margin-bottom:24px; }
+.cta-box .tel { font-family:'Shippori Mincho',serif; font-size:22px; letter-spacing:.1em; color:var(--white); margin-bottom:20px; display:block; }
+@media(max-width:768px){
+  .lesson-block,.lesson-block.reverse{grid-template-columns:1fr;direction:ltr;}
+  .photo-row{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+<nav class="global-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-jp">狛江箏・三味線教室</span>
+      <span class="nav-logo-en">Komae Koto &amp; Shamisen School</span>
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">トップ</a></li>
+        <li><a href="../lesson/index.html">レッスン</a></li>
+        <li><a href="../hajimete/index.html">はじめての方へ</a></li>
+        <li><a href="../faq/index.html">よくあるご質問</a></li>
+        <li><a href="../profile/index.html">講師紹介</a></li>
+        <li><a href="../contact/index.html" class="nav-cta">体験レッスン申込</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-img" style="background-image:url('../images/lesson_topimg.jpg');"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-en">Lesson</span>
+    <h1 class="page-hero-title">レッスン</h1>
+  </div>
+</div>
+<section class="section">
+  <div class="container">
+    <p class="lesson-intro" data-anim>
+      琴・三味線・尺八など日本の伝統楽器の素晴らしさを、<br>
+      一人でも多くの方に伝えたいという思いでレッスンを行っています。<br>
+      初心者の方もお気軽にどうぞ。
+    </p>
+
+    <!-- 個人レッスン -->
+    <div class="lesson-block" data-anim>
+      <img src="../images/lesson02.jpg" alt="個人レッスン" class="lesson-block-img" />
+      <div>
+        <span class="lesson-tag">Individual Lesson</span>
+        <h2 class="lesson-h2">個人レッスン</h2>
+        <p class="lesson-text">
+          初心者の方から経験者まで、個々のペースに合わせて丁寧に指導します。
+          琴の基礎から演奏技術まで、楽しみながら一緒に学んでいきましょう。
+        </p>
+        <p class="lesson-text">
+          こどもから大人まで幅広く受け付けています。
+          ご要望に応じてカリキュラムを組みますので、まずはお気軽にご相談ください。
+        </p>
+        <!-- ★ レッスン料金・場所は data/site-data.js で管理しています -->
+        <div class="lesson-detail" id="lesson-detail-auto">
+          <dl>
+            <dt>対象</dt><dd>小学生〜大人（年齢不問）</dd>
+            <dt>場所</dt><dd>東京都狛江市岩戸北4丁目（岩戸交番隣）<br>小田急線 喜多見駅南口 徒歩7分</dd>
+            <dt>曜日</dt><dd>土曜・日曜（平日は不定期、お問い合わせください）</dd>
+            <dt>入会金</dt><dd>5,000円</dd>
+            <dt>年会費</dt><dd>5,000円</dd>
+            <dt>月謝</dt><dd id="lesson-fees-text">
+              子ども・初級（月2回 / 60分グループ）　3,000円<br>
+              大人・初級（月2回 / 60分グループ）　5,000円<br>
+              小・中学生（月2回 / 45分個人）　8,500円<br>
+              高校生〜一般（月2回 / 45分個人）　10,000円
+            </dd>
+          </dl>
+        </div>
+        <script src="../data/site-data.js"></script>
+        <script>
+        (function(){
+          if(typeof SITE_DATA === 'undefined') return;
+          var d = SITE_DATA.lesson;
+          var dl = document.getElementById('lesson-detail-auto').querySelector('dl');
+          // 場所・曜日・入会金・年会費を更新
+          var dds = dl.querySelectorAll('dd');
+          dds[1].innerHTML = d.location + '<br>' + d.access;
+          dds[2].textContent = d.days;
+          dds[3].textContent = d.admissionFee;
+          dds[4].textContent = d.annualFee;
+          dds[5].innerHTML = d.fees.map(function(f){ return f.label + '　' + f.amount; }).join('<br>');
+        })();
+        </script>
+      </div>
+    </div>
+
+    <hr class="divider" id="kodomo" />
+
+    <!-- こども合奏団 -->
+    <div class="lesson-block reverse" data-anim>
+      <img src="../images/welcome_kids.jpg" alt="こども合奏団" class="lesson-block-img" />
+      <div>
+        <span class="lesson-tag">Children's Ensemble</span>
+        <h2 class="lesson-h2">こども合奏団</h2>
+        <p class="lesson-text">
+          小・中学生による元気いっぱいの箏合奏団です。
+          市内を中心に活動し、仲間と一緒に音楽の楽しさを学びます。
+        </p>
+        <p class="lesson-text">
+          発表会への出演や地域イベントへの参加など、演奏の機会も豊富。
+          音楽を通じた仲間との絆を大切にしています。
+        </p>
+        <div class="lesson-detail">
+          <dl>
+            <dt>対象</dt><dd>小学生・中学生</dd>
+            <dt>主な活動</dt><dd>
+              狛江市内を中心とした催しへの参加<br>
+              発表会・合奏講習会への出演
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- 門下生・合奏団の活動歴 -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:8px;">
+      <div>
+        <span class="lesson-tag" style="display:block;margin-bottom:10px;">門下生の活動</span>
+        <ul style="list-style:none;font-size:12px;line-height:2.2;color:var(--ink-mid);">
+          <li>・NPO法人邦楽指導者ネットワーク21 夏季合宿</li>
+          <li>・門下生によるクリスマスコンサート</li>
+          <li>・門下生による新春コンサート</li>
+          <li>・ランチタイムコンサートIN成城 他</li>
+        </ul>
+      </div>
+      <div>
+        <span class="lesson-tag" style="display:block;margin-bottom:10px;">箏アンサンブル</span>
+        <ul style="list-style:none;font-size:12px;line-height:2.2;color:var(--ink-mid);">
+          <li>・日本橋三越100周年事業 百面箏・三十二女神コンサート</li>
+          <li>・狛江市「若き万葉筝曲の調べ」</li>
+          <li>・音楽の街狛江・夢コンサート</li>
+          <li>・山梨県小菅村多摩源流祭 他</li>
+        </ul>
+      </div>
+      <div>
+        <span class="lesson-tag" style="display:block;margin-bottom:10px;">こども合奏団</span>
+        <ul style="list-style:none;font-size:12px;line-height:2.2;color:var(--ink-mid);">
+          <li>・文化庁主催 伝統文化こども教室交流事業 発表会</li>
+          <li>・山梨県小菅村多摩源流祭</li>
+          <li>・狛江市むいから民家苑 さくらまつり</li>
+          <li>・夏休みこどもお箏コンサート 他</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background:var(--green-pale);border:1px solid var(--border);padding:20px 24px;margin-top:8px;margin-bottom:48px;">
+      <p style="font-size:13px;font-weight:500;color:var(--green-dark);margin-bottom:8px;">東京都立狛江高校 箏曲部（渡辺泰子・正子指導）</p>
+      <p style="font-size:12px;line-height:2;color:var(--ink-mid);">
+        全国高等学校総合文化祭日本音楽部門 文化庁長官賞受賞。東京都優秀校として「国立劇場の夏」出場。<br>
+        現在までに全国大会へ東京都代表として14回出場、うち優良賞11回・文化庁長官賞3回、国立劇場優秀校東京公演に4回出演。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="unified-cta">
+  <div class="unified-cta-inner">
+    <div class="ucta-col">
+      <span class="ucta-label">Instagram</span>
+      <a href="https://www.instagram.com/masako_w112/" target="_blank" rel="noopener" class="ucta-ig">📷 @masako_w112</a>
+      <p class="ucta-sub">最新情報はInstagramで</p>
+    </div>
+    <div class="ucta-div"></div>
+    <div class="ucta-col">
+      <span class="ucta-label">Contact</span>
+      <a href="../contact/index.html" class="ucta-btn">お問い合わせフォーム</a>
+      <p class="ucta-sub" style="margin-top:8px;">見学・体験レッスンも受付中</p>
+    </div>
+    <div class="ucta-div"></div>
+    <div class="ucta-col">
+      <span class="ucta-label">Phone</span>
+      <span class="ucta-tel">070-3847-6962</span>
+      <p class="ucta-sub">教室・問い合わせ専用</p>
+    </div>
+  </div>
+</section>
+
+<footer class="global-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div><p class="footer-logo-jp">狛江箏・三味線教室</p><span class="footer-logo-en">Masako Watanabe — Komae Koto &amp; Shamisen School</span></div>
+            <nav class="footer-nav">
+        <a href="../lesson/index.html">レッスン</a>
+        <a href="../hajimete/index.html">はじめての方へ</a>
+        <a href="../faq/index.html">よくあるご質問</a>
+        <a href="../profile/index.html">講師紹介</a>
+        <a href="../cd/index.html">楽譜・CD・DVD</a>
+        <a href="../contact/index.html">お問い合わせ</a>
+        <a href="../privacy/index.html">個人情報の取扱い</a>
+      </nav>
+    </div>
+    <p class="footer-copy">Copyright &copy; 狛江箏・三味線教室 Masako Watanabe. All Rights Reserved.</p>
+  </div>
+</footer>
+<script src="../common.js"></script>
+</body>
+</html>

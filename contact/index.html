@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>お問い合わせ | 箏演奏家 渡辺正子</title>
+<link rel="stylesheet" href="../style.css" />
+<style>
+.contact-wrap { display:grid; grid-template-columns:1fr 2fr; gap:56px; align-items:start; }
+.contact-info h2 { font-family:'Shippori Mincho',serif; font-size:18px; color:var(--green-dark); margin-bottom:20px; }
+.contact-info dl { font-size:13px; }
+.contact-info dt { font-weight:500; color:var(--green-dark); margin-bottom:4px; margin-top:16px; }
+.contact-info dd { color:var(--ink-mid); line-height:1.9; }
+.contact-info dd:first-of-type { margin-top:0; }
+.contact-info .tel { font-family:'Shippori Mincho',serif; font-size:20px; color:var(--ink); letter-spacing:.05em; }
+.form-note { font-size:12px; color:var(--ink-lt); line-height:1.9; margin-bottom:24px; }
+.form-note a { color:var(--green-dark); }
+/* Googleフォーム埋め込みエリア */
+.gform-wrap {
+  background: var(--green-pale);
+  border: 1px solid var(--border);
+  padding: 32px;
+  min-height: 600px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.gform-placeholder { text-align:center; }
+.gform-placeholder p { font-size:13px; color:var(--ink-mid); line-height:2; margin-bottom:8px; }
+.gform-placeholder code { font-size:11px; background:var(--white); padding:2px 8px; border:1px solid var(--border); color:var(--green-dark); display:block; margin:12px auto; max-width:480px; word-break:break-all; }
+.privacy-box { background:var(--green-pale); border:1px solid var(--border); padding:20px 24px; margin-top:40px; font-size:12px; line-height:2; color:var(--ink-mid); }
+.privacy-box h3 { font-size:13px; font-weight:500; color:var(--green-dark); margin-bottom:8px; }
+@media(max-width:768px){ .contact-wrap{grid-template-columns:1fr;gap:32px;} }
+</style>
+</head>
+<body>
+<nav class="global-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-jp">狛江箏・三味線教室</span>
+      <span class="nav-logo-en">Komae Koto &amp; Shamisen School</span>
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">トップ</a></li>
+        <li><a href="../lesson/index.html">レッスン</a></li>
+        <li><a href="../hajimete/index.html">はじめての方へ</a></li>
+        <li><a href="../faq/index.html">よくあるご質問</a></li>
+        <li><a href="../profile/index.html">講師紹介</a></li>
+        <li><a href="../contact/index.html" class="nav-cta">体験レッスン申込</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-img" style="background-image:url('../images/contact_topimg.jpg');"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-en">Contact us</span>
+    <h1 class="page-hero-title">お問い合わせ</h1>
+  </div>
+</div>
+<section class="section">
+  <div class="container">
+    <div class="contact-wrap" data-anim>
+
+      <!-- 左：連絡先情報 -->
+      <div class="contact-info">
+        <h2>連絡先</h2>
+        <dl>
+          <dt>お電話</dt>
+          <dd class="tel">070-3847-6962</dd>
+          <dd>（教室・問い合わせ専用）</dd>
+        </dl>
+
+        <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
+          <p style="font-size:12px;color:var(--ink-mid);line-height:2.2;">
+            レッスンご希望の方は、お問い合わせフォームまたはお電話にてご連絡ください。<br>
+            見学・体験レッスンも随時受け付けています。
+          </p>
+        </div>
+      </div>
+
+      <!-- 右：Googleフォーム -->
+      <div>
+        <p class="form-note">
+          下のフォームでご入力いただいた情報は、お問い合わせへの返信以外には使用しません。<br>
+          <a href="../privacy/index.html">個人情報の取扱いについて</a>
+        </p>
+        <p class="form-note">● マークの項目は必須です。</p>
+
+        <!-- ▼▼▼ ここに Google フォームの iframe を貼り付けてください ▼▼▼
+
+          手順（詳しくは「Googleフォーム作成・埋め込み手順.md」を参照）：
+          1. Googleフォームを開く
+          2. 右上の「送信」ボタン →「< >」（埋め込み HTML）タブを選択
+          3. 表示された <iframe ...></iframe> コードをコピー
+          4. 下の【ここから】〜【ここまで】の <div> をまるごと削除し、
+             コピーした iframe をこの位置に貼り付ける
+
+          ▲▲▲ 貼り付けるのはこの上の行（このコメントの直後）▲▲▲ -->
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSephRWUBifH7VfDJZd6Or9fL5fJpJl0Ijw4kJj26YbB83RGSQ/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+
+        <!-- 参考：貼り付けるコードの例（YOUR_FORM_ID の部分が実際のフォームでは固有の文字列になります）
+        <iframe src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+        -->
+        <style>.contact-wrap iframe{width:100%;border:0;min-height:600px;}</style>
+      </div>
+    </div>
+
+    <div class="privacy-box" data-anim>
+      <h3>個人情報の取扱いについて</h3>
+      <p>
+        お問い合わせフォームにてご記入いただいた個人情報（お名前・メールアドレス・電話番号等）は、
+        お問い合わせへの返信および必要なご連絡のみに使用し、第三者への提供は行いません。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<footer class="global-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div><p class="footer-logo-jp">狛江箏・三味線教室</p><span class="footer-logo-en">Masako Watanabe — Komae Koto &amp; Shamisen School</span></div>
+            <nav class="footer-nav">
+        <a href="../lesson/index.html">レッスン</a>
+        <a href="../hajimete/index.html">はじめての方へ</a>
+        <a href="../faq/index.html">よくあるご質問</a>
+        <a href="../profile/index.html">講師紹介</a>
+        <a href="../cd/index.html">楽譜・CD・DVD</a>
+        <a href="../contact/index.html">お問い合わせ</a>
+        <a href="../privacy/index.html">個人情報の取扱い</a>
+      </nav>
+    </div>
+    <p class="footer-copy">Copyright &copy; 狛江箏・三味線教室 Masako Watanabe. All Rights Reserved.</p>
+  </div>
+</footer>
+<script src="../common.js"></script>
+</body>
+</html>

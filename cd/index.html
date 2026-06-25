@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>楽譜・CD・DVD | 箏演奏家 渡辺正子</title>
+<link rel="stylesheet" href="../style.css" />
+<style>
+/* ── セクション見出し ── */
+.works-section-title {
+  font-family:'Shippori Mincho',serif;
+  font-size:20px; font-weight:600;
+  color:var(--green-dark);
+  border-left:4px solid var(--green);
+  padding-left:14px;
+  margin-bottom:32px;
+}
+.works-subsection-title {
+  font-family:'Shippori Mincho',serif;
+  font-size:15px; font-weight:600;
+  color:var(--green-dark);
+  border-bottom:1px solid var(--border);
+  padding-bottom:8px;
+  margin:32px 0 16px;
+}
+
+/* ── メインCDカード（画像付き大カード） ── */
+.works-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:32px;
+  margin-bottom:48px;
+}
+.work-card {
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:24px;
+  background:var(--white);
+  border:1px solid var(--border);
+  padding:24px;
+  align-items:start;
+  transition:box-shadow .2s;
+}
+.work-card:hover { box-shadow:0 4px 16px rgba(74,122,66,0.1); }
+.work-cover {
+  width:140px; height:140px;
+  object-fit:cover;
+  display:block;
+  border:1px solid var(--border);
+}
+.work-cover-placeholder {
+  width:140px; height:140px;
+  background:var(--green-bg);
+  border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; color:var(--green-mid);
+  text-align:center; flex-shrink:0;
+}
+.work-type {
+  font-size:10px; letter-spacing:.2em;
+  color:var(--green-mid);
+  display:block; margin-bottom:6px;
+}
+.work-title {
+  font-family:'Shippori Mincho',serif;
+  font-size:16px; font-weight:600;
+  color:var(--green-dark);
+  margin-bottom:10px; line-height:1.5;
+}
+.work-desc {
+  font-size:12px; line-height:2;
+  color:var(--ink-mid);
+}
+
+/* ── 参加CDコンパクトカード ── */
+.participation-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  margin-bottom:48px;
+}
+.participation-card {
+  background:var(--white);
+  border:1px solid var(--border);
+  padding:20px;
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+  transition:box-shadow .2s;
+}
+.participation-card:hover { box-shadow:0 4px 16px rgba(74,122,66,0.08); }
+.participation-cover {
+  width:80px; height:80px;
+  object-fit:cover;
+  border:1px solid var(--border);
+  flex-shrink:0;
+}
+.participation-body { flex:1; min-width:0; }
+.participation-card .work-type { font-size:10px; letter-spacing:.2em; color:var(--green-mid); display:block; margin-bottom:4px; }
+.participation-card .work-title { font-family:'Shippori Mincho',serif; font-size:14px; font-weight:600; color:var(--green-dark); margin-bottom:4px; line-height:1.4; }
+.participation-card .work-publisher { font-size:11px; color:var(--ink-lt); margin-bottom:10px; }
+.participation-card .work-desc { font-size:12px; line-height:1.9; color:var(--ink-mid); }
+
+/* ── Amazonリンク ── */
+.amazon-link {
+  display:inline-flex; align-items:center; gap:5px;
+  font-size:11px; color:var(--green-dark);
+  text-decoration:none;
+  border:1px solid var(--green-lt);
+  background:var(--green-bg);
+  padding:3px 9px;
+  border-radius:3px;
+  margin-top:8px;
+  transition:background .15s;
+}
+.amazon-link:hover { background:var(--green-lt); }
+
+/* ── 楽譜リスト ── */
+.score-list {
+  border:1px solid var(--border);
+  border-radius:4px;
+  overflow:hidden;
+  margin-bottom:32px;
+}
+.score-list-header {
+  background:var(--green-bg);
+  padding:10px 16px;
+  font-size:12px;
+  font-weight:600;
+  color:var(--green-dark);
+  font-family:'Shippori Mincho',serif;
+}
+.score-item {
+  display:grid;
+  grid-template-columns:48px 1fr;
+  gap:12px;
+  padding:10px 16px;
+  border-top:1px solid var(--border);
+  align-items:start;
+}
+.score-item:nth-child(even) { background:var(--green-pale); }
+.score-no {
+  font-size:11px;
+  color:var(--green-mid);
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  padding-top:2px;
+}
+.score-title {
+  font-size:13px;
+  color:var(--ink);
+  line-height:1.7;
+}
+.score-title small {
+  display:block;
+  font-size:11px;
+  color:var(--ink-lt);
+  margin-top:2px;
+}
+.score-catalog {
+  font-size:10px;
+  color:var(--ink-lt);
+  font-family:'Cormorant Garamond',serif;
+}
+
+/* ── 楽譜グリッド（2列） ── */
+.score-two-col {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  margin-bottom:32px;
+}
+
+/* ── 注意書きボックス ── */
+.info-box {
+  background:var(--green-pale);
+  border:1px solid var(--border);
+  border-left:3px solid var(--green);
+  padding:14px 18px;
+  font-size:12px;
+  line-height:2;
+  color:var(--ink-mid);
+  margin-bottom:24px;
+}
+
+/* ── 仕切り ── */
+.divider { border:none; border-top:2px solid var(--border); margin:56px 0 48px; }
+
+/* ── ご購入について ── */
+.purchase-note {
+  background:var(--green-pale);
+  border:1px solid var(--border);
+  padding:24px 28px;
+  font-size:13px; line-height:2.2;
+  color:var(--ink-mid);
+  margin-top:40px;
+}
+.purchase-note strong { color:var(--green-dark); }
+
+@media(max-width:768px){
+  .works-grid { grid-template-columns:1fr; }
+  .work-card { grid-template-columns:100px 1fr; gap:16px; }
+  .work-cover,.work-cover-placeholder { width:100px; height:100px; }
+  .participation-grid { grid-template-columns:1fr; }
+  .participation-cover { width:64px; height:64px; }
+  .score-two-col { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<nav class="global-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-jp">狛江箏・三味線教室</span>
+      <span class="nav-logo-en">Komae Koto &amp; Shamisen School</span>
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">トップ</a></li>
+        <li><a href="../lesson/index.html">レッスン</a></li>
+        <li><a href="../hajimete/index.html">はじめての方へ</a></li>
+        <li><a href="../faq/index.html">よくあるご質問</a></li>
+        <li><a href="../profile/index.html">講師紹介</a></li>
+        <li><a href="../contact/index.html" class="nav-cta">体験レッスン申込</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-img" style="background-image:url('../images/cd_topimg.jpg');"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-en">Score, CD, DVD</span>
+    <h1 class="page-hero-title">楽譜・CD・DVD</h1>
+  </div>
+</div>
+<section class="section">
+  <div class="container">
+
+    <!-- ════════════ CD（渡辺正子） ════════════ -->
+    <h2 class="works-section-title" data-anim>CD</h2>
+    <div class="works-grid" data-anim>
+      <div class="work-card">
+        <img src="../images/index_cd01.jpg" alt="いとへんげ" class="work-cover" />
+        <div>
+          <span class="work-type">CD</span>
+          <div class="work-title">いとへんげ ─糸変華─</div>
+          <p class="work-desc">発売：(有)JAPAN KAIZAN MUSIC<br>
+          箏・二十絃箏・三絃・十七絃によるソロファーストアルバム。<br>
+          <strong style="color:var(--green-dark);">収録曲：</strong>空を推す／五足十三和十八番／十七絃二面の為の一章／箏譚詩集第2集より 華やぎへの序 華やぎ／花簪</p>
+        </div>
+      </div>
+      <div class="work-card">
+        <img src="../images/index_cd02.jpg" alt="歌いつぐ日本の歌" class="work-cover" />
+        <div>
+          <span class="work-type">CD</span>
+          <div class="work-title">琴伴奏による 歌いつぐ日本の歌</div>
+          <p class="work-desc">発売：(有)大日本家庭音楽会　渡辺泰子編曲<br>
+          <strong style="color:var(--green-dark);">収録曲（全30曲）：</strong>赤とんぼ・大きな古時計・里の秋・故郷・村祭り・椰子の実・ゆりかごの歌・茶摘み・冬景色・小さい秋みつけた・かあさんの歌・四季の歌・内緒の話・うれしいひなまつり・赤い靴・シャボン玉・荒城の月・さくら貝の歌・花嫁人形・平城山・船頭小唄・さくらさくら・浜千鳥・雨降りお月さん・早春賦・夏の思い出・みかんの花咲く丘・旅愁・夕焼けこやけ・おぼろ月夜</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════ 渡辺正子 参加CD ════════════ -->
+    <h2 class="works-section-title" data-anim>渡辺正子 参加CD</h2>
+    <div class="participation-grid" data-anim>
+      <div class="participation-card">
+        <img src="../images/jck150.jpg" alt="心に残るヒットメロディ" class="participation-cover" />
+        <div class="participation-body">
+          <span class="work-type">CD（渡辺正子参加）</span>
+          <div class="work-title">心に残るヒットメロディ</div>
+          <div class="work-publisher">(有)大日本家庭音楽会</div>
+          <p class="work-desc">
+            <strong style="color:var(--green-dark);">演奏：</strong>渡辺泰子・渡辺正子・丸田美紀・ジョン海山ネプチューン<br>
+            <strong style="color:var(--green-dark);">収録曲：</strong>ルパン三世・タッチ・キューティハニー・もののけ姫・いつも何度でも・ルージュの伝言・サザエさん・ぼくはくま・お江戸日本橋・とうりゃんせ・さくら・四季の歌・夏の思い出・荒城の月・シルクロード・沖縄メドレー・花祭り・コンドルは飛んでいく・テイク ファイブ
+          </p>
+        </div>
+      </div>
+      <div class="participation-card">
+        <img src="../images/cd_m_solo1.jpg" alt="ソロで弾く名曲集 I" class="participation-cover" />
+        <div class="participation-body">
+          <span class="work-type">CD（渡辺正子参加）</span>
+          <div class="work-title">ソロで弾く名曲集 I</div>
+          <div class="work-publisher">(有)大日本家庭音楽会</div>
+          <p class="work-desc">
+            <strong style="color:var(--green-dark);">収録曲：</strong>花・亜麻色の髪の乙女・ジュピター・島唄・もらい泣き・いつも何度でも・Love Love Love・世界に一つだけの花・My heart will go on・君をのせて・涙そうそう・見上げてごらん夜の星を
+          </p>
+        </div>
+      </div>
+      <div class="participation-card">
+        <img src="../images/cd_m_solo2.jpg" alt="ソロで弾く名曲集 II" class="participation-cover" />
+        <div class="participation-body">
+          <span class="work-type">CD（渡辺正子参加）</span>
+          <div class="work-title">ソロで弾く名曲集 II</div>
+          <div class="work-publisher">(有)大日本家庭音楽会</div>
+          <p class="work-desc">
+            <strong style="color:var(--green-dark);">収録曲：</strong>春なのに・戦場のメリークリスマス・春よ、来い・言葉にできない・赤いスイトピー・雪の華・なごり雪・未来へ・粉雪・花（ORANGE RANGE）・朧月夜～祈り・千の風になって
+          </p>
+        </div>
+      </div>
+      <div class="participation-card">
+        <img src="../images/cd_m_mizuno.jpg" alt="水野コレクション８" class="participation-cover" />
+        <div class="participation-body">
+          <span class="work-type">CD（渡辺正子参加）</span>
+          <div class="work-title">水野コレクション ８</div>
+          <div class="work-publisher">(有)大日本家庭音楽会</div>
+          <p class="work-desc">
+            <strong style="color:var(--green-dark);">収録曲：</strong>北国絶唱・谺の詩・風の魔術師・スターズギフト～星の贈り物～・巴・HITO-TOSE ─春夏秋冬─
+          </p>
+        </div>
+      </div>
+      <div class="participation-card" style="grid-column:span 2;">
+        <img src="../images/cd_m_rinko.jpg" alt="RINKO五" class="participation-cover" />
+        <div class="participation-body">
+          <span class="work-type">CD（渡辺正子参加）</span>
+          <div class="work-title">RINKO 五</div>
+          <div class="work-publisher">(有)大日本家庭音楽会</div>
+          <p class="work-desc">
+            <strong style="color:var(--green-dark);">収録曲：</strong>涙そうそう・ことうた～日本のうた～・蕾・ことうた～わらべ唄～・島唄・THE KOKIRIO・TSUNAMI・ことうた～民謡～
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════ 渡辺泰子 参加CD ════════════ -->
+    <h2 class="works-section-title" data-anim>渡辺泰子 参加CD</h2>
+    <div class="participation-grid" data-anim>
+      <div class="participation-card">
+        <img src="../images/cd_y_primenumbers.jpg" alt="プライムナンバーズ" class="participation-cover" />
+        <div class="participation-body">
+          <span class="work-type">CD（渡辺泰子参加）</span>
+          <div class="work-title">プライムナンバーズ</div>
+          <div class="work-publisher">(有)JAPAN KAIZAN MUSIC</div>
+          <p class="work-desc">
+            <strong style="color:var(--green-dark);">収録曲：</strong>キャニオンビュー・月の精霊・空を推す・本末・町へ・五足十三和十八番
+          </p>
+        </div>
+      </div>
+      <div class="participation-card">
+        <img src="../images/cd_y_kasajizo.jpg" alt="かさじぞう" class="participation-cover" />
+        <div class="participation-body">
+          <span class="work-type">CD＋DVD（渡辺泰子参加）</span>
+          <div class="work-title">かさじぞう</div>
+          <div class="work-publisher">(有)大日本家庭音楽会　[6202]</div>
+          <p class="work-desc">
+            箏・尺八と語りの音楽DVD＋CD 二枚組。<br>
+            映像・創作はりえ：渡辺順子<br>
+            DVDお手本映像と、音楽なしパワーポイント用CD付き。
+          </p>
+        </div>
+      </div>
+      <div class="participation-card">
+        <img src="../images/cd_y_hiten.jpg" alt="飛天" class="participation-cover" />
+        <div class="participation-body">
+          <span class="work-type">CD（渡辺泰子参加）</span>
+          <div class="work-title">飛天</div>
+          <div class="work-publisher">ビクター音楽産業(株)　作曲・演奏：尺八 ジョン海山ネプチューン</div>
+          <p class="work-desc">
+            <strong style="color:var(--green-dark);">収録曲：</strong>飛天・フォア・ファン・ノーウォールズ・イーザー・ウェイ・テンツク・インザ・ディスタンス・紅岩・ミダレ・ローズィ
+          </p>
+        </div>
+      </div>
+      <div class="participation-card">
+        <img src="../images/cd_y_tokyosphere.jpg" alt="東京スフィヤー" class="participation-cover" />
+        <div class="participation-body">
+          <span class="work-type">CD（渡辺泰子参加）</span>
+          <div class="work-title">東京スフィヤー</div>
+          <div class="work-publisher">ビクター音楽産業(株)　作曲・演奏：尺八 ジョン海山ネプチューン</div>
+          <p class="work-desc">
+            <strong style="color:var(--green-dark);">収録曲：</strong>大和の曙・七条・トウキョウブルース・ジャングル・トレール・聴光・時空の綾・涌流・暖流・奔流・空想
+          </p>
+        </div>
+      </div>
+      <div class="participation-card" style="grid-column:span 2;">
+        <img src="../images/cd_y_thecircle.jpg" alt="THE CIRCLE" class="participation-cover" />
+        <div class="participation-body">
+          <span class="work-type">CD（渡辺泰子参加）</span>
+          <div class="work-title">THE CIRCLE 「ザ・サークル」</div>
+          <div class="work-publisher">日本コロンビア　作曲・演奏：尺八 ジョン海山ネプチューン</div>
+          <p class="work-desc">
+            <strong style="color:var(--green-dark);">収録曲：</strong>The Circle / Soul of the Deep / Tokyo Pace / Ryukyu / India Indigo / Mountain Mist / Spring Breeze / Spring Lift / North of NoPlace / Musashi
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- ════════════ 楽譜 ════════════ -->
+    <h2 class="works-section-title" id="HEARTFULL" data-anim>楽譜</h2>
+
+    <!-- ハートフルサウンド -->
+    <div class="score-two-col">
+      <div>
+        <img src="../images/gakufu_heartfull.jpg" alt="ハートフルサウンド" style="width:100%;max-width:280px;height:auto;border:1px solid var(--border);display:block;margin-bottom:12px;" />
+        <img src="../images/gakufu_natsumatsuri.jpg" alt="夏祭り楽譜" style="width:100%;max-width:280px;height:auto;border:1px solid var(--border);display:block;" />
+      </div>
+      <div>
+        <div class="works-subsection-title" style="margin-top:0;">琴で奏でる ハートフルサウンド</div>
+        <p style="font-size:12px;color:var(--ink-mid);line-height:1.9;margin-bottom:12px;">渡辺正子 編曲／箏2・十七絃・尺八の三重奏楽譜（五線譜付き）</p>
+        <div class="info-box">
+          ※ 2016年日本テレビ「ミュージックデイ」で嵐の櫻井さんが演奏した<br>
+          破矢ジン作曲「夏祭り」（箏・十七絃三重奏）の楽譜も発売中。
+        </div>
+        <a href="https://www.amazon.co.jp/s/ref=nb_sb_noss?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&url=search-alias%3Daps&field-keywords=%E6%B8%A1%E8%BE%BA%E6%AD%A3%E5%AD%90%E6%A5%BD%E8%AD%9C&rh=i%3Aaps%2Ck%3A%E6%B8%A1%E8%BE%BA%E6%AD%A3%E5%AD%90%E6%A5%BD%E8%AD%9C" target="_blank" rel="noopener" class="amazon-link">🛒 Amazonで渡辺正子編曲楽譜を探す</a>
+      </div>
+    </div>
+    <div class="score-list">
+      <div class="score-list-header">ハートフルサウンド　全10曲</div>
+      <div class="score-item"><div class="score-no">No.1</div><div class="score-title">ルパン三世<small>箏2・十七絃・尺八　五線譜付き　[6094]</small></div></div>
+      <div class="score-item"><div class="score-no">No.2</div><div class="score-title">キューティーハニー<small>箏2・十七絃・尺八　五線譜付き　[6095]</small></div></div>
+      <div class="score-item"><div class="score-no">No.3</div><div class="score-title">タッチ<small>箏2・十七絃・尺八　五線譜付き　[6112]</small></div></div>
+      <div class="score-item"><div class="score-no">No.4</div><div class="score-title">粉雪<small>筝2・十七絃　[6162]</small></div></div>
+      <div class="score-item"><div class="score-no">No.5</div><div class="score-title">コンドルは飛んでゆく<small>箏2・十七絃・尺八　五線譜付き　[6163]</small></div></div>
+      <div class="score-item"><div class="score-no">No.6</div><div class="score-title">カントリー・ロード<small>筝2・十七絃・三絃</small></div></div>
+      <div class="score-item"><div class="score-no">No.7</div><div class="score-title">子供のためのメドレー<small>サザエさん・ぼくはくま・鉄腕アトム　箏2・十七絃・尺八　[6165]</small></div></div>
+      <div class="score-item"><div class="score-no">No.8</div><div class="score-title">花祭り<small>箏2・十七絃・尺八　五線譜付き　[6498]</small></div></div>
+      <div class="score-item"><div class="score-no">No.9</div><div class="score-title">シルクロード<small>箏2・十七絃・尺八　五線譜付き　[6363]</small></div></div>
+      <div class="score-item"><div class="score-no">No.10</div><div class="score-title">やさしさに包まれたなら<small>箏2・十七絃・尺八　五線譜付き　[6569]</small></div></div>
+    </div>
+
+    <!-- 名曲集（渡辺泰子編曲） -->
+    <div class="score-two-col" style="margin-bottom:0;">
+      <div>
+        <img src="../images/gakufu_mekyoku4.jpg" alt="名曲集" style="width:100%;max-width:280px;height:auto;border:1px solid var(--border);display:block;" />
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center;">
+        <div class="works-subsection-title" style="margin-top:0;">名曲集　渡辺泰子 編曲</div>
+        <a href="https://www.amazon.co.jp/s/ref=nb_sb_noss_1?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&url=search-alias%3Daps&field-keywords=%E6%B8%A1%E8%BE%BA%E6%B3%B0%E5%AD%90&rh=i%3Aaps%2Ck%3A%E6%B8%A1%E8%BE%BA%E6%B3%B0%E5%AD%90" target="_blank" rel="noopener" class="amazon-link" style="align-self:flex-start;">🛒 Amazonで渡辺泰子編曲楽譜を探す</a>
+      </div>
+    </div>
+    <div class="score-list">
+      <div class="score-list-header">名曲集　全13巻</div>
+      <div class="score-item"><div class="score-no">No.1</div><div class="score-title">「冬のソナタ」<small>筝・十七絃・尺八</small></div></div>
+      <div class="score-item"><div class="score-no">No.2</div><div class="score-title">「沖縄メドレー」<small>箏・十七絃・尺八　三絃譜別売りあり</small></div></div>
+      <div class="score-item"><div class="score-no">No.3</div><div class="score-title">「四季の歌・夏の思い出・荒城の月」<small>箏2・十七絃・尺八</small></div></div>
+      <div class="score-item"><div class="score-no">No.4</div><div class="score-title">「かさじぞう」<small>箏・十七絃・尺八・語り　スライド別売りあり</small></div></div>
+      <div class="score-item"><div class="score-no">No.5</div><div class="score-title">「森のくまさん・大きな古時計・山の音楽家」<small>箏2・十七絃・尺八</small></div></div>
+      <div class="score-item"><div class="score-no">No.6</div><div class="score-title">「もののけ姫・いつも何度でも・ルージュの伝言」<small>箏2・十七絃・尺八</small></div></div>
+      <div class="score-item"><div class="score-no">No.7</div><div class="score-title">「お江戸日本橋・通りゃんせ・さくらメドレー」<small>箏2・十七絃・尺八　三絃譜別売りあり</small></div></div>
+      <div class="score-item"><div class="score-no">No.8</div><div class="score-title">「はじめの一歩」「かえるのがっしょう」「ちょうちょ」「たなばたさま」「もみじ」「ゆき」<small>筝2・十七絃</small></div></div>
+      <div class="score-item"><div class="score-no">No.9</div><div class="score-title">「かぐや姫」<small>箏・十七絃・尺八・語り　スライド別売りあり</small></div></div>
+      <div class="score-item"><div class="score-no">No.10</div><div class="score-title">「ふるさと」「手のひらを太陽に」「幸せなら手をたたこう」<small>箏2・十七絃・尺八</small></div></div>
+      <div class="score-item"><div class="score-no">No.11</div><div class="score-title">「ドラえもん」「おじゃる丸」「アンパンマンのマーチ」<small>箏2・十七絃・尺八</small></div></div>
+      <div class="score-item"><div class="score-no">No.12</div><div class="score-title">「知床旅情」「小さい秋見つけた」「月の砂漠」<small>箏2・十七絃・尺八</small></div></div>
+      <div class="score-item"><div class="score-no">No.13</div><div class="score-title">「ハナミズキ」「世界にひとつだけの花」「花は咲く」<small style="color:var(--green);">NEW</small></div></div>
+    </div>
+
+    <!-- 歌いつぐ日本の歌（独奏集） -->
+    <div class="score-two-col">
+      <div style="display:flex;gap:12px;">
+        <img src="../images/gakufu_utaitsugu1.jpg" alt="歌いつぐ日本の歌（楽譜）No.1" style="width:calc(50% - 6px);height:auto;border:1px solid var(--border);display:block;" />
+        <img src="../images/gakufu_utaitsugu2.jpg" alt="歌いつぐ日本の歌（楽譜）No.2" style="width:calc(50% - 6px);height:auto;border:1px solid var(--border);display:block;" />
+      </div>
+      <div>
+        <div class="works-subsection-title" style="margin-top:0;">歌いつぐ日本の歌（独奏集）　渡辺泰子 編曲</div>
+        <div class="score-list" style="margin-bottom:0;">
+          <div class="score-item"><div class="score-no">No.1</div><div class="score-title">全15曲<small>赤とんぼ・大きな古時計・里の秋・シャボン玉・ふるさと・村祭り・椰子の実・ゆりかごの歌・茶摘み・冬景色・小さな秋みつけた・かあさんの歌・四季の歌・ないしょの歌・うれしいひなまつり</small></div></div>
+          <div class="score-item"><div class="score-no">No.2</div><div class="score-title">全15曲<small>赤い靴・荒城の月・さくら貝のうた・花嫁人形・平城山・船頭小唄・さくらさくら・浜千鳥・雨降りおつきさん・早春賦・夏の思い出・みかんの花咲く丘・旅愁・夕やけこやけ・おぼろ月夜</small></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- その他の楽譜（単品） -->
+    <div class="works-subsection-title">その他の楽譜　渡辺泰子 編曲</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px;">
+      <div style="text-align:center;">
+        <img src="../images/gakufu_yokai.jpg" alt="妖怪ウォッチ" style="width:100%;height:auto;border:1px solid var(--border);display:block;margin-bottom:6px;" />
+        <p style="font-size:11px;color:var(--ink-mid);line-height:1.5;">妖怪ウォッチ<br>「ようかい体操第一！」<br>「ゲラゲラポーのうた」</p>
+      </div>
+      <div style="text-align:center;">
+        <img src="../images/gakufu_marumo.jpg" alt="マルマルモリモリ" style="width:100%;height:auto;border:1px solid var(--border);display:block;margin-bottom:6px;" />
+        <p style="font-size:11px;color:var(--ink-mid);line-height:1.5;">マルマルモリモリ！<br><small>筝2・十七絃</small></p>
+      </div>
+      <div style="text-align:center;">
+        <img src="../images/gakufu_senbon.jpg" alt="千本桜" style="width:100%;height:auto;border:1px solid var(--border);display:block;margin-bottom:6px;" />
+        <p style="font-size:11px;color:var(--ink-mid);line-height:1.5;">初音ミクの千本桜<br><small>筝2・十七絃</small></p>
+      </div>
+      <div style="text-align:center;">
+        <img src="../images/gakufu_hyaku.jpg" alt="百万本のバラ" style="width:100%;height:auto;border:1px solid var(--border);display:block;margin-bottom:6px;" />
+        <p style="font-size:11px;color:var(--ink-mid);line-height:1.5;">百万本のバラ<br><small>筝2・十七絃・尺八</small></p>
+      </div>
+    </div>
+
+    <!-- クリスマス名曲集 -->
+    <div class="works-subsection-title">クリスマス名曲集　渡辺泰子・正子 編曲</div>
+    <p style="font-size:12px;color:var(--ink-mid);margin-bottom:10px;">箏2・十七絃・尺八の四重奏曲</p>
+    <div style="display:flex;gap:16px;margin-bottom:32px;align-items:flex-start;">
+      <div style="text-align:center;flex:0 0 auto;">
+        <img src="../images/gakufu_xmas1.jpg" alt="クリスマス名曲集No.1" style="width:120px;height:auto;border:1px solid var(--border);display:block;margin-bottom:4px;" />
+        <p style="font-size:11px;color:var(--ink-mid);">No.1</p>
+      </div>
+      <div style="text-align:center;flex:0 0 auto;">
+        <img src="../images/gakufu_xmas2.jpg" alt="クリスマス名曲集No.2" style="width:120px;height:auto;border:1px solid var(--border);display:block;margin-bottom:4px;" />
+        <p style="font-size:11px;color:var(--ink-mid);">No.2</p>
+      </div>
+      <div class="score-list" style="margin-bottom:0;flex:1;">
+        <div class="score-item"><div class="score-no">No.1</div><div class="score-title">聖夜・もろびとこぞりて・サンタが町にやってくる・ジングルベルロック</div></div>
+        <div class="score-item"><div class="score-no">No.2</div><div class="score-title">赤鼻のトナカイ・ジングルベル・恋人がサンタクロース</div></div>
+      </div>
+    </div>
+
+    <!-- 渡辺泰子 作品集 -->
+    <div class="score-two-col" style="margin-bottom:0;align-items:start;">
+      <div>
+        <img src="../images/gakufu_wysakuhinsyu.jpg" alt="渡辺泰子 作品集" style="width:100%;max-width:280px;height:auto;border:1px solid var(--border);display:block;" />
+      </div>
+      <div>
+        <div class="works-subsection-title" style="margin-top:0;">渡辺泰子 作品集</div>
+        <div class="score-list" style="margin-bottom:0;">
+          <div class="score-item"><div class="score-no">No.1</div><div class="score-title">テイク ファイブ<small>筝・十七絃・尺八</small></div></div>
+          <div class="score-item"><div class="score-no">No.2</div><div class="score-title">アクアブルーの風<small>筝1・2・3・十七絃</small></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ご購入について -->
+    <div class="purchase-note">
+      <strong>ご購入について</strong><br>
+      CD・楽譜はすべて <strong>(有)大日本家庭音楽会</strong> にてご購入いただけます。<br>
+      「いとへんげ」「プライムナンバーズ」等はJAPAN KAIZAN MUSIC（E-MAIL：jneptune@awa.or.jp）にてお取り扱い。<br>
+      CDと楽譜のご購入・お問い合わせはお問い合わせフォームからもお受けいたします。<br><br>
+      <strong>Amazon でのご購入：</strong><br>
+      <a href="https://www.amazon.co.jp/s/ref=nb_sb_noss?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&url=search-alias%3Daps&field-keywords=%E6%B8%A1%E8%BE%BA%E6%AD%A3%E5%AD%90%E6%A5%BD%E8%AD%9C&rh=i%3Aaps%2Ck%3A%E6%B8%A1%E8%BE%BA%E6%AD%A3%E5%AD%90%E6%A5%BD%E8%AD%9C" target="_blank" rel="noopener" class="amazon-link">🛒 渡辺正子 編曲楽譜をAmazonで探す</a>
+
+      <a href="https://www.amazon.co.jp/s/ref=nb_sb_noss_1?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&url=search-alias%3Daps&field-keywords=%E6%B8%A1%E8%BE%BA%E6%B3%B0%E5%AD%90&rh=i%3Aaps%2Ck%3A%E6%B8%A1%E8%BE%BA%E6%B3%B0%E5%AD%90" target="_blank" rel="noopener" class="amazon-link">🛒 渡辺泰子 編曲楽譜をAmazonで探す</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="unified-cta">
+  <div class="unified-cta-inner">
+    <div class="ucta-col">
+      <span class="ucta-label">Instagram</span>
+      <a href="https://www.instagram.com/masako_w112/" target="_blank" rel="noopener" class="ucta-ig">📷 @masako_w112</a>
+      <p class="ucta-sub">最新情報はInstagramで</p>
+    </div>
+    <div class="ucta-div"></div>
+    <div class="ucta-col">
+      <span class="ucta-label">Contact</span>
+      <a href="../contact/index.html" class="ucta-btn">お問い合わせフォーム</a>
+      <p class="ucta-sub" style="margin-top:8px;">CD・楽譜のご購入お問い合わせも</p>
+    </div>
+    <div class="ucta-div"></div>
+    <div class="ucta-col">
+      <span class="ucta-label">Phone</span>
+      <span class="ucta-tel">070-3847-6962</span>
+      <p class="ucta-sub">教室・問い合わせ専用</p>
+    </div>
+  </div>
+</section>
+
+<footer class="global-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div><p class="footer-logo-jp">狛江箏・三味線教室</p><span class="footer-logo-en">Masako Watanabe — Komae Koto &amp; Shamisen School</span></div>
+            <nav class="footer-nav">
+        <a href="../lesson/index.html">レッスン</a>
+        <a href="../hajimete/index.html">はじめての方へ</a>
+        <a href="../faq/index.html">よくあるご質問</a>
+        <a href="../profile/index.html">講師紹介</a>
+        <a href="../cd/index.html">楽譜・CD・DVD</a>
+        <a href="../contact/index.html">お問い合わせ</a>
+        <a href="../privacy/index.html">個人情報の取扱い</a>
+      </nav>
+    </div>
+    <p class="footer-copy">Copyright &copy; 狛江箏・三味線教室 Masako Watanabe. All Rights Reserved.</p>
+  </div>
+</footer>
+<script src="../common.js"></script>
+</body>
+</html>
