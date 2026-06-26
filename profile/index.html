@@ -72,6 +72,8 @@
         <ul class="career-list" id="profile-career"></ul>
         <div class="profile-section-title" data-anim>所属・活動</div>
         <ul class="career-list" id="profile-affiliations"></ul>
+        <div class="profile-section-title" data-anim>指導実績</div>
+        <div id="profile-teaching"></div>
         <div class="profile-section-title" data-anim>NHK出演歴</div>
         <ul class="career-list" id="profile-nhk"></ul>
       </div>
@@ -125,14 +127,19 @@
   var p = SITE_DATA.profile;
   function escH(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-  // 自己紹介文
-  var bioEl = document.getElementById('profile-bio');
-  (p.bio||[]).forEach(function(t){
-    var el = document.createElement('p');
-    el.className = 'profile-text';
-    el.textContent = t;
-    bioEl.appendChild(el);
-  });
+  // 自己紹介文・指導実績（段落描画共通）
+  function renderParas(id, arr){
+    var box = document.getElementById(id);
+    if(!box) return;
+    (arr||[]).forEach(function(t){
+      var el = document.createElement('p');
+      el.className = 'profile-text';
+      el.textContent = t;
+      box.appendChild(el);
+    });
+  }
+  renderParas('profile-bio', p.bio);
+  renderParas('profile-teaching', p.teaching);
 
   // 経歴・所属・NHKリスト共通
   function renderList(id, arr) {

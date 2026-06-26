@@ -146,6 +146,14 @@ nav.global-nav.scrolled { background:rgba(255,255,255,0.96); box-shadow:0 2px 22
 .trial { padding:92px 0; background:var(--white); }
 .trial-inner { max-width:980px; margin:0 auto; padding:0 28px; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
 .trial-img-wrap { aspect-ratio:4/3; }
+.trial-ss { position:relative; width:100%; height:100%; aspect-ratio:4/3; overflow:hidden; }
+.trial-ss .ts { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; animation:tfade 20s ease-in-out infinite; }
+.trial-ss .ts1 { background-image:url('images/trial01.jpg'); animation-delay:0s; }
+.trial-ss .ts2 { background-image:url('images/trial02.jpg'); animation-delay:5s; }
+.trial-ss .ts3 { background-image:url('images/trial03.jpg'); animation-delay:10s; }
+.trial-ss .ts4 { background-image:url('images/trial04.jpg'); animation-delay:15s; }
+@keyframes tfade { 0%{opacity:0;} 3%{opacity:1;} 22%{opacity:1;} 25%{opacity:0;} 100%{opacity:0;} }
+@media (prefers-reduced-motion: reduce){ .trial-ss .ts{animation:none;} .trial-ss .ts1{opacity:1;} }
 .trial-en { font-family:'Cormorant Garamond',serif; font-size:11px; font-style:italic; letter-spacing:.4em; color:var(--green-mid); display:block; margin-bottom:12px; }
 .trial-title { font-family:'Shippori Mincho',serif; font-size:clamp(26px,3.2vw,38px); font-weight:700; letter-spacing:.16em; color:var(--green-dark); line-height:1.4; margin-bottom:18px; }
 .trial-lead { font-size:13px; line-height:2.3; color:var(--ink-mid); margin-bottom:26px; }
@@ -336,7 +344,14 @@ footer { background:var(--green-dark); color:rgba(255,255,255,0.55); padding:44p
 <!-- ── 体験レッスンの流れ ── -->
 <section class="trial">
   <div class="trial-inner">
-    <div class="trial-img-wrap reveal-mask" data-anim="left"><img src="images/lesson03.jpg" alt="レッスン風景" /></div>
+    <div class="trial-img-wrap reveal-mask" data-anim="left" role="img" aria-label="体験レッスンの様子">
+      <div class="trial-ss">
+        <div class="ts ts1"></div>
+        <div class="ts ts2"></div>
+        <div class="ts ts3"></div>
+        <div class="ts ts4"></div>
+      </div>
+    </div>
     <div data-anim data-delay="1">
       <span class="trial-en">Trial Lesson</span>
       <h2 class="trial-title">まずは体験<br>レッスンから</h2>
