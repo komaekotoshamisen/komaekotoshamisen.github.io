@@ -21,9 +21,7 @@
 .kodomo-ss { position:relative; width:100%; aspect-ratio:4/3; border:1px solid var(--border); overflow:hidden; }
 .kodomo-ss .kss-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1.2s ease; }
 .kodomo-ss .kss-img.is-active { opacity:1; }
-.kodomo-ss .kss-dots { position:absolute; left:0; right:0; bottom:10px; display:flex; gap:7px; justify-content:center; z-index:2; }
-.kodomo-ss .kss-dot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.55); transition:background .3s; }
-.kodomo-ss .kss-dot.is-active { background:var(--white); }
+.kodomo-ss .kss-dots { display:none; }
 .divider { border:none; border-top:1px solid var(--border); margin:56px 0; }
 .photo-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:32px; }
 .photo-row img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; border:1px solid var(--border); }
@@ -52,6 +50,7 @@
         <li><a href="../hajimete/index.html">はじめての方へ</a></li>
         <li><a href="../faq/index.html">よくあるご質問</a></li>
         <li><a href="../profile/index.html">講師紹介</a></li>
+        <li><a href="../cd/index.html">楽譜・CD</a></li>
         <li><a href="../contact/index.html" class="nav-cta">お問い合わせ</a></li>
       </ul>
       <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー"><span></span><span></span><span></span></button>
@@ -60,7 +59,7 @@
 </nav>
 
 <div class="page-hero">
-  <div class="page-hero-img" style="background-image:url('../images/lesson_topimg.jpg');"></div>
+  <div class="page-hero-img" style="background-image:url('../images/lesson_hero.jpg');"></div>
   <div class="page-hero-content">
     <span class="page-hero-en">Lesson</span>
     <h1 class="page-hero-title">レッスン</h1>
@@ -76,7 +75,7 @@
 
     <!-- 個人レッスン -->
     <div class="lesson-block" data-anim>
-      <img src="../images/lesson02.jpg" alt="個人レッスン／グループレッスン" class="lesson-block-img" />
+      <img src="../images/shared_lesson.jpg" alt="個人レッスン／グループレッスン" class="lesson-block-img" />
       <div>
         <span class="lesson-tag">Individual &amp; Group Lesson</span>
         <h2 class="lesson-h2">個人レッスン／グループレッスン</h2>
@@ -127,10 +126,10 @@
     <!-- 子ども琴三味線合奏団 -->
     <div class="lesson-block reverse" data-anim>
       <div class="kodomo-ss" aria-label="子ども琴三味線合奏団の活動写真">
-        <img src="../images/ensemble_kids1.jpg" alt="子ども琴三味線合奏団" class="kss-img is-active" />
-        <img src="../images/ensemble_kids2.jpg" alt="子ども琴三味線合奏団" class="kss-img" />
-        <img src="../images/ensemble_kids3.jpg" alt="子ども琴三味線合奏団" class="kss-img" />
-        <img src="../images/ensemble_kids4.jpg" alt="子ども琴三味線合奏団" class="kss-img" />
+        <img src="../images/lesson_ensemble01.jpg" alt="子ども琴三味線合奏団" class="kss-img is-active" />
+        <img src="../images/lesson_ensemble02.jpg" alt="子ども琴三味線合奏団" class="kss-img" />
+        <img src="../images/lesson_ensemble03.jpg" alt="子ども琴三味線合奏団" class="kss-img" />
+        <img src="../images/lesson_ensemble04.jpg" alt="子ども琴三味線合奏団" class="kss-img" />
         <div class="kss-dots">
           <span class="kss-dot is-active"></span>
           <span class="kss-dot"></span>
@@ -237,10 +236,12 @@
         <a href="../faq/index.html">よくあるご質問</a>
         <a href="../profile/index.html">講師紹介</a>
         <a href="../omenjo/index.html">お免状について</a>
-        <a href="../cd/index.html">楽譜・CD・DVD</a>
+        <a href="../cd/index.html">楽譜・CD</a>
         <a href="../contact/index.html">お問い合わせ</a>
         <a href="../privacy/index.html">個人情報の取扱い</a>
         <a href="https://www.instagram.com/masako_w112/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://line.me/R/ti/p/@663bbuyv?oat_content=qr" target="_blank" rel="noopener">公式LINE</a>
+        <a href="mailto:komaekotoshamisen@gmail.com">メール</a>
       </nav>
     </div>
     <p class="footer-copy">Copyright &copy; 生田流筝曲正音会 狛江琴三味線教室 Masako Watanabe. All Rights Reserved.</p>

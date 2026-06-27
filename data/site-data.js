@@ -18,7 +18,8 @@ var SITE_DATA = {
   // ============================================================
   contact: {
     phone:     "070-3847-6962",
-    instagram: "https://www.instagram.com/masako_w112/"
+    instagram: "https://www.instagram.com/masako_w112/",
+    line:      "https://line.me/R/ti/p/@663bbuyv?oat_content=qr"
   },
 
   // ============================================================

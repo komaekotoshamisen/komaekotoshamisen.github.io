@@ -12,26 +12,6 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ページヘッダー */
-.page-header {
-  margin-top: var(--nav-h);
-  background: var(--green-bg);
-  padding: 56px 0 48px;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-}
-.page-header-en {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 12px; font-style: italic;
-  letter-spacing: .45em; color: var(--green-mid);
-  display: block; margin-bottom: 14px;
-}
-.page-header-title {
-  font-family: 'Shippori Mincho', serif;
-  font-size: clamp(22px, 3vw, 32px);
-  font-weight: 700; letter-spacing: .2em;
-  color: var(--green-dark);
-}
 
 /* メインコンテンツ */
 .faq-section {
@@ -133,6 +113,7 @@
         <li><a href="../hajimete/index.html">はじめての方へ</a></li>
         <li><a href="../faq/index.html">よくあるご質問</a></li>
         <li><a href="../profile/index.html">講師紹介</a></li>
+        <li><a href="../cd/index.html">楽譜・CD</a></li>
         <li><a href="../contact/index.html" class="nav-cta">お問い合わせ</a></li>
       </ul>
       <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー"><span></span><span></span><span></span></button>
@@ -141,9 +122,12 @@
 </nav>
 
 <!-- ページヘッダー -->
-<div class="page-header" data-anim="fade">
-  <span class="page-header-en">FAQ</span>
-  <h1 class="page-header-title">よくあるご質問</h1>
+<div class="page-hero">
+  <div class="page-hero-img" style="background-image:url('../images/faq_hero.jpg');"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-en">FAQ</span>
+    <h1 class="page-hero-title">よくあるご質問</h1>
+  </div>
 </div>
 
 <!-- FAQ本体 -->
@@ -346,10 +330,12 @@
         <a href="../faq/index.html">よくあるご質問</a>
         <a href="../profile/index.html">講師紹介</a>
         <a href="../omenjo/index.html">お免状について</a>
-        <a href="../cd/index.html">楽譜・CD・DVD</a>
+        <a href="../cd/index.html">楽譜・CD</a>
         <a href="../contact/index.html">お問い合わせ</a>
         <a href="../privacy/index.html">個人情報の取扱い</a>
         <a href="https://www.instagram.com/masako_w112/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://line.me/R/ti/p/@663bbuyv?oat_content=qr" target="_blank" rel="noopener">公式LINE</a>
+        <a href="mailto:komaekotoshamisen@gmail.com">メール</a>
       </nav>
     </div>
     <p class="footer-copy">Copyright &copy; 生田流筝曲正音会 狛江琴三味線教室 Masako Watanabe. All Rights Reserved.</p>
