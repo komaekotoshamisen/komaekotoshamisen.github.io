@@ -55,7 +55,8 @@ nav.global-nav.scrolled { background: rgba(255,255,255,0.96); box-shadow: 0 2px 
 }
 .nav-cta:hover { background: var(--green-dark); color: var(--white); }
 .nav-logo { text-decoration: none; display: flex; flex-direction: column; justify-content: center; gap: 2px; }
-.nav-logo-jp { font-family: 'Shippori Mincho', serif; font-size: 15px; font-weight: 600; letter-spacing: 0.18em; color: var(--green-dark); line-height: 1.5; }
+.nav-logo-school { font-family: 'Shippori Mincho', serif; font-size: 9px; font-weight: 500; letter-spacing: 0.14em; color: var(--green-mid); line-height: 1.4; }
+.nav-logo-jp { font-family: 'Shippori Mincho', serif; font-size: 15px; font-weight: 600; letter-spacing: 0.16em; color: var(--green-dark); line-height: 1.45; }
 .nav-logo-en { font-family: 'Cormorant Garamond', serif; font-size: 10px; font-style: italic; letter-spacing: 0.18em; color: var(--green-mid); }
 .nav-links { display: flex; list-style: none; }
 .nav-links li a {
@@ -139,7 +140,8 @@ nav.global-nav.scrolled { background: rgba(255,255,255,0.96); box-shadow: 0 2px 
 /* ── FOOTER ── */
 footer.global-footer { background: var(--green-dark); border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.55); padding: 40px 0 24px; }
 .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.12); margin-bottom: 20px; }
-.footer-logo-jp { font-family: 'Shippori Mincho', serif; font-size: 15px; font-weight: 600; letter-spacing: .2em; color: var(--white); }
+.footer-logo-school { font-family: 'Shippori Mincho', serif; font-size: 11px; font-weight: 500; letter-spacing: .16em; color: var(--green-lt); display: block; margin-bottom: 2px; }
+.footer-logo-jp { font-family: 'Shippori Mincho', serif; font-size: 15px; font-weight: 600; letter-spacing: .18em; color: var(--white); }
 .footer-logo-en { font-family: 'Cormorant Garamond', serif; font-size: 11px; font-style: italic; letter-spacing: .18em; color: var(--green-lt); display: block; margin-top: 3px; }
 .footer-nav { display: flex; gap: 20px; flex-wrap: wrap; justify-content: flex-end; }
 .footer-nav a { font-size: 11px; letter-spacing: .1em; color: rgba(255,255,255,0.55); text-decoration: none; transition: color .2s; }
@@ -176,7 +178,8 @@ footer.global-footer { background: var(--green-dark); border-top: 1px solid rgba
 .ucta-sub { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 5px; }
 .ucta-btn { display: inline-block; padding: 10px 22px; border: 1px solid rgba(255,255,255,0.6); color: var(--white); text-decoration: none; font-family: 'Shippori Mincho', serif; font-size: 12px; letter-spacing: .12em; transition: all .2s; }
 .ucta-btn:hover { background: rgba(255,255,255,0.12); border-color: var(--white); }
-.ucta-tel { font-family: 'Shippori Mincho', serif; font-size: 20px; color: var(--white); letter-spacing: .05em; display: block; }
+.ucta-tel { font-family: 'Shippori Mincho', serif; font-size: 20px; color: var(--white); letter-spacing: .05em; display: block; text-decoration: none; transition: color .2s; }
+.ucta-tel:hover { color: var(--green-lt); }
 
 /* ── SCROLL ANIMATION（全ページ共通） ── */
 /* anim-start クラスは JS がスクロールで現れる要素にのみ付与する */

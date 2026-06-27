@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>狛江箏・三味線教室 | こども・大人の初心者歓迎（渡辺正子）</title>
-<meta name="description" content="東京都狛江市の箏・三味線教室。こどもから大人まで初心者歓迎、楽器の貸出あり。喜多見駅南口から徒歩7分。体験レッスン受付中。渡辺正子が丁寧に指導します。" />
+<title>生田流筝曲正音会 狛江琴三味線教室 | こども・大人の初心者歓迎（渡辺正子）</title>
+<meta name="description" content="東京都狛江市の琴・三味線教室。こどもから大人まで初心者歓迎、楽器の貸出あり。喜多見駅南口から徒歩7分。体験レッスン受付中。渡辺正子が丁寧に指導します。" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet" />
@@ -29,28 +29,7 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cg fill='none' stroke='%23dcc8a8' stroke-width='1.1' opacity='0.55'%3E%3Cpath d='M0 40c0-22 18-40 40-40s40 18 40 40'/%3E%3Cpath d='M-13 40C-13 18 5 0 27 0'/%3E%3Cpath d='M53 0c22 0 40 18 40 40'/%3E%3Cpath d='M0 40c0-12 10-22 22-22s22 10 22 22'/%3E%3Cpath d='M36 40c0-12 10-22 22-22s22 10 22 22'/%3E%3C/g%3E%3C/svg%3E");
   background-size:80px 40px; }
 
-/* ── NAV ── */
-nav.global-nav { position:fixed; top:0; left:0; right:0; z-index:100; height:var(--nav-h);
-  background:rgba(255,255,255,0.80); backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--green-lt); box-shadow:0 2px 18px rgba(46,38,32,0.06); transition:background .3s, box-shadow .3s; }
-nav.global-nav.scrolled { background:rgba(255,255,255,0.96); box-shadow:0 2px 22px rgba(46,38,32,0.10); }
-.nav-inner { max-width:1080px; margin:0 auto; height:100%; display:flex; align-items:center; justify-content:space-between; padding:0 24px; }
-.nav-logo { text-decoration:none; display:flex; flex-direction:column; gap:2px; }
-.nav-logo-jp { font-family:'Shippori Mincho',serif; font-size:15px; font-weight:600; letter-spacing:.16em; color:var(--green-dark); }
-.nav-logo-en { font-family:'Cormorant Garamond',serif; font-size:10px; font-style:italic; letter-spacing:.18em; color:var(--green-mid); }
-.nav-right { display:flex; align-items:center; gap:18px; }
-.nav-links { display:flex; list-style:none; }
-.nav-links li a { display:block; padding:0 12px; height:var(--nav-h); line-height:var(--nav-h);
-  font-size:12px; letter-spacing:.08em; color:var(--ink-mid); text-decoration:none; position:relative; white-space:nowrap; }
-.nav-links li a::after { content:''; position:absolute; left:12px; right:12px; bottom:16px; height:1.5px;
-  background:var(--green); transform:scaleX(0); transform-origin:left; transition:transform .3s ease; }
-.nav-links li a:hover, .nav-links li a.active { color:var(--green-dark); }
-.nav-links li a:hover::after, .nav-links li a.active::after { transform:scaleX(1); }
-.nav-cta { background:var(--green-mid); color:var(--green-dark); padding:9px 18px; font-family:'Shippori Mincho',serif;
-  font-size:12px; font-weight:500; letter-spacing:.08em; text-decoration:none; transition:all .25s; white-space:nowrap; }
-.nav-cta:hover { background:var(--green-dark); color:#fff; }
-.nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; background:none; border:none; }
-.nav-hamburger span { display:block; width:22px; height:2px; background:var(--green-dark); border-radius:2px; transition:all .3s; }
+/* ── NAV（スタイルは全ページ共通の style.css に統一） ── */
 
 /* ── HERO ── */
 .hero { margin-top:var(--nav-h); position:relative; height:calc(100vh - var(--nav-h)); max-height:600px;
@@ -78,6 +57,7 @@ nav.global-nav.scrolled { background:rgba(255,255,255,0.96); box-shadow:0 2px 22
 @keyframes heroUp { to{opacity:1; transform:none;} }
 .hero-label { font-family:'Cormorant Garamond',serif; font-size:12px; font-style:italic; letter-spacing:.45em; color:rgba(240,225,200,0.85); display:block; margin-bottom:14px; }
 .hero-name { font-family:'Shippori Mincho',serif; font-size:clamp(24px,5.4vw,46px); font-weight:700; letter-spacing:.06em; color:var(--white); line-height:1.25; margin-bottom:8px; white-space:nowrap; }
+.hero-school { display:block; font-size:clamp(13px,2.4vw,18px); font-weight:600; letter-spacing:.2em; color:var(--green-lt); white-space:nowrap; margin-bottom:6px; }
 .hero-name-en { font-family:'Cormorant Garamond',serif; font-size:13px; font-style:italic; letter-spacing:.3em; color:var(--green-lt); display:block; margin-bottom:20px; }
 .hero-tagline { font-size:13.5px; line-height:2; color:rgba(255,255,255,0.88); margin-bottom:18px; border-left:2px solid var(--green-lt); padding-left:16px; }
 .hero-points { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
@@ -129,6 +109,14 @@ nav.global-nav.scrolled { background:rgba(255,255,255,0.96); box-shadow:0 2px 22
 .aud-en { font-family:'Cormorant Garamond',serif; font-size:11px; font-style:italic; letter-spacing:.3em; color:var(--green-mid); display:block; margin-bottom:8px; }
 .aud-title { font-family:'Shippori Mincho',serif; font-size:19px; font-weight:600; letter-spacing:.08em; color:var(--green-dark); margin-bottom:12px; }
 .aud-text { font-size:12.5px; line-height:2.1; color:var(--ink-mid); flex:1; }
+
+/* ── 理念・教室の特色 ── */
+.philosophy { padding:92px 0; position:relative; overflow:hidden; }
+.phil-inner { max-width:760px; margin:0 auto; text-align:center; }
+.phil-lead { font-family:'Shippori Mincho',serif; font-size:clamp(20px,3vw,28px); font-weight:600; letter-spacing:.1em; color:var(--green-dark); line-height:1.75; margin-bottom:30px; }
+.phil-text { font-size:13.5px; line-height:2.3; color:var(--ink-mid); margin-bottom:18px; text-align:left; }
+.phil-link { display:inline-block; margin-top:14px; font-family:'Shippori Mincho',serif; font-size:13px; letter-spacing:.08em; color:var(--green-dark); text-decoration:none; border-bottom:1px solid var(--green-mid); padding-bottom:3px; transition:all .25s; }
+.phil-link:hover { color:var(--green); border-color:var(--green); }
 
 /* ── レッスンの核心情報 ── */
 .facts { background:var(--green-dark); padding:80px 0; color:#fff; }
@@ -203,15 +191,7 @@ nav.global-nav.scrolled { background:rgba(255,255,255,0.96); box-shadow:0 2px 22
 .cta-tel { color:#fff; font-family:'Shippori Mincho',serif; font-size:20px; letter-spacing:.05em; }
 .cta-tel small { display:block; font-size:11px; letter-spacing:.1em; color:var(--green-lt); margin-top:2px; }
 
-/* ── FOOTER ── */
-footer { background:var(--green-dark); color:rgba(255,255,255,0.55); padding:44px 0 26px; }
-.footer-inner { display:flex; justify-content:space-between; align-items:flex-start; padding-bottom:26px; border-bottom:1px solid rgba(255,255,255,0.12); margin-bottom:18px; }
-.footer-logo-jp { font-family:'Shippori Mincho',serif; font-size:15px; font-weight:600; letter-spacing:.18em; color:#fff; }
-.footer-logo-en { font-family:'Cormorant Garamond',serif; font-size:11px; font-style:italic; letter-spacing:.18em; color:var(--green-lt); display:block; margin-top:3px; }
-.footer-nav { display:flex; gap:18px; flex-wrap:wrap; justify-content:flex-end; max-width:560px; }
-.footer-nav a { font-size:11px; letter-spacing:.08em; color:rgba(255,255,255,0.55); text-decoration:none; transition:color .2s; }
-.footer-nav a:hover { color:var(--green-lt); }
-.footer-copy { text-align:center; font-size:10px; letter-spacing:.1em; }
+/* ── FOOTER（スタイルは全ページ共通の style.css に統一） ── */
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation:none !important; transition:none !important; }
@@ -244,7 +224,8 @@ footer { background:var(--green-dark); color:rgba(255,255,255,0.55); padding:44p
 <nav class="global-nav" id="nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <span class="nav-logo-jp">狛江箏・三味線教室</span>
+      <span class="nav-logo-school">生田流筝曲正音会</span>
+      <span class="nav-logo-jp">狛江琴三味線教室</span>
       <span class="nav-logo-en">Komae Koto &amp; Shamisen School</span>
     </a>
     <div class="nav-right">
@@ -254,7 +235,7 @@ footer { background:var(--green-dark); color:rgba(255,255,255,0.55); padding:44p
         <li><a href="hajimete/index.html">はじめての方へ</a></li>
         <li><a href="faq/index.html">よくあるご質問</a></li>
         <li><a href="profile/index.html">講師紹介</a></li>
-        <li><a href="contact/index.html" class="nav-cta">体験レッスン申込</a></li>
+        <li><a href="contact/index.html" class="nav-cta">お問い合わせ</a></li>
       </ul>
       <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー">
         <span></span><span></span><span></span>
@@ -274,7 +255,7 @@ footer { background:var(--green-dark); color:rgba(255,255,255,0.55); padding:44p
   <svg class="bloom b2" viewBox="0 0 100 100"><g fill="#f0e1c8"><circle cx="50" cy="26" r="15"/><circle cx="74" cy="44" r="15"/><circle cx="65" cy="72" r="15"/><circle cx="35" cy="72" r="15"/><circle cx="26" cy="44" r="15"/><circle cx="50" cy="50" r="9" fill="#b09050"/></g></svg>
   <div class="hero-content">
     <span class="hero-label">Koto &amp; Shamisen Lesson — 狛江</span>
-    <h1 class="hero-name">狛江箏・三味線教室</h1>
+    <h1 class="hero-name"><span class="hero-school">生田流筝曲正音会</span>狛江琴三味線教室</h1>
     <span class="hero-name-en">Komae Koto &amp; Shamisen School</span>
     <p class="hero-tagline">こどもから大人まで、未経験から。<br>狛江・喜多見で、和の音色をはじめませんか。</p>
     <div class="hero-points"><span>初心者歓迎</span><span>楽器の貸出あり</span><span>こども〜大人</span><span>喜多見駅 徒歩7分</span></div>
@@ -302,7 +283,7 @@ footer { background:var(--green-dark); color:rgba(255,255,255,0.55); padding:44p
         <div class="aud-body">
           <span class="aud-en">For Kids</span>
           <div class="aud-title">お子さま</div>
-          <p class="aud-text">情操教育や和の文化にふれる習い事として。発表会やこども合奏団もあり、楽しく続けられます。送り迎えしやすい立地です。</p>
+          <p class="aud-text">情操教育や和の文化にふれる習い事として。発表会や子ども琴三味線合奏団もあり、楽しく続けられます。送り迎えしやすい立地です。</p>
         </div>
       </div>
       <div class="aud-card" data-anim data-delay="2">
@@ -325,6 +306,23 @@ footer { background:var(--green-dark); color:rgba(255,255,255,0.55); padding:44p
   </div>
 </section>
 
+<!-- ── 理念・教室の特色 ── -->
+<section class="philosophy washi">
+  <div class="container">
+    <div class="sec-head" data-anim="fade">
+      <span class="ghost-word">Our Belief</span>
+      <span class="sec-en">Our Philosophy</span>
+      <h2 class="sec-jp">理念・教室の特色</h2>
+    </div>
+    <div class="phil-inner" data-anim>
+      <p class="phil-lead">一人ひとりに寄り添った、<br>柔軟で自由な音楽活動</p>
+      <p class="phil-text">生田流筝曲正音会は、個々の思いや音楽性を大切にしながら、柔軟で開かれた活動を続けています。古典から現代曲まで幅広い楽曲を学ぶほか、ご希望の曲を琴・三味線用にアレンジし、自分だけの音楽を楽しむこともできます。</p>
+      <p class="phil-text">一人ひとりの「弾きたい」という気持ちを大切に、自由で豊かな音楽表現を提案しています。また、師範取得を目指す方にも、専門性に基づいた丁寧な指導を行い、安心して学びを深められる環境を整えています。</p>
+      <a href="omenjo/index.html" class="phil-link">お免状について詳しく見る →</a>
+    </div>
+  </div>
+</section>
+
 <!-- ── レッスンの基本 ── -->
 <section class="facts">
   <div class="container">
@@ -333,10 +331,10 @@ footer { background:var(--green-dark); color:rgba(255,255,255,0.55); padding:44p
       <h2 class="sec-jp">レッスンの基本</h2>
     </div>
     <div class="facts-grid">
-      <div class="fact" data-anim data-delay="1"><span class="fact-en">Lesson</span><div class="fact-main">箏・三味線</div><div class="fact-sub">個人 / グループ<br>こども〜大人</div></div>
-      <div class="fact" data-anim data-delay="2"><span class="fact-en">Fee</span><div class="fact-main">月3,000円〜</div><div class="fact-sub">グループ。個人は8,500円〜</div></div>
+      <div class="fact" data-anim data-delay="1"><span class="fact-en">Lesson</span><div class="fact-main">琴・三味線</div><div class="fact-sub">個人 / グループ<br>こども〜大人</div></div>
+      <div class="fact" data-anim data-delay="2"><span class="fact-en">Fee</span><div class="fact-main">月4,000円〜</div><div class="fact-sub">グループ。個人は8,500円〜</div></div>
       <div class="fact" data-anim data-delay="3"><span class="fact-en">Place</span><div class="fact-main">狛江市岩戸北</div><div class="fact-sub">喜多見駅南口<br>徒歩7分</div></div>
-      <div class="fact" data-anim data-delay="4"><span class="fact-en">Day</span><div class="fact-main">土・日 中心</div><div class="fact-sub">平日は要相談</div></div>
+      <div class="fact" data-anim data-delay="4"><span class="fact-en">Day</span><div class="fact-main">平日・土日</div><div class="fact-sub">月曜祝日はお休み</div></div>
     </div>
   </div>
 </section>
@@ -355,7 +353,7 @@ footer { background:var(--green-dark); color:rgba(255,255,255,0.55); padding:44p
     <div data-anim data-delay="1">
       <span class="trial-en">Trial Lesson</span>
       <h2 class="trial-title">まずは体験<br>レッスンから</h2>
-      <p class="trial-lead">気軽に一度、箏・三味線の音色を体験してみてください。初心者の方も、楽器をお持ちでない方も大歓迎です。こどもから大人まで、自分のペースで始められます。</p>
+      <p class="trial-lead">気軽に一度、琴・三味線の音色を体験してみてください。初心者の方も、楽器をお持ちでない方も大歓迎です。こどもから大人まで、自分のペースで始められます。</p>
       <div class="trial-steps">
         <div class="trial-step"><span class="step-num">01</span><span class="step-txt">お問い合わせ</span></div>
         <span class="step-arrow">›</span>
@@ -384,12 +382,12 @@ footer { background:var(--green-dark); color:rgba(255,255,255,0.55); padding:44p
 <!-- ── 英字マーキー ── -->
 <div class="marquee">
   <div class="marquee-track">
-    <span><b>KOTO</b> 箏</span><span><b>SHAMISEN</b> 三味線</span><span><b>KOMAE</b> 狛江</span>
-    <span><b>KOTO</b> 箏</span><span><b>SHAMISEN</b> 三味線</span><span><b>KOMAE</b> 狛江</span>
-    <span><b>KOTO</b> 箏</span><span><b>SHAMISEN</b> 三味線</span><span><b>KOMAE</b> 狛江</span>
-    <span><b>KOTO</b> 箏</span><span><b>SHAMISEN</b> 三味線</span><span><b>KOMAE</b> 狛江</span>
-    <span><b>KOTO</b> 箏</span><span><b>SHAMISEN</b> 三味線</span><span><b>KOMAE</b> 狛江</span>
-    <span><b>KOTO</b> 箏</span><span><b>SHAMISEN</b> 三味線</span><span><b>KOMAE</b> 狛江</span>
+    <span><b>KOTO</b> 琴</span><span><b>SHAMISEN</b> 三味線</span><span><b>KOMAE</b> 狛江</span>
+    <span><b>KOTO</b> 琴</span><span><b>SHAMISEN</b> 三味線</span><span><b>KOMAE</b> 狛江</span>
+    <span><b>KOTO</b> 琴</span><span><b>SHAMISEN</b> 三味線</span><span><b>KOMAE</b> 狛江</span>
+    <span><b>KOTO</b> 琴</span><span><b>SHAMISEN</b> 三味線</span><span><b>KOMAE</b> 狛江</span>
+    <span><b>KOTO</b> 琴</span><span><b>SHAMISEN</b> 三味線</span><span><b>KOMAE</b> 狛江</span>
+    <span><b>KOTO</b> 琴</span><span><b>SHAMISEN</b> 三味線</span><span><b>KOMAE</b> 狛江</span>
   </div>
 </div>
 
@@ -404,34 +402,51 @@ footer { background:var(--green-dark); color:rgba(255,255,255,0.55); padding:44p
 </section>
 
 <!-- ── 統一CTA ── -->
-<section class="cta">
-  <span class="cta-en">Contact Us</span>
-  <h2 class="cta-title">体験レッスン、受付中です</h2>
-  <div class="cta-btns">
-    <a href="contact/index.html" class="cta-btn">お問い合わせフォーム</a>
-    <span class="cta-tel">070-3847-6962<small>教室・問い合わせ専用</small></span>
+<section class="unified-cta">
+  <span class="cta-en" style="display:block;text-align:center;">Contact Us</span>
+  <h2 class="cta-title" style="text-align:center;margin-bottom:28px;">体験レッスン、受付中です</h2>
+  <div class="unified-cta-inner">
+    <div class="ucta-col">
+      <span class="ucta-label">Instagram</span>
+      <a href="https://www.instagram.com/masako_w112/" target="_blank" rel="noopener" class="ucta-ig">📷 @masako_w112</a>
+      <p class="ucta-sub">最新情報はInstagramで</p>
+    </div>
+    <div class="ucta-div"></div>
+    <div class="ucta-col">
+      <span class="ucta-label">Contact</span>
+      <a href="contact/index.html" class="ucta-btn">お問い合わせ</a>
+      <p class="ucta-sub" style="margin-top:8px;">レッスン申込・公演依頼など</p>
+    </div>
+    <div class="ucta-div"></div>
+    <div class="ucta-col">
+      <span class="ucta-label">Phone</span>
+      <a class="ucta-tel" href="tel:070-3847-6962">070-3847-6962</a>
+      <p class="ucta-sub">教室・問い合わせ専用</p>
+    </div>
   </div>
 </section>
 
 <!-- ── FOOTER ── -->
-<footer>
+<footer class="global-footer">
   <div class="container">
     <div class="footer-inner">
       <div>
-        <p class="footer-logo-jp">狛江箏・三味線教室</p>
-        <span class="footer-logo-en">Masako Watanabe — Komae Koto &amp; Shamisen School</span>
+        <p class="footer-logo-jp"><span class="footer-logo-school">生田流筝曲正音会</span>狛江琴三味線教室</p>
+        <span class="footer-logo-en">Komae Koto &amp; Shamisen School</span>
       </div>
       <nav class="footer-nav">
         <a href="lesson/index.html">レッスン</a>
         <a href="hajimete/index.html">はじめての方へ</a>
         <a href="faq/index.html">よくあるご質問</a>
         <a href="profile/index.html">講師紹介</a>
+        <a href="omenjo/index.html">お免状について</a>
         <a href="cd/index.html">楽譜・CD・DVD</a>
         <a href="contact/index.html">お問い合わせ</a>
         <a href="privacy/index.html">個人情報の取扱い</a>
+        <a href="https://www.instagram.com/masako_w112/" target="_blank" rel="noopener">Instagram</a>
       </nav>
     </div>
-    <p class="footer-copy">Copyright &copy; 狛江箏・三味線教室 Masako Watanabe. All Rights Reserved.</p>
+    <p class="footer-copy">Copyright &copy; 生田流筝曲正音会 狛江琴三味線教室 Masako Watanabe. All Rights Reserved.</p>
   </div>
 </footer>
 

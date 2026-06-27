@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>レッスン | 箏演奏家 渡辺正子</title>
+<title>レッスン | 琴演奏家 渡辺正子</title>
 <link rel="stylesheet" href="../style.css" />
 <style>
 .lesson-intro { font-size:14px; line-height:2.4; color:var(--ink-mid); max-width:700px; margin:0 auto 56px; text-align:center; }
@@ -18,6 +18,12 @@
 .lesson-detail dl { display:grid; grid-template-columns:80px 1fr; gap:8px 16px; font-size:13px; }
 .lesson-detail dt { color:var(--green-dark); font-weight:500; }
 .lesson-detail dd { color:var(--ink-mid); }
+.kodomo-ss { position:relative; width:100%; aspect-ratio:4/3; border:1px solid var(--border); overflow:hidden; }
+.kodomo-ss .kss-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1.2s ease; }
+.kodomo-ss .kss-img.is-active { opacity:1; }
+.kodomo-ss .kss-dots { position:absolute; left:0; right:0; bottom:10px; display:flex; gap:7px; justify-content:center; z-index:2; }
+.kodomo-ss .kss-dot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.55); transition:background .3s; }
+.kodomo-ss .kss-dot.is-active { background:var(--white); }
 .divider { border:none; border-top:1px solid var(--border); margin:56px 0; }
 .photo-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:32px; }
 .photo-row img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; border:1px solid var(--border); }
@@ -35,7 +41,8 @@
 <nav class="global-nav">
   <div class="nav-inner">
     <a href="../index.html" class="nav-logo">
-      <span class="nav-logo-jp">狛江箏・三味線教室</span>
+      <span class="nav-logo-school">生田流筝曲正音会</span>
+      <span class="nav-logo-jp">狛江琴三味線教室</span>
       <span class="nav-logo-en">Komae Koto &amp; Shamisen School</span>
     </a>
     <div class="nav-right">
@@ -45,7 +52,7 @@
         <li><a href="../hajimete/index.html">はじめての方へ</a></li>
         <li><a href="../faq/index.html">よくあるご質問</a></li>
         <li><a href="../profile/index.html">講師紹介</a></li>
-        <li><a href="../contact/index.html" class="nav-cta">体験レッスン申込</a></li>
+        <li><a href="../contact/index.html" class="nav-cta">お問い合わせ</a></li>
       </ul>
       <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー"><span></span><span></span><span></span></button>
     </div>
@@ -86,11 +93,11 @@
           <dl>
             <dt>対象</dt><dd>小学生〜大人（年齢不問）</dd>
             <dt>場所</dt><dd>東京都狛江市岩戸北4丁目（岩戸交番隣）<br>小田急線 喜多見駅南口 徒歩7分</dd>
-            <dt>曜日</dt><dd>土曜・日曜（平日は不定期、お問い合わせください）</dd>
+            <dt>曜日</dt><dd>平日／土日（月曜祝日はお休み）</dd>
             <dt>入会金</dt><dd>5,000円</dd>
             <dt>年会費</dt><dd>5,000円</dd>
             <dt>月謝</dt><dd id="lesson-fees-text">
-              子ども・初級（月2回 / 60分グループ）　3,000円<br>
+              子ども・初級（月2回 / 50分グループ）　4,000円<br>
               大人・初級（月2回 / 60分グループ）　5,000円<br>
               小・中学生（月2回 / 45分個人）　8,500円<br>
               高校生〜一般（月2回 / 45分個人）　10,000円
@@ -117,12 +124,23 @@
 
     <hr class="divider" id="kodomo" />
 
-    <!-- こども合奏団 -->
+    <!-- 子ども琴三味線合奏団 -->
     <div class="lesson-block reverse" data-anim>
-      <img src="../images/welcome_kids.jpg" alt="こども合奏団" class="lesson-block-img" />
+      <div class="kodomo-ss" aria-label="子ども琴三味線合奏団の活動写真">
+        <img src="../images/ensemble_kids1.jpg" alt="子ども琴三味線合奏団" class="kss-img is-active" />
+        <img src="../images/ensemble_kids2.jpg" alt="子ども琴三味線合奏団" class="kss-img" />
+        <img src="../images/ensemble_kids3.jpg" alt="子ども琴三味線合奏団" class="kss-img" />
+        <img src="../images/ensemble_kids4.jpg" alt="子ども琴三味線合奏団" class="kss-img" />
+        <div class="kss-dots">
+          <span class="kss-dot is-active"></span>
+          <span class="kss-dot"></span>
+          <span class="kss-dot"></span>
+          <span class="kss-dot"></span>
+        </div>
+      </div>
       <div>
         <span class="lesson-tag">Children's Ensemble</span>
-        <h2 class="lesson-h2">こども合奏団</h2>
+        <h2 class="lesson-h2">子ども琴三味線合奏団</h2>
         <p class="lesson-text">
           小・中学生による元気いっぱいの箏合奏団です。
           市内を中心に活動し、仲間と一緒に音楽の楽しさを学びます。
@@ -166,7 +184,7 @@
         </ul>
       </div>
       <div>
-        <span class="lesson-tag" style="display:block;margin-bottom:10px;">こども合奏団</span>
+        <span class="lesson-tag" style="display:block;margin-bottom:10px;">子ども琴三味線合奏団</span>
         <ul style="list-style:none;font-size:12px;line-height:2.2;color:var(--ink-mid);">
           <li>・文化庁主催 伝統文化こども教室交流事業 発表会</li>
           <li>・山梨県小菅村多摩源流祭</li>
@@ -177,7 +195,7 @@
     </div>
 
     <div style="background:var(--green-pale);border:1px solid var(--border);padding:20px 24px;margin-top:8px;margin-bottom:48px;">
-      <p style="font-size:13px;font-weight:500;color:var(--green-dark);margin-bottom:8px;">東京都立狛江高校 箏曲部（渡辺泰子・正子指導）</p>
+      <p style="font-size:13px;font-weight:500;color:var(--green-dark);margin-bottom:8px;">東京都立狛江高校 箏曲部（渡辺正子指導）</p>
       <p style="font-size:12px;line-height:2;color:var(--ink-mid);">
         全国高等学校総合文化祭日本音楽部門 文化庁長官賞受賞。東京都優秀校として「国立劇場の夏」出場。<br>
         現在までに全国大会へ東京都代表として14回出場、うち優良賞11回・文化庁長官賞3回、国立劇場優秀校東京公演に4回出演。
@@ -197,13 +215,13 @@
     <div class="ucta-div"></div>
     <div class="ucta-col">
       <span class="ucta-label">Contact</span>
-      <a href="../contact/index.html" class="ucta-btn">お問い合わせフォーム</a>
+      <a href="../contact/index.html" class="ucta-btn">お問い合わせ</a>
       <p class="ucta-sub" style="margin-top:8px;">見学・体験レッスンも受付中</p>
     </div>
     <div class="ucta-div"></div>
     <div class="ucta-col">
       <span class="ucta-label">Phone</span>
-      <span class="ucta-tel">070-3847-6962</span>
+      <a class="ucta-tel" href="tel:070-3847-6962">070-3847-6962</a>
       <p class="ucta-sub">教室・問い合わせ専用</p>
     </div>
   </div>
@@ -212,20 +230,40 @@
 <footer class="global-footer">
   <div class="container">
     <div class="footer-inner">
-      <div><p class="footer-logo-jp">狛江箏・三味線教室</p><span class="footer-logo-en">Masako Watanabe — Komae Koto &amp; Shamisen School</span></div>
+      <div><p class="footer-logo-jp"><span class="footer-logo-school">生田流筝曲正音会</span>狛江琴三味線教室</p><span class="footer-logo-en">Komae Koto &amp; Shamisen School</span></div>
             <nav class="footer-nav">
         <a href="../lesson/index.html">レッスン</a>
         <a href="../hajimete/index.html">はじめての方へ</a>
         <a href="../faq/index.html">よくあるご質問</a>
         <a href="../profile/index.html">講師紹介</a>
+        <a href="../omenjo/index.html">お免状について</a>
         <a href="../cd/index.html">楽譜・CD・DVD</a>
         <a href="../contact/index.html">お問い合わせ</a>
         <a href="../privacy/index.html">個人情報の取扱い</a>
+        <a href="https://www.instagram.com/masako_w112/" target="_blank" rel="noopener">Instagram</a>
       </nav>
     </div>
-    <p class="footer-copy">Copyright &copy; 狛江箏・三味線教室 Masako Watanabe. All Rights Reserved.</p>
+    <p class="footer-copy">Copyright &copy; 生田流筝曲正音会 狛江琴三味線教室 Masako Watanabe. All Rights Reserved.</p>
   </div>
 </footer>
+<script>
+(function(){
+  var ss = document.querySelector('.kodomo-ss');
+  if(!ss) return;
+  var imgs = ss.querySelectorAll('.kss-img');
+  var dots = ss.querySelectorAll('.kss-dot');
+  if(imgs.length < 2) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var i = 0;
+  setInterval(function(){
+    imgs[i].classList.remove('is-active');
+    if(dots[i]) dots[i].classList.remove('is-active');
+    i = (i + 1) % imgs.length;
+    imgs[i].classList.add('is-active');
+    if(dots[i]) dots[i].classList.add('is-active');
+  }, 4000);
+})();
+</script>
 <script src="../common.js"></script>
 </body>
 </html>

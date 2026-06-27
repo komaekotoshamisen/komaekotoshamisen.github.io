@@ -2,39 +2,59 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>お問い合わせ | 箏演奏家 渡辺正子</title>
+<title>お問い合わせ | 狛江琴三味線教室（渡辺正子）</title>
 <link rel="stylesheet" href="../style.css" />
 <style>
-.contact-wrap { display:grid; grid-template-columns:1fr 2fr; gap:56px; align-items:start; }
-.contact-info h2 { font-family:'Shippori Mincho',serif; font-size:18px; color:var(--green-dark); margin-bottom:20px; }
-.contact-info dl { font-size:13px; }
-.contact-info dt { font-weight:500; color:var(--green-dark); margin-bottom:4px; margin-top:16px; }
-.contact-info dd { color:var(--ink-mid); line-height:1.9; }
-.contact-info dd:first-of-type { margin-top:0; }
-.contact-info .tel { font-family:'Shippori Mincho',serif; font-size:20px; color:var(--ink); letter-spacing:.05em; }
-.form-note { font-size:12px; color:var(--ink-lt); line-height:1.9; margin-bottom:24px; }
-.form-note a { color:var(--green-dark); }
-/* Googleフォーム埋め込みエリア */
-.gform-wrap {
-  background: var(--green-pale);
-  border: 1px solid var(--border);
-  padding: 32px;
-  min-height: 600px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
+/* 導入文 */
+.contact-lead { max-width:760px; margin:0 auto 8px; text-align:center; font-size:15px; line-height:2.1; color:var(--ink-mid); }
+.contact-lead .priv { display:block; margin-top:14px; font-size:13px; color:var(--ink-lt); }
+
+/* お問い合わせ方法カード */
+.method-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:8px; }
+.method-card {
+  background:var(--white); border:1px solid var(--border); border-radius:8px;
+  padding:28px 18px; text-align:center; display:flex; flex-direction:column; align-items:center;
+  transition:transform .25s ease, box-shadow .25s ease;
 }
-.gform-placeholder { text-align:center; }
-.gform-placeholder p { font-size:13px; color:var(--ink-mid); line-height:2; margin-bottom:8px; }
-.gform-placeholder code { font-size:11px; background:var(--white); padding:2px 8px; border:1px solid var(--border); color:var(--green-dark); display:block; margin:12px auto; max-width:480px; word-break:break-all; }
-.privacy-box { background:var(--green-pale); border:1px solid var(--border); padding:20px 24px; margin-top:40px; font-size:12px; line-height:2; color:var(--ink-mid); }
+.method-card:hover { transform:translateY(-4px); box-shadow:0 10px 24px rgba(46,38,32,.10); }
+.method-icon { width:48px; height:48px; margin-bottom:14px; color:var(--green); }
+.method-icon svg { width:100%; height:100%; }
+.method-card h3 { font-family:'Shippori Mincho',serif; font-size:16px; color:var(--green-dark); margin-bottom:6px; }
+.method-card .en { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:var(--green-mid); letter-spacing:.04em; margin-bottom:12px; }
+.method-card p { font-size:12px; color:var(--ink-mid); line-height:1.85; margin-bottom:14px; flex:1; }
+.method-value { font-family:'Shippori Mincho',serif; font-size:15px; color:var(--ink); word-break:break-all; line-height:1.7; }
+.method-value.tel { font-size:18px; letter-spacing:.04em; }
+.method-btn {
+  display:inline-block; margin-top:6px; padding:9px 20px; border-radius:999px;
+  background:var(--green-mid); color:var(--green-dark); font-size:13px; font-weight:500;
+  text-decoration:none; transition:background .2s, color .2s;
+}
+.method-btn:hover { background:var(--green-dark); color:var(--white); }
+.method-btn.is-soon { background:var(--green-pale); color:var(--ink-lt); pointer-events:none; border:1px dashed var(--border); }
+.method-sub { font-size:11px; color:var(--ink-lt); margin-top:10px; }
+
+/* フォーム */
+.form-block { margin-top:64px; }
+.form-head { text-align:center; margin-bottom:24px; }
+.form-head h2 { font-family:'Shippori Mincho',serif; font-size:22px; color:var(--green-dark); }
+.form-head .en { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:14px; color:var(--green-mid); display:block; margin-top:4px; }
+.gform-shell { max-width:680px; margin:0 auto; }
+.gform-shell iframe { width:100%; border:0; min-height:600px; }
+
+.privacy-box { background:var(--green-pale); border:1px solid var(--border); border-radius:8px; padding:20px 24px; margin:48px auto 0; max-width:760px; font-size:12px; line-height:2; color:var(--ink-mid); }
 .privacy-box h3 { font-size:13px; font-weight:500; color:var(--green-dark); margin-bottom:8px; }
-@media(max-width:768px){ .contact-wrap{grid-template-columns:1fr;gap:32px;} }
+.privacy-box a { color:var(--green-dark); }
+
+@media(max-width:880px){ .method-grid{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:480px){ .method-grid{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
 <nav class="global-nav">
   <div class="nav-inner">
     <a href="../index.html" class="nav-logo">
-      <span class="nav-logo-jp">狛江箏・三味線教室</span>
+      <span class="nav-logo-school">生田流筝曲正音会</span>
+      <span class="nav-logo-jp">狛江琴三味線教室</span>
       <span class="nav-logo-en">Komae Koto &amp; Shamisen School</span>
     </a>
     <div class="nav-right">
@@ -44,7 +64,7 @@
         <li><a href="../hajimete/index.html">はじめての方へ</a></li>
         <li><a href="../faq/index.html">よくあるご質問</a></li>
         <li><a href="../profile/index.html">講師紹介</a></li>
-        <li><a href="../contact/index.html" class="nav-cta">体験レッスン申込</a></li>
+        <li><a href="../contact/index.html" class="nav-cta">お問い合わせ</a></li>
       </ul>
       <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー"><span></span><span></span><span></span></button>
     </div>
@@ -58,60 +78,86 @@
     <h1 class="page-hero-title">お問い合わせ</h1>
   </div>
 </div>
+
 <section class="section">
   <div class="container">
-    <div class="contact-wrap" data-anim>
 
-      <!-- 左：連絡先情報 -->
-      <div class="contact-info">
-        <h2>連絡先</h2>
-        <dl>
-          <dt>お電話</dt>
-          <dd class="tel">070-3847-6962</dd>
-          <dd>（教室・問い合わせ専用）</dd>
-        </dl>
+    <!-- 導入文 -->
+    <p class="contact-lead" data-anim>
+      レッスンのご相談・見学／体験のお申し込み・公演依頼など、お気軽にご連絡ください。
+      <span class="priv">いただいた個人情報は、お問い合わせへの返信以外には使用しません。</span>
+    </p>
 
-        <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
-          <p style="font-size:12px;color:var(--ink-mid);line-height:2.2;">
-            レッスンご希望の方は、お問い合わせフォームまたはお電話にてご連絡ください。<br>
-            見学・体験レッスンも随時受け付けています。
-          </p>
-        </div>
+    <!-- お問い合わせ方法（4つ） -->
+    <div class="method-grid" data-anim>
+
+      <!-- 公式LINE -->
+      <div class="method-card">
+        <span class="method-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.69 2 10.23c0 4.07 3.6 7.48 8.46 8.12.33.07.78.22.89.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1.02.9.55 1.1-.46 5.93-3.49 8.09-5.98C21.5 13.6 22 11.97 22 10.23 22 5.69 17.52 2 12 2zM8.07 12.69H6.1a.52.52 0 0 1-.52-.52V8.24a.52.52 0 1 1 1.04 0v3.41h1.45a.52.52 0 1 1 0 1.04zm2.04-.52a.52.52 0 1 1-1.04 0V8.24a.52.52 0 1 1 1.04 0v3.93zm4.74 0a.52.52 0 0 1-.36.5.5.5 0 0 1-.16.02.52.52 0 0 1-.42-.21l-2.02-2.74v2.43a.52.52 0 1 1-1.04 0V8.24a.52.52 0 0 1 .94-.31l2.02 2.75V8.24a.52.52 0 1 1 1.04 0v3.93zm3.32-2.49a.52.52 0 1 1 0 1.04h-1.45v.93h1.45a.52.52 0 1 1 0 1.04h-1.97a.52.52 0 0 1-.52-.52V8.24a.52.52 0 0 1 .52-.52h1.97a.52.52 0 1 1 0 1.04h-1.45v.93h1.45z"/></svg>
+        </span>
+        <h3>公式LINE</h3>
+        <span class="en">LINE</span>
+        <p>友だち追加で、トークから気軽にご相談いただけます。</p>
+        <!-- ▼ 友だち追加URLが決まったら href を差し替え、is-soon クラスを削除してください ▼ -->
+        <a class="method-btn is-soon" href="#">準備中</a>
+        <span class="method-sub">※ ただいま準備中です</span>
       </div>
 
-      <!-- 右：Googleフォーム -->
-      <div>
-        <p class="form-note">
-          下のフォームでご入力いただいた情報は、お問い合わせへの返信以外には使用しません。<br>
-          <a href="../privacy/index.html">個人情報の取扱いについて</a>
-        </p>
-        <p class="form-note">● マークの項目は必須です。</p>
+      <!-- メール -->
+      <div class="method-card">
+        <span class="method-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </span>
+        <h3>メール</h3>
+        <span class="en">E-mail</span>
+        <p>24時間受付。内容を整理して送りたい方に。</p>
+        <a class="method-value" href="mailto:komaekotoshamisen@gmail.com">komaekotoshamisen@gmail.com</a>
+      </div>
 
-        <!-- ▼▼▼ ここに Google フォームの iframe を貼り付けてください ▼▼▼
+      <!-- お問い合わせフォーム -->
+      <div class="method-card">
+        <span class="method-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        </span>
+        <h3>お問い合わせフォーム</h3>
+        <span class="en">Form</span>
+        <p>項目に沿って入力するだけ。はじめての方におすすめです。</p>
+        <a class="method-btn" href="#contact-form">フォームへ</a>
+      </div>
 
-          手順（詳しくは「Googleフォーム作成・埋め込み手順.md」を参照）：
-          1. Googleフォームを開く
-          2. 右上の「送信」ボタン →「< >」（埋め込み HTML）タブを選択
-          3. 表示された <iframe ...></iframe> コードをコピー
-          4. 下の【ここから】〜【ここまで】の <div> をまるごと削除し、
-             コピーした iframe をこの位置に貼り付ける
+      <!-- お電話 -->
+      <div class="method-card">
+        <span class="method-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+        </span>
+        <h3>お電話</h3>
+        <span class="en">Tel</span>
+        <p>直接お話ししたい方はこちらへ。</p>
+        <a class="method-value tel" href="tel:070-3847-6962">070-3847-6962</a>
+        <span class="method-sub">教室・問い合わせ専用</span>
+      </div>
 
-          ▲▲▲ 貼り付けるのはこの上の行（このコメントの直後）▲▲▲ -->
+    </div>
 
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSephRWUBifH7VfDJZd6Or9fL5fJpJl0Ijw4kJj26YbB83RGSQ/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
-
-        <!-- 参考：貼り付けるコードの例（YOUR_FORM_ID の部分が実際のフォームでは固有の文字列になります）
-        <iframe src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
-        -->
-        <style>.contact-wrap iframe{width:100%;border:0;min-height:600px;}</style>
+    <!-- フォーム本体 -->
+    <div class="form-block" id="contact-form" data-anim>
+      <div class="form-head">
+        <h2>お問い合わせフォーム</h2>
+        <span class="en">Contact Form</span>
+      </div>
+      <div class="gform-shell">
+        <!-- ▼▼▼ Google フォームの iframe を貼り付ける場所 ▼▼▼ -->
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSephRWUBifH7VfDJZd6Or9fL5fJpJl0Ijw4kJj26YbB83RGSQ/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+        <!-- ▲▲▲ ここまで ▲▲▲ -->
       </div>
     </div>
 
     <div class="privacy-box" data-anim>
       <h3>個人情報の取扱いについて</h3>
       <p>
-        お問い合わせフォームにてご記入いただいた個人情報（お名前・メールアドレス・電話番号等）は、
-        お問い合わせへの返信および必要なご連絡のみに使用し、第三者への提供は行いません。
+        ご記入いただいた個人情報（お名前・メールアドレス・電話番号等）は、お問い合わせへの返信および必要なご連絡のみに使用し、第三者への提供は行いません。
+        詳しくは<a href="../privacy/index.html">個人情報の取扱い</a>をご覧ください。
       </p>
     </div>
 
@@ -121,18 +167,20 @@
 <footer class="global-footer">
   <div class="container">
     <div class="footer-inner">
-      <div><p class="footer-logo-jp">狛江箏・三味線教室</p><span class="footer-logo-en">Masako Watanabe — Komae Koto &amp; Shamisen School</span></div>
+      <div><p class="footer-logo-jp"><span class="footer-logo-school">生田流筝曲正音会</span>狛江琴三味線教室</p><span class="footer-logo-en">Komae Koto &amp; Shamisen School</span></div>
             <nav class="footer-nav">
         <a href="../lesson/index.html">レッスン</a>
         <a href="../hajimete/index.html">はじめての方へ</a>
         <a href="../faq/index.html">よくあるご質問</a>
         <a href="../profile/index.html">講師紹介</a>
+        <a href="../omenjo/index.html">お免状について</a>
         <a href="../cd/index.html">楽譜・CD・DVD</a>
         <a href="../contact/index.html">お問い合わせ</a>
         <a href="../privacy/index.html">個人情報の取扱い</a>
+        <a href="https://www.instagram.com/masako_w112/" target="_blank" rel="noopener">Instagram</a>
       </nav>
     </div>
-    <p class="footer-copy">Copyright &copy; 狛江箏・三味線教室 Masako Watanabe. All Rights Reserved.</p>
+    <p class="footer-copy">Copyright &copy; 生田流筝曲正音会 狛江琴三味線教室 Masako Watanabe. All Rights Reserved.</p>
   </div>
 </footer>
 <script src="../common.js"></script>
