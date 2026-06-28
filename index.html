@@ -370,7 +370,7 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
     </div>
     <div class="facts-grid">
       <div class="fact" data-anim data-delay="1"><span class="fact-en">Lesson</span><div class="fact-main">琴・三味線</div><div class="fact-sub">個人 / グループ<br>こども〜大人</div></div>
-      <div class="fact" data-anim data-delay="2"><span class="fact-en">Fee</span><div class="fact-main">月4,000円〜</div><div class="fact-sub">グループ。個人は8,500円〜</div></div>
+      <div class="fact" data-anim data-delay="2"><span class="fact-en">Fee</span><div class="fact-main" id="fact-fee-main">月4,000円〜</div><div class="fact-sub" id="fact-fee-sub">グループ。個人は8,500円〜</div></div>
       <div class="fact" data-anim data-delay="3"><span class="fact-en">Place</span><div class="fact-main">狛江市岩戸北</div><div class="fact-sub">喜多見駅南口<br>徒歩7分</div></div>
       <div class="fact" data-anim data-delay="4"><span class="fact-en">Day</span><div class="fact-main">平日・土日</div><div class="fact-sub">月曜祝日はお休み</div></div>
     </div>
@@ -485,6 +485,23 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
   </div>
 </footer>
 
+<!-- ★ レッスン料金はdata/site-data.jsで管理 -->
+<script src="data/site-data.js"></script>
+<script>
+(function(){
+  if(typeof SITE_DATA === 'undefined') return;
+  var fees = SITE_DATA.lesson.fees;
+  function parseAmt(s){ return parseInt(s.replace(/,/g,''), 10); }
+  var group = fees.filter(function(f){ return f.label.indexOf('グループ') !== -1; });
+  var indiv = fees.filter(function(f){ return f.label.indexOf('個人') !== -1; });
+  function minAmt(arr){ return arr.reduce(function(m,f){ return Math.min(m, parseAmt(f.amount)); }, Infinity); }
+  function fmtAmt(n){ return n.toLocaleString() + '円'; }
+  var gMin = group.length ? minAmt(group) : null;
+  var iMin = indiv.length ? minAmt(indiv) : null;
+  if(gMin) document.getElementById('fact-fee-main').textContent = '月' + fmtAmt(gMin) + '〜';
+  if(iMin) document.getElementById('fact-fee-sub').textContent = 'グループ。個人は' + fmtAmt(iMin) + '〜';
+})();
+</script>
 <script>
 // ナビ：スクロールで背景を濃く
 var nav = document.getElementById('nav');

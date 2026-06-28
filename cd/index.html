@@ -201,11 +201,15 @@
 }
 .purchase-note strong { color:var(--green-dark); }
 
+/* 最後のカードを2列幅で表示（デスクトップ） */
+.participation-card--full { grid-column: span 2; }
+
 @media(max-width:768px){
   .works-grid { grid-template-columns:1fr; }
   .work-card { grid-template-columns:100px 1fr; gap:16px; }
   .work-cover,.work-cover-placeholder { width:100px; height:100px; }
   .participation-grid { grid-template-columns:1fr; }
+  .participation-card--full { grid-column: auto; }
   .participation-cover { width:64px; height:64px; }
   .score-two-col { grid-template-columns:1fr; }
 }
@@ -350,7 +354,7 @@
           </p>
         </div>
       </div>
-      <div class="participation-card" style="grid-column:span 2;">
+      <div class="participation-card participation-card--full">
         <img src="../images/cd_rinko.jpg" alt="RINKO五" class="participation-cover" />
         <div class="participation-body">
           <span class="work-type">CD（渡辺正子参加）</span>
