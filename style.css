@@ -47,13 +47,13 @@ nav.global-nav.scrolled { background: rgba(255,255,255,0.96); box-shadow: 0 2px 
   padding: 0 24px;
 }
 .nav-right { display: flex; align-items: center; gap: 16px; }
-.nav-cta {
+.nav-links li a.nav-cta {
   background: var(--green-dark); color: var(--white);
-  padding: 9px 18px; font-family: 'Shippori Mincho', serif;
+  padding: 0 18px; font-family: 'Shippori Mincho', serif;
   font-size: 12px; font-weight: 600; letter-spacing: .08em; text-decoration: none;
   border-bottom: none; transition: all .25s; white-space: nowrap;
 }
-.nav-cta:hover { background: var(--green-mid); color: var(--green-dark); }
+.nav-links li a.nav-cta:hover { background: var(--green-mid); color: var(--green-dark); }
 .nav-logo { text-decoration: none; display: flex; flex-direction: column; justify-content: center; gap: 2px; }
 .nav-logo-school { font-family: 'Shippori Mincho', serif; font-size: 9px; font-weight: 500; letter-spacing: 0.14em; color: var(--green-mid); line-height: 1.4; }
 .nav-logo-jp { font-family: 'Shippori Mincho', serif; font-size: 15px; font-weight: 600; letter-spacing: 0.16em; color: var(--green-dark); line-height: 1.45; }
