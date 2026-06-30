@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>生田流筝曲正音会 狛江琴三味線教室 | こども・大人の初心者歓迎（渡辺正子）</title>
 <meta name="description" content="東京都狛江市の琴・三味線教室。こどもから大人まで初心者歓迎、楽器の貸出あり。喜多見駅南口から徒歩7分。体験レッスン受付中。渡辺正子が丁寧に指導します。" />
-<link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+<link rel="icon" href="images/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
 <meta property="og:site_name" content="狛江琴三味線教室" />
 <meta property="og:title" content="生田流筝曲正音会 狛江琴三味線教室 | こども・大人の初心者歓迎（渡辺正子）" />
 <meta property="og:description" content="東京都狛江市の琴・三味線教室。こどもから大人まで初心者歓迎、楽器の貸出あり。喜多見駅南口から徒歩7分。体験レッスン受付中。" />
@@ -166,6 +168,12 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
 .fact-en { font-family:'Cormorant Garamond',serif; font-size:11px; font-style:italic; letter-spacing:.25em; color:var(--green-lt); display:block; margin-bottom:12px; }
 .fact-main { font-family:'Shippori Mincho',serif; font-size:19px; letter-spacing:.04em; color:#fff; line-height:1.5; }
 .fact-sub { font-size:11.5px; color:rgba(255,255,255,0.6); margin-top:8px; line-height:1.7; }
+.fact-fee-title { font-family:'Shippori Mincho',serif; font-size:15px; letter-spacing:.04em; color:#fff; margin-bottom:12px; }
+.fee-mini { width:100%; max-width:200px; margin:0 auto; border-collapse:collapse; }
+.fee-mini th, .fee-mini td { padding:5px 4px; text-align:center; line-height:1.3; }
+.fee-mini thead th { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:10.5px; font-style:italic; letter-spacing:.06em; color:var(--green-lt); border-bottom:1px solid rgba(255,255,255,0.22); }
+.fee-mini tbody th { font-family:'Shippori Mincho',serif; font-weight:500; font-size:12.5px; color:var(--green-lt); text-align:left; }
+.fee-mini tbody td { font-family:'Shippori Mincho',serif; font-size:13px; color:#fff; }
 
 /* ── 体験レッスンの流れ ── */
 .trial { padding:92px 0; background:var(--white); position:relative; overflow:hidden; }
@@ -370,7 +378,7 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
     </div>
     <div class="facts-grid">
       <div class="fact" data-anim data-delay="1"><span class="fact-en">Lesson</span><div class="fact-main">琴・三味線</div><div class="fact-sub">個人 / グループ<br>こども〜大人</div></div>
-      <div class="fact" data-anim data-delay="2"><span class="fact-en">Fee</span><div class="fact-main" id="fact-fee-main">月4,000円〜</div><div class="fact-sub" id="fact-fee-sub">グループ。個人は8,500円〜</div></div>
+      <div class="fact" data-anim data-delay="2"><span class="fact-en">Fee</span><div class="fact-fee-title">月謝</div><table class="fee-mini"><thead><tr><th></th><th>グループ</th><th>個人</th></tr></thead><tbody><tr><th>こども</th><td id="fee-kg">4,000円</td><td id="fee-ki">8,500円</td></tr><tr><th>おとな</th><td id="fee-ag">5,000円</td><td id="fee-ai">10,000円</td></tr></tbody></table></div>
       <div class="fact" data-anim data-delay="3"><span class="fact-en">Place</span><div class="fact-main">狛江市岩戸北</div><div class="fact-sub">喜多見駅南口<br>徒歩7分</div></div>
       <div class="fact" data-anim data-delay="4"><span class="fact-en">Day</span><div class="fact-main">平日・土日</div><div class="fact-sub">月曜祝日はお休み</div></div>
     </div>
@@ -495,26 +503,23 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
   function parseAmt(s){ var m = String(s==null?'':s).match(/\d[\d,]*/); return m ? parseInt(m[0].replace(/,/g,''),10) : NaN; }
   // NaN（応相談など）は無視して最小を返す。1件も数値が無ければnull
   function minAmt(arr){ var ns = arr.map(function(f){ return parseAmt(f.amount); }).filter(function(n){ return !isNaN(n); }); return ns.length ? Math.min.apply(null, ns) : null; }
-  // ラベルのゆれを吸収（グループ＝団体/集団/合奏/クラス、個人＝個別/マンツーマン/プライベート 等）
+  // ラベルのゆれを吸収（こども／おとな × グループ／個人 の4分類）
   function has(label, words){ label = String(label||''); return words.some(function(w){ return label.indexOf(w) !== -1; }); }
+  var KIDS  = ['こども','子ども','子供','キッズ','幼','小学','小・中','小中','中学'];
+  var ADULT = ['大人','おとな','一般','高校','社会人','シニア'];
   var GROUP = ['グループ','団体','集団','合奏','クラス'];
   var INDIV = ['個人','個別','マンツーマン','プライベート','1対1','１対１'];
-  var group = fees.filter(function(f){ return has(f.label, GROUP); });
-  var indiv = fees.filter(function(f){ return has(f.label, INDIV); });
   function fmtAmt(n){ return n.toLocaleString() + '円'; }
-
-  var gMin   = minAmt(group);
-  var iMin   = minAmt(indiv);
-  var allMin = minAmt(fees);
-
-  // main：グループ最安。グループが無い/数値が取れない場合は全体最安にフォールバック（古い既定値の取り残しを防止）
-  var mainVal = (gMin !== null) ? gMin : allMin;
-  if(mainVal !== null) document.getElementById('fact-fee-main').textContent = '月' + fmtAmt(mainVal) + '〜';
-
-  // sub：個人の金額が取れた時だけ「個人は◯円〜」。取れなければ誤った金額を出さず空に（データ全滅時は既定表示を据え置き）
-  var subEl = document.getElementById('fact-fee-sub');
-  if(iMin !== null)        subEl.textContent = 'グループ。個人は' + fmtAmt(iMin) + '〜';
-  else if(mainVal !== null) subEl.textContent = '';
+  // 区分に合致する料金の最安を返し、対応するセルに反映（取れなければ既定値を据え置き）
+  function setCell(id, cat, type){
+    var sel = fees.filter(function(f){ return has(f.label, cat) && has(f.label, type); });
+    var v = minAmt(sel);
+    if(v !== null) document.getElementById(id).textContent = fmtAmt(v);
+  }
+  setCell('fee-kg', KIDS,  GROUP);
+  setCell('fee-ki', KIDS,  INDIV);
+  setCell('fee-ag', ADULT, GROUP);
+  setCell('fee-ai', ADULT, INDIV);
 })();
 </script>
 <script>
