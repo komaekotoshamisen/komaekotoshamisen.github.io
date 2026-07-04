@@ -72,7 +72,25 @@
     <h1 class="page-hero-title">レッスン</h1>
   </div>
 </div>
-<section class="section">
+<section class="section wagara-host">
+  <div class="wagara-deco" data-anim="fade" style="bottom:0; right:0; width:300px;">
+    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <pattern id="wd-shippo" width="42" height="42" patternUnits="userSpaceOnUse">
+          <g fill="none" stroke="#c9ad82" stroke-width="1.4">
+            <circle cx="0" cy="0" r="29.7"/><circle cx="42" cy="0" r="29.7"/>
+            <circle cx="0" cy="42" r="29.7"/><circle cx="42" cy="42" r="29.7"/>
+          </g>
+        </pattern>
+        <linearGradient id="wd-fadeBR" x1="1" y1="1" x2="0" y2="0">
+          <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+          <stop offset=".78" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="wd-mBR"><rect width="300" height="300" fill="url(#wd-fadeBR)"/></mask>
+      </defs>
+      <g mask="url(#wd-mBR)" opacity=".62"><rect width="300" height="300" fill="url(#wd-shippo)"/></g>
+    </svg>
+  </div>
   <div class="container">
     <p class="lesson-intro" data-anim>
       琴・三味線・尺八など日本の伝統楽器の素晴らしさを、<br>
@@ -82,7 +100,7 @@
 
     <!-- 個人レッスン -->
     <div class="lesson-block" data-anim>
-      <img src="../images/shared_lesson.jpg" alt="個人レッスン／グループレッスン" class="lesson-block-img" />
+      <img src="../images/lesson_individual_group.jpg" alt="個人レッスン／グループレッスン" class="lesson-block-img" />
       <div>
         <span class="lesson-tag">Individual &amp; Group Lesson</span>
         <h2 class="lesson-h2">個人レッスン／グループレッスン</h2>

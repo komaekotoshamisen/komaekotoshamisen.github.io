@@ -256,6 +256,10 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
   .footer-nav { justify-content:flex-start; }
   .ghost-word { font-size:60px; }
 }
+/* ── 和柄コーナー装飾（スクロールでふわっと表示・控えめ） ── */
+.wagara-deco { position:absolute; z-index:0; pointer-events:none; }
+.wagara-deco svg { display:block; width:100%; height:auto; }
+@media (max-width:768px){ .wagara-deco { display:none; } }
 </style>
 </head>
 <body>
@@ -337,7 +341,7 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
         </div>
       </div>
       <div class="aud-card" data-anim data-delay="3">
-        <div class="aud-imgwrap reveal-mask"><img src="images/shared_lesson.jpg" alt="個人レッスンの様子" /></div>
+        <div class="aud-imgwrap reveal-mask"><img src="images/top_welcome_noinstrument.jpg" alt="個人レッスンの様子" /></div>
         <div class="aud-body">
           <span class="aud-en">No Instrument?</span>
           <div class="aud-title">楽器をお持ちでない方</div>
@@ -350,6 +354,25 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
 
 <!-- ── 理念・教室の特色 ── -->
 <section class="philosophy washi">
+  <!-- 和柄装飾 No.19 七宝（右下・控えめ） -->
+  <div class="wagara-deco" data-anim="fade" style="bottom:0; right:0; width:300px;">
+    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <pattern id="wd-shippo" width="42" height="42" patternUnits="userSpaceOnUse">
+          <g fill="none" stroke="#c9ad82" stroke-width="1.4">
+            <circle cx="0" cy="0" r="29.7"/><circle cx="42" cy="0" r="29.7"/>
+            <circle cx="0" cy="42" r="29.7"/><circle cx="42" cy="42" r="29.7"/>
+          </g>
+        </pattern>
+        <linearGradient id="wd-fadeBR" x1="1" y1="1" x2="0" y2="0">
+          <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+          <stop offset=".78" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="wd-mBR"><rect width="300" height="300" fill="url(#wd-fadeBR)"/></mask>
+      </defs>
+      <g mask="url(#wd-mBR)" opacity=".62"><rect width="300" height="300" fill="url(#wd-shippo)"/></g>
+    </svg>
+  </div>
   <svg class="sb" style="top:12%;right:5%;width:66px;opacity:.08;animation-name:floaty3;animation-duration:12s;animation-delay:1s;" viewBox="0 0 100 100" aria-hidden="true"><g fill="#dcc8a8"><circle cx="50" cy="26" r="15"/><circle cx="74" cy="44" r="15"/><circle cx="65" cy="72" r="15"/><circle cx="35" cy="72" r="15"/><circle cx="26" cy="44" r="15"/><circle cx="50" cy="50" r="9" fill="#b09050"/></g></svg>
   <svg class="sb" style="bottom:10%;left:6%;width:44px;opacity:.06;animation-name:floaty2;animation-duration:14s;animation-delay:3s;" viewBox="0 0 100 100" aria-hidden="true"><g fill="#dcc8a8"><circle cx="50" cy="26" r="15"/><circle cx="74" cy="44" r="15"/><circle cx="65" cy="72" r="15"/><circle cx="35" cy="72" r="15"/><circle cx="26" cy="44" r="15"/><circle cx="50" cy="50" r="9" fill="#b09050"/></g></svg>
   <div class="container">
@@ -369,6 +392,29 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
 
 <!-- ── レッスンの基本 ── -->
 <section class="facts">
+  <!-- 和柄装飾 No.18 花七宝（左上・クリーム／控えめ） -->
+  <div class="wagara-deco" data-anim="fade" style="top:0; left:0; width:300px;">
+    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <pattern id="wd-hana" width="46" height="46" patternUnits="userSpaceOnUse">
+          <g fill="none" stroke="#efe0c6" stroke-width="1.6">
+            <circle cx="23" cy="0" r="16"/><circle cx="23" cy="46" r="16"/>
+            <circle cx="0" cy="23" r="16"/><circle cx="46" cy="23" r="16"/>
+          </g>
+          <g fill="#f0e1c8">
+            <circle cx="23" cy="23" r="3"/><circle cx="0" cy="0" r="3"/>
+            <circle cx="46" cy="0" r="3"/><circle cx="0" cy="46" r="3"/><circle cx="46" cy="46" r="3"/>
+          </g>
+        </pattern>
+        <linearGradient id="wd-fadeTL" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+          <stop offset=".78" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="wd-mTL"><rect width="300" height="300" fill="url(#wd-fadeTL)"/></mask>
+      </defs>
+      <g mask="url(#wd-mTL)" opacity=".68"><rect width="300" height="300" fill="url(#wd-hana)"/></g>
+    </svg>
+  </div>
   <svg class="sb" style="top:8%;right:4%;width:72px;opacity:.10;animation-duration:11s;animation-delay:0.5s;" viewBox="0 0 100 100" aria-hidden="true"><g fill="#f0e1c8"><circle cx="50" cy="26" r="15"/><circle cx="74" cy="44" r="15"/><circle cx="65" cy="72" r="15"/><circle cx="35" cy="72" r="15"/><circle cx="26" cy="44" r="15"/><circle cx="50" cy="50" r="9" fill="#d4a855"/></g></svg>
   <svg class="sb" style="bottom:10%;left:3%;width:48px;opacity:.08;animation-name:floaty3;animation-duration:13s;animation-delay:2.5s;" viewBox="0 0 100 100" aria-hidden="true"><g fill="#f0e1c8"><circle cx="50" cy="26" r="15"/><circle cx="74" cy="44" r="15"/><circle cx="65" cy="72" r="15"/><circle cx="35" cy="72" r="15"/><circle cx="26" cy="44" r="15"/><circle cx="50" cy="50" r="9" fill="#d4a855"/></g></svg>
   <div class="container">
@@ -387,6 +433,36 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
 
 <!-- ── 体験レッスンの流れ ── -->
 <section class="trial">
+  <!-- 和柄装飾 No.03 霞雲＋梅（左下・控えめ） -->
+  <div class="wagara-deco" data-anim="fade" style="bottom:0; left:0; width:320px;">
+    <svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="wd-fadeBL" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+          <stop offset=".82" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="wd-mBL"><rect width="360" height="240" fill="url(#wd-fadeBL)"/></mask>
+      </defs>
+      <g mask="url(#wd-mBL)" opacity=".55">
+        <path d="M150 60 h150 a14 14 0 0 1 0 28 h-70 a14 14 0 0 0 0 28 h120 v18 h-130 a14 14 0 0 1 0 -28 h60 a14 14 0 0 0 0 -28 h-160 a14 14 0 0 1 0 -28 h50 z" fill="#cbb489"/>
+        <g transform="translate(95,150)">
+          <g fill="#e2d1b4">
+            <g transform="rotate(0)"><circle cx="0" cy="-26" r="17"/></g>
+            <g transform="rotate(72)"><circle cx="0" cy="-26" r="17"/></g>
+            <g transform="rotate(144)"><circle cx="0" cy="-26" r="17"/></g>
+            <g transform="rotate(216)"><circle cx="0" cy="-26" r="17"/></g>
+            <g transform="rotate(288)"><circle cx="0" cy="-26" r="17"/></g>
+          </g>
+          <g stroke="#b39a6a" stroke-width="2" stroke-linecap="round">
+            <line x1="0" y1="0" x2="0" y2="-22"/><line x1="0" y1="0" x2="21" y2="-7"/>
+            <line x1="0" y1="0" x2="13" y2="18"/><line x1="0" y1="0" x2="-13" y2="18"/>
+            <line x1="0" y1="0" x2="-21" y2="-7"/>
+          </g>
+          <circle r="5" fill="#b39a6a"/>
+        </g>
+      </g>
+    </svg>
+  </div>
   <svg class="sb" style="top:5%;right:2%;width:58px;opacity:.07;animation-name:floaty2;animation-duration:12s;animation-delay:1.8s;" viewBox="0 0 100 100" aria-hidden="true"><g fill="#dcc8a8"><circle cx="50" cy="26" r="15"/><circle cx="74" cy="44" r="15"/><circle cx="65" cy="72" r="15"/><circle cx="35" cy="72" r="15"/><circle cx="26" cy="44" r="15"/><circle cx="50" cy="50" r="9" fill="#b09050"/></g></svg>
   <svg class="sb" style="bottom:6%;left:2%;width:40px;opacity:.06;animation-name:floaty3;animation-duration:10s;animation-delay:3.5s;" viewBox="0 0 100 100" aria-hidden="true"><g fill="#dcc8a8"><circle cx="50" cy="26" r="15"/><circle cx="74" cy="44" r="15"/><circle cx="65" cy="72" r="15"/><circle cx="35" cy="72" r="15"/><circle cx="26" cy="44" r="15"/><circle cx="50" cy="50" r="9" fill="#b09050"/></g></svg>
   <div class="trial-inner">
@@ -416,6 +492,46 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
 
 <!-- ── 講師（信頼の裏付け） ── -->
 <section class="teacher washi">
+  <!-- 和柄装飾 No.12 格子＋桜（右下・控えめ） -->
+  <div class="wagara-deco" data-anim="fade" style="bottom:0; right:0; width:300px;">
+    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <pattern id="wd-koushi" width="34" height="34" patternUnits="userSpaceOnUse">
+          <path d="M34 0 V34 M0 34 H34" fill="none" stroke="#dcc8a8" stroke-width="1.2"/>
+        </pattern>
+        <linearGradient id="wd-fadeBR2" x1="1" y1="1" x2="0" y2="0">
+          <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+          <stop offset=".8" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="wd-mBR2"><rect width="300" height="300" fill="url(#wd-fadeBR2)"/></mask>
+      </defs>
+      <g mask="url(#wd-mBR2)">
+        <rect width="300" height="300" fill="url(#wd-koushi)" opacity=".72"/>
+        <g opacity=".78">
+          <g transform="translate(230,150)">
+            <g fill="#e0cfb2">
+              <g transform="rotate(0)"><path d="M0 -15 C 5 -9, 5 -4, 0 0 C -5 -4, -5 -9, 0 -15 Z"/></g>
+              <g transform="rotate(72)"><path d="M0 -15 C 5 -9, 5 -4, 0 0 C -5 -4, -5 -9, 0 -15 Z"/></g>
+              <g transform="rotate(144)"><path d="M0 -15 C 5 -9, 5 -4, 0 0 C -5 -4, -5 -9, 0 -15 Z"/></g>
+              <g transform="rotate(216)"><path d="M0 -15 C 5 -9, 5 -4, 0 0 C -5 -4, -5 -9, 0 -15 Z"/></g>
+              <g transform="rotate(288)"><path d="M0 -15 C 5 -9, 5 -4, 0 0 C -5 -4, -5 -9, 0 -15 Z"/></g>
+            </g>
+            <circle r="2.6" fill="#c9ad82"/>
+          </g>
+          <g transform="translate(255,235) scale(1.25)">
+            <g fill="#e0cfb2">
+              <g transform="rotate(0)"><path d="M0 -15 C 5 -9, 5 -4, 0 0 C -5 -4, -5 -9, 0 -15 Z"/></g>
+              <g transform="rotate(72)"><path d="M0 -15 C 5 -9, 5 -4, 0 0 C -5 -4, -5 -9, 0 -15 Z"/></g>
+              <g transform="rotate(144)"><path d="M0 -15 C 5 -9, 5 -4, 0 0 C -5 -4, -5 -9, 0 -15 Z"/></g>
+              <g transform="rotate(216)"><path d="M0 -15 C 5 -9, 5 -4, 0 0 C -5 -4, -5 -9, 0 -15 Z"/></g>
+              <g transform="rotate(288)"><path d="M0 -15 C 5 -9, 5 -4, 0 0 C -5 -4, -5 -9, 0 -15 Z"/></g>
+            </g>
+            <circle r="2.6" fill="#c9ad82"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
   <svg class="sb" style="top:10%;left:4%;width:62px;opacity:.08;animation-name:floaty2;animation-duration:13s;animation-delay:0.8s;" viewBox="0 0 100 100" aria-hidden="true"><g fill="#dcc8a8"><circle cx="50" cy="26" r="15"/><circle cx="74" cy="44" r="15"/><circle cx="65" cy="72" r="15"/><circle cx="35" cy="72" r="15"/><circle cx="26" cy="44" r="15"/><circle cx="50" cy="50" r="9" fill="#b09050"/></g></svg>
   <svg class="sb" style="bottom:8%;right:4%;width:46px;opacity:.07;animation-name:floaty3;animation-duration:11s;animation-delay:4.5s;" viewBox="0 0 100 100" aria-hidden="true"><g fill="#dcc8a8"><circle cx="50" cy="26" r="15"/><circle cx="74" cy="44" r="15"/><circle cx="65" cy="72" r="15"/><circle cx="35" cy="72" r="15"/><circle cx="26" cy="44" r="15"/><circle cx="50" cy="50" r="9" fill="#b09050"/></g></svg>
   <div class="teacher-inner">

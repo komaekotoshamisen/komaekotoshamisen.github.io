@@ -199,6 +199,16 @@ footer.global-footer { background: var(--brown-bg); border-top: 1px solid rgba(2
   [data-anim].anim-start { opacity: 1; transform: none; transition: none; }
 }
 
+/* ── 和柄コーナー装飾（全ページ共通・控えめ） ── */
+.wagara-host { position: relative; overflow: hidden; }
+/* sticky を含むセクション用：overflow:hidden を付けずクリップしない版 */
+.wagara-host-open { position: relative; }
+.wagara-host > *:not(.wagara-deco),
+.wagara-host-open > *:not(.wagara-deco) { position: relative; z-index: 1; }
+.wagara-deco { position: absolute; z-index: 0; pointer-events: none; }
+.wagara-deco svg { display: block; width: 100%; height: auto; }
+@media (max-width: 768px) { .wagara-deco { display: none; } }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .nav-inner { padding: 0 16px; }
