@@ -207,7 +207,7 @@ footer.global-footer { background: var(--brown-bg); border-top: 1px solid rgba(2
 .wagara-host-open > *:not(.wagara-deco) { position: relative; z-index: 1; }
 .wagara-deco { position: absolute; z-index: 0; pointer-events: none; }
 .wagara-deco svg { display: block; width: 100%; height: auto; }
-@media (max-width: 768px) { .wagara-deco { display: none; } }
+@media (max-width: 768px) { .wagara-deco { width: 170px !important; } }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
