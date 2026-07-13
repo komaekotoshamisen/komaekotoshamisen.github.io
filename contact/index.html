@@ -17,7 +17,7 @@
 .contact-lead .priv { display:block; margin-top:14px; font-size:13px; color:var(--ink-lt); }
 
 /* お問い合わせ方法カード */
-.method-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:8px; }
+.method-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:8px; max-width:760px; margin-left:auto; margin-right:auto; }
 .method-card {
   background:var(--white); border:1px solid var(--border); border-radius:8px;
   padding:28px 18px; text-align:center; display:flex; flex-direction:column; align-items:center;
@@ -135,19 +135,8 @@
       <span class="priv">いただいた個人情報は、お問い合わせへの返信以外には使用しません。</span>
     </p>
 
-    <!-- お問い合わせ方法（4つ） -->
+    <!-- お問い合わせ方法（3つ） -->
     <div class="method-grid" data-anim>
-
-      <!-- 公式LINE -->
-      <div class="method-card">
-        <span class="method-icon">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.69 2 10.23c0 4.07 3.6 7.48 8.46 8.12.33.07.78.22.89.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1.02.9.55 1.1-.46 5.93-3.49 8.09-5.98C21.5 13.6 22 11.97 22 10.23 22 5.69 17.52 2 12 2zM8.07 12.69H6.1a.52.52 0 0 1-.52-.52V8.24a.52.52 0 1 1 1.04 0v3.41h1.45a.52.52 0 1 1 0 1.04zm2.04-.52a.52.52 0 1 1-1.04 0V8.24a.52.52 0 1 1 1.04 0v3.93zm4.74 0a.52.52 0 0 1-.36.5.5.5 0 0 1-.16.02.52.52 0 0 1-.42-.21l-2.02-2.74v2.43a.52.52 0 1 1-1.04 0V8.24a.52.52 0 0 1 .94-.31l2.02 2.75V8.24a.52.52 0 1 1 1.04 0v3.93zm3.32-2.49a.52.52 0 1 1 0 1.04h-1.45v.93h1.45a.52.52 0 1 1 0 1.04h-1.97a.52.52 0 0 1-.52-.52V8.24a.52.52 0 0 1 .52-.52h1.97a.52.52 0 1 1 0 1.04h-1.45v.93h1.45z"/></svg>
-        </span>
-        <h3>公式LINE</h3>
-        <span class="en">LINE</span>
-        <p>友だち追加で、トークから気軽にご相談いただけます。</p>
-        <a class="method-btn" href="https://line.me/R/ti/p/@663bbuyv?oat_content=qr" target="_blank" rel="noopener">友だち追加</a>
-      </div>
 
       <!-- メール -->
       <div class="method-card">
@@ -223,7 +212,6 @@
         <a href="../contact/index.html">お問い合わせ</a>
         <a href="../privacy/index.html">個人情報の取扱い</a>
         <a href="https://www.instagram.com/masako_w112/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://line.me/R/ti/p/@663bbuyv?oat_content=qr" target="_blank" rel="noopener">公式LINE</a>
         <a href="mailto:komaekotoshamisen@gmail.com">メール</a>
       </nav>
     </div>
