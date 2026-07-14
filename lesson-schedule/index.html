@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>レッスン日程 | 生田流筝曲正音会 狛江琴三味線教室</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png" />
+<link rel="icon" href="../images/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../style.css?v=20260705" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.sched-section {
+  padding: 56px 0 96px;
+  background: var(--white);
+  min-height: 60vh;
+}
+.sched-container {
+  max-width: 880px; margin: 0 auto; padding: 0 24px;
+}
+.sched-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 26px; font-weight: 600;
+  color: var(--green-dark);
+  letter-spacing: .08em;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.sched-lead {
+  font-size: 15px; line-height: 1.9; color: var(--ink-mid);
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+/* ── 合言葉ゲート ── */
+.gate-box {
+  max-width: 420px; margin: 0 auto;
+  background: var(--green-pale);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px 28px;
+}
+.gate-note {
+  font-size: 14px; line-height: 1.9; color: var(--ink-mid);
+  text-align: center; margin-bottom: 22px;
+}
+.gate-form { display: flex; flex-direction: column; gap: 14px; }
+.gate-input {
+  width: 100%;
+  font-size: 20px;
+  letter-spacing: .08em;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--ink);
+  text-align: center;
+}
+.gate-input:focus { outline: 2px solid var(--green-mid); }
+.gate-btn {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 17px; font-weight: 500;
+  padding: 15px 18px;
+  border: none; border-radius: 10px;
+  background: var(--green-mid); color: var(--green-dark);
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.gate-btn:hover { background: var(--green-dark); color: var(--white); }
+.gate-btn:disabled { opacity: .6; cursor: default; }
+.gate-error {
+  display: none;
+  font-size: 14px; color: #a3402c;
+  text-align: center;
+}
+.gate-error.show { display: block; }
+.gate-help {
+  font-size: 13px; color: var(--ink-lt);
+  text-align: center; margin-top: 20px; line-height: 1.8;
+}
+.gate-loading {
+  text-align: center; font-size: 15px; color: var(--ink-mid);
+  padding: 40px 0;
+}
+
+/* ── 予定表示 ── */
+#scheduleView { display: none; }
+.sched-wide { max-width: 880px; }
+
+.sched-controls {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.view-toggle {
+  display: inline-flex; border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+}
+.view-toggle button {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px; padding: 9px 16px;
+  border: none; background: var(--white); color: var(--ink-mid);
+  cursor: pointer;
+}
+.view-toggle button.active { background: var(--green); color: var(--white); font-weight: 500; }
+
+.period-nav {
+  display: flex; align-items: center; gap: 12px;
+}
+.period-nav button {
+  width: 34px; height: 34px;
+  border: 1px solid var(--border); border-radius: 50%;
+  background: var(--white); color: var(--green-dark);
+  font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.period-nav button:hover { background: var(--green-bg); }
+.period-label {
+  font-size: 15px; font-weight: 500; color: var(--green-dark);
+  min-width: 170px; text-align: center;
+}
+
+/* ── 名前フィルター ── */
+.filter-box {
+  display: flex; align-items: center; gap: 8px;
+  max-width: 340px; margin: 0 auto 28px;
+  border: 1px solid var(--border); border-radius: 10px;
+  background: var(--white); padding: 4px 6px 4px 14px;
+}
+.filter-box input {
+  flex: 1; border: none; outline: none;
+  font-size: 15px; padding: 8px 0; background: none; color: var(--ink);
+  min-width: 0;
+}
+.filter-clear {
+  flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+  border: none; background: var(--green-pale); color: var(--ink-mid);
+  font-size: 15px; cursor: pointer; line-height: 1;
+}
+.filter-clear:hover { background: var(--green-lt); }
+.filter-note {
+  text-align: center; font-size: 12.5px; color: var(--ink-lt);
+  margin: -20px 0 24px;
+}
+
+.sched-empty {
+  text-align: center; color: var(--ink-lt); font-size: 15px; padding: 40px 0;
+}
+
+/* ── リスト表示（スケジュール） ── */
+.sched-day { margin-bottom: 22px; }
+.sched-day-head {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 16px; font-weight: 600;
+  color: var(--green);
+  border-bottom: 2px solid var(--green-lt);
+  padding-bottom: 6px; margin-bottom: 8px;
+}
+.sched-day-head.is-today { color: var(--green-mid); }
+.sched-event {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px;
+  padding: 10px 2px;
+  border-bottom: 1px solid var(--border);
+  font-size: 15px;
+}
+.sched-event:last-child { border-bottom: none; }
+.sched-event-main { display: flex; flex-direction: column; gap: 2px; }
+.sched-time { color: var(--ink-mid); white-space: nowrap; font-size: 13px; }
+.sched-name { font-weight: 500; color: var(--ink); }
+.sched-add {
+  flex-shrink: 0; white-space: nowrap;
+  font-size: 12px; color: var(--green);
+  border: 1px solid var(--green-lt); border-radius: 14px;
+  padding: 5px 10px; text-decoration: none;
+}
+.sched-add:hover { background: var(--green-pale); }
+
+.gate-again {
+  display: block; text-align: center; margin-top: 40px;
+  font-size: 13px; color: var(--ink-lt); text-decoration: underline;
+  background: none; border: none; cursor: pointer;
+  text-underline-offset: 3px;
+}
+
+/* ── 週表示（タイムグリッド） ── */
+.grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.wk-grid {
+  display: grid;
+  grid-template-columns: 46px repeat(7, minmax(84px, 1fr));
+  min-width: 660px;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+.wk-corner {
+  border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: var(--green-pale);
+  position: sticky; left: 0; z-index: 3;
+}
+.wk-head {
+  text-align: center; padding: 8px 0 10px;
+  border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: var(--green-pale);
+}
+.wk-head-dow { display: block; font-size: 11px; color: var(--ink-mid); }
+.wk-head-date {
+  display: block; font-size: 15px; font-weight: 500; color: var(--green-dark);
+  margin-top: 2px;
+}
+.wk-head.is-today .wk-head-date {
+  color: var(--white); background: var(--green-mid); border-radius: 50%;
+  width: 26px; height: 26px; line-height: 26px; margin: 2px auto 0;
+}
+.wk-timecol {
+  position: sticky; left: 0; z-index: 2;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  box-shadow: 2px 0 4px rgba(0,0,0,.04);
+}
+.wk-timelabel {
+  position: absolute; right: 6px; transform: translateY(-50%);
+  font-size: 10px; color: var(--ink-lt); white-space: nowrap;
+}
+.wk-daycol { position: relative; border-right: 1px solid var(--border); }
+.wk-daycol.is-today { background: #fbf6ee; }
+.wk-hourline { position: absolute; left: 0; right: 0; border-top: 1px solid var(--border); }
+.wk-event {
+  position: absolute; left: 3px; right: 3px;
+  background: var(--green-mid); color: var(--white);
+  border-radius: 5px; padding: 3px 5px; overflow: hidden;
+  line-height: 1.3; box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+.wk-event-time { display: block; font-size: 9.5px; opacity: .9; }
+.wk-event-title {
+  display: block; font-size: 11px; font-weight: 500;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ── 月表示（カレンダーグリッド） ── */
+.mo-grid {
+  display: grid; grid-template-columns: repeat(7, minmax(78px, 1fr));
+  min-width: 620px;
+  border-top: 1px solid var(--border); border-left: 1px solid var(--border);
+}
+.mo-weekday {
+  text-align: center; font-size: 12px; padding: 8px 0;
+  color: var(--ink-mid); background: var(--green-pale);
+  border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.mo-cell {
+  min-height: 82px; padding: 4px 5px;
+  border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.mo-cell.is-outside { background: #faf8f4; }
+.mo-cell.is-outside .mo-date { color: var(--ink-lt); }
+.mo-date {
+  display: inline-block; min-width: 20px; height: 20px; line-height: 20px;
+  text-align: center; font-size: 12px; font-weight: 500; color: var(--green-dark);
+  margin-bottom: 3px;
+}
+.mo-cell.is-today .mo-date {
+  background: var(--green-mid); color: var(--white); border-radius: 50%;
+}
+.mo-event {
+  background: var(--green-pale); border-left: 3px solid var(--green-mid);
+  border-radius: 2px; padding: 2px 4px; margin-bottom: 2px;
+  font-size: 10.5px; line-height: 1.4; color: var(--green-dark);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mo-more { font-size: 10px; color: var(--ink-lt); padding-left: 2px; }
+
+@media (max-width: 480px) {
+  .sched-title { font-size: 22px; }
+  .period-label { min-width: 0; font-size: 14px; }
+  .filter-box { max-width: 100%; }
+
+  .wk-grid {
+    grid-template-columns: 38px repeat(7, minmax(56px, 1fr));
+    min-width: 430px;
+  }
+  .wk-timelabel { font-size: 9px; right: 3px; }
+  .wk-head-dow { font-size: 10px; }
+  .wk-head-date { font-size: 13px; }
+  .wk-event-time { font-size: 8.5px; }
+  .wk-event-title { font-size: 10px; }
+
+  .mo-grid {
+    grid-template-columns: repeat(7, minmax(52px, 1fr));
+    min-width: 400px;
+  }
+  .mo-cell { min-height: 64px; padding: 3px 3px; }
+  .mo-event { font-size: 9.5px; padding: 1px 3px; }
+  .mo-more { font-size: 9px; }
+
+  .sched-event { flex-wrap: wrap; gap: 6px 12px; }
+  .sched-add { font-size: 11px; padding: 4px 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="global-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-school">生田流筝曲正音会</span>
+      <span class="nav-logo-jp">狛江琴三味線教室</span>
+      <span class="nav-logo-en">Komae Koto &amp; Shamisen School</span>
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">トップ</a></li>
+        <li><a href="../lesson/index.html">レッスン</a></li>
+        <li><a href="../hajimete/index.html">はじめての方へ</a></li>
+        <li><a href="../faq/index.html">よくあるご質問</a></li>
+        <li><a href="../profile/index.html">講師紹介</a></li>
+        <li><a href="../cd/index.html">楽譜・CD</a></li>
+        <li><a href="../contact/index.html" class="nav-cta">お問い合わせ</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<section class="sched-section">
+  <div class="sched-container">
+    <p class="sched-title">レッスン日程</p>
+    <p class="sched-lead">生徒の皆様専用のページです。</p>
+
+    <!-- 合言葉ゲート -->
+    <div class="gate-box" id="gateBox">
+      <p class="gate-note">教室でお伝えしている合言葉を入力してください。</p>
+      <form class="gate-form" id="gateForm" autocomplete="off">
+        <input type="password" inputmode="text" class="gate-input" id="pwInput" placeholder="合言葉" autocomplete="off" />
+        <button type="submit" class="gate-btn" id="gateBtn">開く</button>
+        <p class="gate-error" id="gateError">合言葉が違います。もう一度お確かめください。</p>
+      </form>
+      <p class="gate-help">合言葉がわからない場合は、教室内の掲示をご確認いただくか、先生までお尋ねください。</p>
+    </div>
+    <div class="gate-loading" id="gateLoading" style="display:none;">読み込み中…</div>
+
+    <!-- 予定表示 -->
+    <div id="scheduleView">
+      <div class="sched-controls">
+        <div class="view-toggle">
+          <button type="button" id="btnList" class="active">リスト</button>
+          <button type="button" id="btnWeek">週</button>
+          <button type="button" id="btnMonth">月</button>
+        </div>
+        <div class="period-nav" id="periodNav" style="display:none;">
+          <button type="button" id="btnPrev" aria-label="前へ">＜</button>
+          <span class="period-label" id="periodLabel"></span>
+          <button type="button" id="btnNext" aria-label="次へ">＞</button>
+        </div>
+      </div>
+      <div class="filter-box">
+        <input type="text" id="filterInput" placeholder="生徒名で絞り込み（例：田中）" />
+        <button type="button" class="filter-clear" id="filterClear" aria-label="絞り込みを解除">×</button>
+      </div>
+      <p class="filter-note">空欄のときは全員分の予定が表示されます</p>
+      <div id="listWrap"></div>
+      <div id="weekGridWrap" class="grid-wrap" style="display:none;"></div>
+      <div id="monthGridWrap" class="grid-wrap" style="display:none;"></div>
+      <button type="button" class="gate-again" id="btnRelock">別の合言葉で開き直す</button>
+    </div>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer class="global-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-logo-jp"><span class="footer-logo-school">生田流筝曲正音会</span>狛江琴三味線教室</p>
+        <span class="footer-logo-en">Komae Koto &amp; Shamisen School</span>
+      </div>
+      <nav class="footer-nav">
+        <a href="../lesson/index.html">レッスン</a>
+        <a href="../hajimete/index.html">はじめての方へ</a>
+        <a href="../faq/index.html">よくあるご質問</a>
+        <a href="../profile/index.html">講師紹介</a>
+        <a href="../omenjo/index.html">お免状について</a>
+        <a href="../cd/index.html">楽譜・CD</a>
+        <a href="../contact/index.html">お問い合わせ</a>
+        <a href="../privacy/index.html">個人情報の取扱い</a>
+        <a href="https://www.instagram.com/masako_w112/" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:komaekotoshamisen@gmail.com">メール</a>
+      </nav>
+    </div>
+    <p class="footer-copy">Copyright &copy; 生田流筝曲正音会 狛江琴三味線教室 Masako Watanabe. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="../common.js"></script>
+<script>
+// ここに GAS デプロイ後の「ウェブアプリのURL」（.../exec で終わるもの）を貼り付ける
+var GAS_URL = "https://script.google.com/macros/s/AKfycbxzf6ytabgip2u57EZCWMyiiV6tV0s4aAH0kQ7JjkJVJXSrqRUeE5dRdnpRND5Hmz9ikg/exec";
+
+var STORAGE_KEY = 'lesson_pw';
+var FILTER_KEY = 'lesson_filter';
+var YOUBI = ['日', '月', '火', '水', '木', '金', '土'];
+var allEvents = [];
+var currentView = 'list'; // 'list' | 'week' | 'month'
+var anchorDate = new Date();
+var filterKeyword = localStorage.getItem(FILTER_KEY) || '';
+
+var gateBox = document.getElementById('gateBox');
+var gateLoading = document.getElementById('gateLoading');
+var gateForm = document.getElementById('gateForm');
+var gateBtn = document.getElementById('gateBtn');
+var gateError = document.getElementById('gateError');
+var pwInput = document.getElementById('pwInput');
+var scheduleView = document.getElementById('scheduleView');
+var listWrap = document.getElementById('listWrap');
+var weekGridWrap = document.getElementById('weekGridWrap');
+var monthGridWrap = document.getElementById('monthGridWrap');
+var periodNav = document.getElementById('periodNav');
+var filterInput = document.getElementById('filterInput');
+
+function pad2(n) { return (n < 10 ? '0' : '') + n; }
+
+function dateKey(d) {
+  return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+}
+
+function formatDay(d) {
+  return (d.getMonth() + 1) + '/' + d.getDate() + '(' + YOUBI[d.getDay()] + ')';
+}
+
+function formatTime(d) {
+  return pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+}
+
+function startOfDay(d) {
+  var r = new Date(d);
+  r.setHours(0, 0, 0, 0);
+  return r;
+}
+
+async function tryUnlock(pw, isAuto) {
+  if (!isAuto) {
+    gateBtn.disabled = true;
+    gateBtn.textContent = '確認中…';
+    gateError.classList.remove('show');
+  }
+  try {
+    var res = await fetch(GAS_URL + '?pw=' + encodeURIComponent(pw));
+    var data = await res.json();
+
+    if (!data.ok) {
+      if (isAuto) {
+        // 保存されていた合言葉が無効（変更された等）→ ゲートを表示
+        localStorage.removeItem(STORAGE_KEY);
+        showGate();
+        return;
+      }
+      gateError.classList.add('show');
+      gateBtn.disabled = false;
+      gateBtn.textContent = '開く';
+      return;
+    }
+
+    localStorage.setItem(STORAGE_KEY, pw);
+    allEvents = (data.events || []).map(function (ev) {
+      return { title: ev.title, start: new Date(ev.start), end: new Date(ev.end) };
+    });
+    showSchedule();
+  } catch (err) {
+    if (isAuto) {
+      showGate();
+      return;
+    }
+    gateError.textContent = '通信に失敗しました。時間をおいて再度お試しください。';
+    gateError.classList.add('show');
+    gateBtn.disabled = false;
+    gateBtn.textContent = '開く';
+  }
+}
+
+function showGate() {
+  gateLoading.style.display = 'none';
+  gateBox.style.display = 'block';
+  scheduleView.style.display = 'none';
+}
+
+function showSchedule() {
+  gateLoading.style.display = 'none';
+  gateBox.style.display = 'none';
+  scheduleView.style.display = 'block';
+  anchorDate = new Date();
+  applyViewVisibility();
+  render();
+}
+
+gateForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  var pw = pwInput.value.trim();
+  if (!pw) return;
+  tryUnlock(pw, false);
+});
+
+document.getElementById('btnRelock').addEventListener('click', function () {
+  localStorage.removeItem(STORAGE_KEY);
+  pwInput.value = '';
+  gateError.classList.remove('show');
+  showGate();
+});
+
+var btnList = document.getElementById('btnList');
+var btnWeek = document.getElementById('btnWeek');
+var btnMonth = document.getElementById('btnMonth');
+
+function setActiveButton(btn) {
+  [btnList, btnWeek, btnMonth].forEach(function (b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+// 表示切替ボタンの状態に応じて、各表示エリアの表示/非表示をまとめて反映する
+// （初期表示時にも呼ぶ必要があるため、クリックイベントの中だけに置かない）
+function applyViewVisibility() {
+  periodNav.style.display = 'flex';
+  listWrap.style.display = currentView === 'list' ? 'block' : 'none';
+  weekGridWrap.style.display = currentView === 'week' ? 'block' : 'none';
+  monthGridWrap.style.display = currentView === 'month' ? 'block' : 'none';
+}
+
+btnList.addEventListener('click', function () {
+  currentView = 'list';
+  anchorDate = new Date();
+  setActiveButton(btnList);
+  applyViewVisibility();
+  render();
+});
+btnWeek.addEventListener('click', function () {
+  currentView = 'week';
+  anchorDate = new Date();
+  setActiveButton(btnWeek);
+  applyViewVisibility();
+  render();
+});
+btnMonth.addEventListener('click', function () {
+  currentView = 'month';
+  anchorDate = new Date();
+  setActiveButton(btnMonth);
+  applyViewVisibility();
+  render();
+});
+document.getElementById('btnPrev').addEventListener('click', function () { shiftPeriod(-1); });
+document.getElementById('btnNext').addEventListener('click', function () { shiftPeriod(1); });
+
+filterInput.value = filterKeyword;
+filterInput.addEventListener('input', function () {
+  filterKeyword = filterInput.value.trim();
+  if (filterKeyword) localStorage.setItem(FILTER_KEY, filterKeyword);
+  else localStorage.removeItem(FILTER_KEY);
+  render();
+});
+document.getElementById('filterClear').addEventListener('click', function () {
+  filterKeyword = '';
+  filterInput.value = '';
+  localStorage.removeItem(FILTER_KEY);
+  render();
+});
+
+function shiftPeriod(dir) {
+  if (currentView === 'week') {
+    anchorDate.setDate(anchorDate.getDate() + dir * 7);
+  } else {
+    anchorDate.setMonth(anchorDate.getMonth() + dir);
+  }
+  render();
+}
+
+// 週の範囲：今日が何曜日でも日曜始まり〜土曜終わりに固定
+function getWeekRange(anchor) {
+  var d = startOfDay(anchor);
+  var start = new Date(d);
+  start.setDate(start.getDate() - start.getDay());
+  var end = new Date(start);
+  end.setDate(end.getDate() + 7);
+  return { start: start, end: end };
+}
+
+function getMonthRange(anchor) {
+  var y = anchor.getFullYear(), m = anchor.getMonth();
+  var start = new Date(y, m, 1);
+  var end = new Date(y, m + 1, 1);
+  return { start: start, end: end };
+}
+
+function filteredEvents() {
+  if (!filterKeyword) return allEvents;
+  return allEvents.filter(function (ev) {
+    return ev.title.indexOf(filterKeyword) !== -1;
+  });
+}
+
+function updateLabel() {
+  var label;
+  if (currentView === 'week') {
+    var r = getWeekRange(anchorDate);
+    var lastDay = new Date(r.end - 86400000);
+    label = formatDay(r.start) + '〜' + formatDay(lastDay);
+  } else {
+    label = anchorDate.getFullYear() + '年' + (anchorDate.getMonth() + 1) + '月';
+  }
+  document.getElementById('periodLabel').textContent = label;
+}
+
+// Googleカレンダーに予定を追加するためのリンクURLを作成
+function gcalStamp(d) {
+  return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+}
+function gcalUrl(ev) {
+  var params = 'action=TEMPLATE'
+    + '&text=' + encodeURIComponent(ev.title)
+    + '&dates=' + gcalStamp(ev.start) + '/' + gcalStamp(ev.end);
+  return 'https://calendar.google.com/calendar/render?' + params;
+}
+
+function render() {
+  updateLabel();
+  var events = filteredEvents();
+  if (currentView === 'list') renderList(events);
+  else if (currentView === 'week') renderWeek(events);
+  else renderMonth(events);
+}
+
+// ── リスト表示（スケジュール・月ごと） ──
+function renderList(events) {
+  listWrap.innerHTML = '';
+
+  var range = getMonthRange(anchorDate);
+  var inRange = events.filter(function (ev) {
+    return ev.start >= range.start && ev.start < range.end;
+  });
+  var sorted = inRange.slice().sort(function (a, b) { return a.start - b.start; });
+
+  if (!sorted.length) {
+    var empty = document.createElement('p');
+    empty.className = 'sched-empty';
+    empty.textContent = filterKeyword
+      ? 'この月に「' + filterKeyword + '」を含む予定はありません。'
+      : 'この月の予定はありません。';
+    listWrap.appendChild(empty);
+    return;
+  }
+
+  var groups = {};
+  var order = [];
+  sorted.forEach(function (ev) {
+    var key = dateKey(ev.start);
+    if (!groups[key]) { groups[key] = []; order.push(key); }
+    groups[key].push(ev);
+  });
+
+  var todayKey = dateKey(new Date());
+
+  order.forEach(function (key) {
+    var dayEl = document.createElement('div');
+    dayEl.className = 'sched-day';
+
+    var head = document.createElement('p');
+    head.className = 'sched-day-head' + (key === todayKey ? ' is-today' : '');
+    head.textContent = formatDay(groups[key][0].start) + (key === todayKey ? '（本日）' : '');
+    dayEl.appendChild(head);
+
+    groups[key].forEach(function (ev) {
+      var row = document.createElement('div');
+      row.className = 'sched-event';
+
+      var main = document.createElement('div');
+      main.className = 'sched-event-main';
+      var time = document.createElement('span');
+      time.className = 'sched-time';
+      time.textContent = formatTime(ev.start) + '〜' + formatTime(ev.end);
+      var name = document.createElement('span');
+      name.className = 'sched-name';
+      name.textContent = ev.title;
+      main.appendChild(time);
+      main.appendChild(name);
+
+      var add = document.createElement('a');
+      add.className = 'sched-add';
+      add.href = gcalUrl(ev);
+      add.target = '_blank';
+      add.rel = 'noopener';
+      add.textContent = '＋自分の予定に追加';
+
+      row.appendChild(main);
+      row.appendChild(add);
+      dayEl.appendChild(row);
+    });
+
+    listWrap.appendChild(dayEl);
+  });
+}
+
+// ── 週表示（タイムグリッド） ──
+function renderWeek(events) {
+  var range = getWeekRange(anchorDate);
+  var inRange = events.filter(function (ev) {
+    return ev.start >= range.start && ev.start < range.end;
+  });
+
+  var minH = 8, maxH = 19;
+  inRange.forEach(function (ev) {
+    minH = Math.min(minH, ev.start.getHours());
+    var endH = ev.end.getHours() + (ev.end.getMinutes() > 0 ? 1 : 0);
+    maxH = Math.max(maxH, endH);
+  });
+  minH = Math.max(8, minH - 1); // 午前1時〜7時は表示しない
+  maxH = Math.min(24, maxH + 1);
+  var totalHours = maxH - minH;
+  var hourPx = 48;
+  var colHeight = totalHours * hourPx;
+
+  weekGridWrap.innerHTML = '';
+
+  if (!inRange.length) {
+    var empty = document.createElement('p');
+    empty.className = 'sched-empty';
+    empty.textContent = filterKeyword
+      ? 'この期間に「' + filterKeyword + '」を含む予定はありません。'
+      : 'この期間の予定はありません。';
+    weekGridWrap.appendChild(empty);
+    return;
+  }
+
+  var grid = document.createElement('div');
+  grid.className = 'wk-grid';
+
+  var todayKey = dateKey(new Date());
+  var dayDates = [];
+  for (var i = 0; i < 7; i++) {
+    var dd = new Date(range.start);
+    dd.setDate(dd.getDate() + i);
+    dayDates.push(dd);
+  }
+
+  // ヘッダー行（左上の空セル＋曜日7つ）
+  var corner = document.createElement('div');
+  corner.className = 'wk-corner';
+  grid.appendChild(corner);
+
+  dayDates.forEach(function (dd) {
+    var head = document.createElement('div');
+    head.className = 'wk-head' + (dateKey(dd) === todayKey ? ' is-today' : '');
+    var dow = document.createElement('span');
+    dow.className = 'wk-head-dow';
+    dow.textContent = YOUBI[dd.getDay()];
+    var num = document.createElement('span');
+    num.className = 'wk-head-date';
+    num.textContent = dd.getDate();
+    head.appendChild(dow);
+    head.appendChild(num);
+    grid.appendChild(head);
+  });
+
+  // 時刻ラベル列
+  var timeCol = document.createElement('div');
+  timeCol.className = 'wk-timecol';
+  timeCol.style.height = colHeight + 'px';
+  for (var h = minH; h <= maxH; h++) {
+    var lbl = document.createElement('div');
+    lbl.className = 'wk-timelabel';
+    lbl.style.top = ((h - minH) * hourPx) + 'px';
+    lbl.textContent = h + ':00';
+    timeCol.appendChild(lbl);
+  }
+  grid.appendChild(timeCol);
+
+  // 各曜日の列
+  dayDates.forEach(function (dd) {
+    var col = document.createElement('div');
+    col.className = 'wk-daycol' + (dateKey(dd) === todayKey ? ' is-today' : '');
+    col.style.height = colHeight + 'px';
+
+    for (var h2 = minH; h2 <= maxH; h2++) {
+      var line = document.createElement('div');
+      line.className = 'wk-hourline';
+      line.style.top = ((h2 - minH) * hourPx) + 'px';
+      col.appendChild(line);
+    }
+
+    var dayEvents = inRange.filter(function (ev) { return dateKey(ev.start) === dateKey(dd); });
+    dayEvents.sort(function (a, b) { return a.start - b.start; });
+
+    dayEvents.forEach(function (ev) {
+      var startMin = (ev.start.getHours() - minH) * 60 + ev.start.getMinutes();
+      var endMin = (ev.end.getHours() - minH) * 60 + ev.end.getMinutes();
+      var top = (startMin / 60) * hourPx;
+      var height = Math.max(((endMin - startMin) / 60) * hourPx, 22);
+
+      var block = document.createElement('div');
+      block.className = 'wk-event';
+      block.style.top = top + 'px';
+      block.style.height = height + 'px';
+
+      var t = document.createElement('span');
+      t.className = 'wk-event-time';
+      t.textContent = formatTime(ev.start) + '〜' + formatTime(ev.end);
+      var n = document.createElement('span');
+      n.className = 'wk-event-title';
+      n.textContent = ev.title;
+
+      block.appendChild(t);
+      block.appendChild(n);
+      col.appendChild(block);
+    });
+
+    grid.appendChild(col);
+  });
+
+  weekGridWrap.appendChild(grid);
+}
+
+// ── 月表示（カレンダーグリッド） ──
+function renderMonth(events) {
+  var range = getMonthRange(anchorDate);
+
+  var gridStart = new Date(range.start);
+  gridStart.setDate(gridStart.getDate() - gridStart.getDay());
+  var gridEnd = new Date(range.end);
+  var wd = gridEnd.getDay();
+  if (wd !== 0) gridEnd.setDate(gridEnd.getDate() + (7 - wd));
+
+  var days = [];
+  var cur = new Date(gridStart);
+  while (cur < gridEnd) {
+    days.push(new Date(cur));
+    cur.setDate(cur.getDate() + 1);
+  }
+
+  monthGridWrap.innerHTML = '';
+  var grid = document.createElement('div');
+  grid.className = 'mo-grid';
+
+  YOUBI.forEach(function (w) {
+    var h = document.createElement('div');
+    h.className = 'mo-weekday';
+    h.textContent = w;
+    grid.appendChild(h);
+  });
+
+  var todayKey = dateKey(new Date());
+  var hasAny = false;
+  var MAX_SHOW = 3;
+
+  days.forEach(function (d) {
+    var cell = document.createElement('div');
+    var inMonth = d.getMonth() === range.start.getMonth();
+    var cls = 'mo-cell';
+    if (!inMonth) cls += ' is-outside';
+    if (dateKey(d) === todayKey) cls += ' is-today';
+    cell.className = cls;
+
+    var dateNum = document.createElement('span');
+    dateNum.className = 'mo-date';
+    dateNum.textContent = d.getDate();
+    cell.appendChild(dateNum);
+
+    var dayEvents = events.filter(function (ev) { return dateKey(ev.start) === dateKey(d); });
+    dayEvents.sort(function (a, b) { return a.start - b.start; });
+    if (dayEvents.length) hasAny = true;
+
+    dayEvents.slice(0, MAX_SHOW).forEach(function (ev) {
+      var chip = document.createElement('div');
+      chip.className = 'mo-event';
+      chip.textContent = formatTime(ev.start) + ' ' + ev.title;
+      cell.appendChild(chip);
+    });
+    if (dayEvents.length > MAX_SHOW) {
+      var more = document.createElement('div');
+      more.className = 'mo-more';
+      more.textContent = '他' + (dayEvents.length - MAX_SHOW) + '件';
+      cell.appendChild(more);
+    }
+
+    grid.appendChild(cell);
+  });
+
+  monthGridWrap.appendChild(grid);
+
+  if (!hasAny) {
+    var empty = document.createElement('p');
+    empty.className = 'sched-empty';
+    empty.textContent = filterKeyword
+      ? 'この月に「' + filterKeyword + '」を含む予定はありません。'
+      : 'この月の予定はありません。';
+    monthGridWrap.appendChild(empty);
+  }
+}
+
+// 初期表示：保存済みの合言葉があれば自動で開く
+(function init() {
+  var saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    gateBox.style.display = 'none';
+    gateLoading.style.display = 'block';
+    tryUnlock(saved, true);
+  } else {
+    showGate();
+  }
+})();
+</script>
+</body>
+</html>
