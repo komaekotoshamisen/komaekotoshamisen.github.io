@@ -228,6 +228,13 @@
 .wk-daycol { position: relative; border-right: 1px solid var(--border); }
 .wk-daycol.is-today { background: #fbf6ee; }
 .wk-hourline { position: absolute; left: 0; right: 0; border-top: 1px solid var(--border); }
+.wk-cutband {
+  position: absolute; left: 0; right: 0;
+  background: repeating-linear-gradient(135deg, var(--border), var(--border) 4px, transparent 4px, transparent 8px);
+  opacity: .45;
+  border-top: 1px dashed var(--border); border-bottom: 1px dashed var(--border);
+}
+.wk-timelabel-cut { font-size: 11px; color: var(--ink-lt); letter-spacing: 1px; right: 8px; }
 .wk-event {
   position: absolute; left: 3px; right: 3px;
   background: var(--green-mid); color: var(--white);
@@ -741,23 +748,39 @@ function renderList(events) {
 }
 
 // ── 週表示（タイムグリッド） ──
+// 0:00〜1:00 は表示しつつ、1:00〜8:00 は間を詰めてカットする「軸の省略」構成
+var WK_CUT_START = 1; // ここから
+var WK_CUT_END = 8;   // ここまでを非表示（間を詰める）
+var WK_CUT_PX = 20;   // 省略帯の高さ
+
 function renderWeek(events) {
   var range = getWeekRange(anchorDate);
   var inRange = events.filter(function (ev) {
     return ev.start >= range.start && ev.start < range.end;
   });
 
-  var minH = 8, maxH = 19;
+  var maxH = 19;
   inRange.forEach(function (ev) {
-    minH = Math.min(minH, ev.start.getHours());
     var endH = ev.end.getHours() + (ev.end.getMinutes() > 0 ? 1 : 0);
     maxH = Math.max(maxH, endH);
   });
-  minH = Math.max(8, minH - 1); // 午前1時〜7時は表示しない
   maxH = Math.min(24, maxH + 1);
-  var totalHours = maxH - minH;
+
   var hourPx = 48;
-  var colHeight = totalHours * hourPx;
+  var segAHeight = WK_CUT_START * hourPx; // 0:00〜1:00
+  var segBHeight = (maxH - WK_CUT_END) * hourPx; // 8:00〜maxH
+  var colHeight = segAHeight + WK_CUT_PX + segBHeight;
+
+  // 時刻(時・分)をグリッド内のY座標(px)に変換。1:00〜8:00の間はカットして詰める
+  function yFor(hour, minute) {
+    var mins = hour * 60 + minute;
+    if (hour < WK_CUT_END) {
+      var cappedMins = Math.min(mins, WK_CUT_START * 60);
+      return (cappedMins / 60) * hourPx;
+    }
+    var minsAfterCut = mins - WK_CUT_END * 60;
+    return segAHeight + WK_CUT_PX + (minsAfterCut / 60) * hourPx;
+  }
 
   weekGridWrap.innerHTML = '';
 
@@ -801,16 +824,28 @@ function renderWeek(events) {
     grid.appendChild(head);
   });
 
-  // 時刻ラベル列
+  // 時刻ラベル列（0:00〜1:00 → 省略帯 → 8:00〜maxH）
   var timeCol = document.createElement('div');
   timeCol.className = 'wk-timecol';
   timeCol.style.height = colHeight + 'px';
-  for (var h = minH; h <= maxH; h++) {
+  for (var h = 0; h <= WK_CUT_START; h++) {
     var lbl = document.createElement('div');
     lbl.className = 'wk-timelabel';
-    lbl.style.top = ((h - minH) * hourPx) + 'px';
+    lbl.style.top = yFor(h, 0) + 'px';
     lbl.textContent = h + ':00';
     timeCol.appendChild(lbl);
+  }
+  var cutMark = document.createElement('div');
+  cutMark.className = 'wk-timelabel wk-timelabel-cut';
+  cutMark.style.top = (segAHeight + WK_CUT_PX / 2) + 'px';
+  cutMark.textContent = '︙';
+  timeCol.appendChild(cutMark);
+  for (var h3 = WK_CUT_END; h3 <= maxH; h3++) {
+    var lbl2 = document.createElement('div');
+    lbl2.className = 'wk-timelabel';
+    lbl2.style.top = yFor(h3, 0) + 'px';
+    lbl2.textContent = h3 + ':00';
+    timeCol.appendChild(lbl2);
   }
   grid.appendChild(timeCol);
 
@@ -822,21 +857,31 @@ function renderWeek(events) {
     col.style.height = colHeight + 'px';
     if (dateKey(dd) === todayKey) todayColEl = col;
 
-    for (var h2 = minH; h2 <= maxH; h2++) {
+    for (var h2 = 0; h2 <= WK_CUT_START; h2++) {
       var line = document.createElement('div');
       line.className = 'wk-hourline';
-      line.style.top = ((h2 - minH) * hourPx) + 'px';
+      line.style.top = yFor(h2, 0) + 'px';
       col.appendChild(line);
+    }
+    var cutBand = document.createElement('div');
+    cutBand.className = 'wk-cutband';
+    cutBand.style.top = segAHeight + 'px';
+    cutBand.style.height = WK_CUT_PX + 'px';
+    col.appendChild(cutBand);
+    for (var h4 = WK_CUT_END; h4 <= maxH; h4++) {
+      var line2 = document.createElement('div');
+      line2.className = 'wk-hourline';
+      line2.style.top = yFor(h4, 0) + 'px';
+      col.appendChild(line2);
     }
 
     var dayEvents = inRange.filter(function (ev) { return dateKey(ev.start) === dateKey(dd); });
     dayEvents.sort(function (a, b) { return a.start - b.start; });
 
     dayEvents.forEach(function (ev) {
-      var startMin = (ev.start.getHours() - minH) * 60 + ev.start.getMinutes();
-      var endMin = (ev.end.getHours() - minH) * 60 + ev.end.getMinutes();
-      var top = (startMin / 60) * hourPx;
-      var height = Math.max(((endMin - startMin) / 60) * hourPx, 22);
+      var top = yFor(ev.start.getHours(), ev.start.getMinutes());
+      var bottom = yFor(ev.end.getHours(), ev.end.getMinutes());
+      var height = Math.max(bottom - top, 22);
 
       var block = document.createElement('div');
       block.className = 'wk-event';
