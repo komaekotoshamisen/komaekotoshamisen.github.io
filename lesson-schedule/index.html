@@ -996,7 +996,31 @@ function renderWeek(events) {
     }
 
     var dayEvents = inRange.filter(function (ev) { return dateKey(ev.start) === dateKey(dd); });
-    dayEvents.sort(function (a, b) { return a.start - b.start; });
+    dayEvents.sort(function (a, b) { return (a.start - b.start) || (a.end - b.end); });
+
+    // 重なりを横に並べる：時間が重複するイベントをまとめて列（レーン）に振り分ける
+    var clusters = [];
+    var curCluster = [];
+    var curEnd = null;
+    dayEvents.forEach(function (ev) {
+      if (curCluster.length && curEnd !== null && ev.start >= curEnd) {
+        clusters.push(curCluster); curCluster = []; curEnd = null;
+      }
+      curCluster.push(ev);
+      if (curEnd === null || ev.end > curEnd) curEnd = ev.end;
+    });
+    if (curCluster.length) clusters.push(curCluster);
+    clusters.forEach(function (group) {
+      var colEnds = [];
+      group.forEach(function (ev) {
+        var placed = false;
+        for (var ci = 0; ci < colEnds.length; ci++) {
+          if (ev.start >= colEnds[ci]) { ev._col = ci; colEnds[ci] = ev.end; placed = true; break; }
+        }
+        if (!placed) { ev._col = colEnds.length; colEnds.push(ev.end); }
+      });
+      group.forEach(function (ev) { ev._cols = colEnds.length; });
+    });
 
     dayEvents.forEach(function (ev) {
       var top = yFor(ev.start.getHours(), ev.start.getMinutes());
@@ -1007,6 +1031,13 @@ function renderWeek(events) {
       block.className = 'wk-event';
       block.style.top = top + 'px';
       block.style.height = height + 'px';
+      var cols = ev._cols || 1;
+      if (cols > 1) {
+        var w = 100 / cols;
+        block.style.left = 'calc(' + (ev._col * w) + '% + 2px)';
+        block.style.right = 'auto';
+        block.style.width = 'calc(' + w + '% - 4px)';
+      }
       var wkCatMeta = CATEGORY_MAP[ev.color];
       if (wkCatMeta) block.style.borderLeftColor = wkCatMeta.color;
 
