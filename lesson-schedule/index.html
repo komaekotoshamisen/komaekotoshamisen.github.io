@@ -258,12 +258,12 @@
 .wk-timelabel-cut { font-size: 11px; color: var(--ink-lt); letter-spacing: 1px; right: 8px; }
 .wk-event {
   position: absolute; left: 3px; right: 3px;
-  background: var(--green-mid); color: var(--white);
+  background: var(--green-pale); color: #3C3128;
   border-radius: 5px; padding: 3px 5px; overflow: hidden;
-  border-left: 4px solid rgba(0,0,0,.15);
+  border-left: 4px solid var(--green-mid);
   line-height: 1.3; box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
-.wk-event-time { display: block; font-size: 9.5px; opacity: .9; }
+.wk-event-time { display: block; font-size: 9.5px; opacity: .75; }
 .wk-event-title {
   display: block; font-size: 11px; font-weight: 500;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -297,7 +297,7 @@
 .mo-event {
   background: var(--green-pale); border-left: 3px solid var(--green-mid);
   border-radius: 2px; padding: 2px 4px; margin-bottom: 2px;
-  font-size: 10.5px; line-height: 1.4; color: var(--green-dark);
+  font-size: 10.5px; line-height: 1.4; color: #3C3128;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .mo-more { font-size: 10px; color: var(--ink-lt); padding-left: 2px; }
@@ -464,13 +464,16 @@ var filterKeyword = localStorage.getItem(FILTER_KEY) || '';
 
 // Googleカレンダーの予定の色（colorId）とカテゴリ名の対応
 // ※ 先生のカレンダーで実際に使われている色番号に合わせて設定済み（2026-07確認）
+// color=帯（濃い方・アクセント/ドット用）、fill=塗り（淡い方・週/月表示の背景用）
+// くすみトーンで彩度・明度をそろえ、色相を藍・緑・紫・金・灰の四方に離した配色（2026-07 変更）
 var CATEGORY_MAP = {
-  '9':  { label: '個人レッスン',   color: '#3f51b5' },
-  '1':  { label: '月1レッスン',    color: '#7986cb' },
-  '3':  { label: 'グループ三味線', color: '#8e24aa' },
-  '5':  { label: 'イベント',      color: '#f6c026' },
-  '10': { label: 'お稽古不可',    color: '#0b8043' }
+  '9':  { label: '個人レッスン',   color: '#5F7A91', fill: '#E7ECF0' },
+  '1':  { label: '月1レッスン',    color: '#7E8B5E', fill: '#EDEFE2' },
+  '3':  { label: 'グループ三味線', color: '#8A7091', fill: '#EFEAF1' },
+  '5':  { label: 'イベント',      color: '#C2984C', fill: '#F5EEDC' },
+  '10': { label: 'お稽古不可',    color: '#8F887B', fill: '#ECE8E0' }
 };
+var CATEGORY_TEXT = '#3C3128';
 var CATEGORY_ORDER = ['9', '1', '3', '5', '10'];
 
 function loadCategorySelected() {
@@ -1039,7 +1042,11 @@ function renderWeek(events) {
         block.style.width = 'calc(' + w + '% - 4px)';
       }
       var wkCatMeta = CATEGORY_MAP[ev.color];
-      if (wkCatMeta) block.style.borderLeftColor = wkCatMeta.color;
+      if (wkCatMeta) {
+        block.style.borderLeftColor = wkCatMeta.color;
+        block.style.background = wkCatMeta.fill;
+        block.style.color = CATEGORY_TEXT;
+      }
 
       var t = document.createElement('span');
       t.className = 'wk-event-time';
@@ -1119,7 +1126,11 @@ function renderMonth(events) {
       var chip = document.createElement('div');
       chip.className = 'mo-event';
       var moCatMeta = CATEGORY_MAP[ev.color];
-      if (moCatMeta) chip.style.borderLeftColor = moCatMeta.color;
+      if (moCatMeta) {
+        chip.style.borderLeftColor = moCatMeta.color;
+        chip.style.background = moCatMeta.fill;
+        chip.style.color = CATEGORY_TEXT;
+      }
       chip.textContent = formatTime(ev.start) + ' ' + ev.title;
       cell.appendChild(chip);
     });
