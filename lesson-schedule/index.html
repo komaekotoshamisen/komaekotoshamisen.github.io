@@ -8,6 +8,12 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png" />
 <link rel="icon" href="../images/favicon.ico" sizes="any" />
 <link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+<meta name="theme-color" content="#7a5830" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="レッスン日程" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet" />
@@ -207,6 +213,48 @@
   background: none; border: none; cursor: pointer;
   text-underline-offset: 3px;
 }
+
+/* ── ホーム画面に追加 ── */
+.a2hs-box {
+  display: none;
+  max-width: 420px; margin: 40px auto 0;
+  background: var(--green-pale);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 26px;
+  text-align: center;
+}
+.a2hs-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 16px; font-weight: 600;
+  color: var(--green-dark);
+  margin-bottom: 8px;
+}
+.a2hs-note {
+  font-size: 13.5px; line-height: 1.8; color: var(--ink-mid);
+  margin-bottom: 16px;
+}
+.a2hs-btn {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px; font-weight: 500;
+  padding: 12px 24px;
+  border: none; border-radius: 10px;
+  background: var(--green-mid); color: var(--green-dark);
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.a2hs-btn:hover { background: var(--green-dark); color: var(--white); }
+.a2hs-help {
+  display: none;
+  text-align: left;
+  font-size: 13px; line-height: 1.9; color: var(--ink-mid);
+  margin-top: 16px; padding-top: 16px;
+  border-top: 1px dashed var(--border);
+}
+.a2hs-help.show { display: block; }
+.a2hs-help-lead { margin-bottom: 6px; }
+.a2hs-help ol { padding-left: 20px; }
+.a2hs-help li { margin-bottom: 4px; }
 
 /* ── 週表示（タイムグリッド） ── */
 .grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -418,6 +466,14 @@
       <div id="weekGridWrap" class="grid-wrap" style="display:none;"></div>
       <div id="monthGridWrap" class="grid-wrap" style="display:none;"></div>
       <div id="monthDayDetail" class="mo-day-detail"></div>
+
+      <div class="a2hs-box" id="a2hsBox">
+        <p class="a2hs-title">ホーム画面に追加</p>
+        <p class="a2hs-note">アイコンをホーム画面に追加すると、次回からワンタップでこのページを開けます。</p>
+        <button type="button" class="a2hs-btn" id="a2hsBtn">ホーム画面に追加</button>
+        <div class="a2hs-help" id="a2hsHelp"></div>
+      </div>
+
       <button type="button" class="gate-again" id="btnRelock">別の合言葉で開き直す</button>
     </div>
   </div>
@@ -1191,6 +1247,73 @@ function renderMonth(events) {
     monthGridWrap.appendChild(empty);
   }
 }
+
+// ── ホーム画面に追加 ──
+// iOS Safari には「JSからホーム画面追加を起動するAPI」が存在しないため、
+// Android/Chromeでは beforeinstallprompt を使ったネイティブの追加ダイアログを、
+// それ以外（iOS・非対応ブラウザ）では手順を文章で案内するフォールバックにする。
+var a2hsBox = document.getElementById('a2hsBox');
+var a2hsBtn = document.getElementById('a2hsBtn');
+var a2hsHelp = document.getElementById('a2hsHelp');
+var deferredInstallPrompt = null;
+
+function isStandaloneMode() {
+  return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+}
+function isIOSDevice() {
+  return /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+}
+function isAndroidDevice() {
+  return /android/i.test(navigator.userAgent);
+}
+
+if ('serviceWorker' in navigator) {
+  // インストール可否の判定に Service Worker の登録が必要なブラウザ向け（キャッシュ等は行わない）
+  navigator.serviceWorker.register('sw.js', { scope: './' }).catch(function () {});
+}
+
+if (!isStandaloneMode() && (isIOSDevice() || isAndroidDevice())) {
+  a2hsBox.style.display = 'block';
+}
+
+window.addEventListener('beforeinstallprompt', function (e) {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  if (!isStandaloneMode()) a2hsBox.style.display = 'block';
+});
+
+window.addEventListener('appinstalled', function () {
+  a2hsBox.style.display = 'none';
+});
+
+a2hsBtn.addEventListener('click', function () {
+  if (deferredInstallPrompt) {
+    a2hsHelp.classList.remove('show');
+    var promptEvent = deferredInstallPrompt;
+    deferredInstallPrompt = null;
+    promptEvent.prompt();
+    return;
+  }
+  var steps;
+  if (isIOSDevice()) {
+    steps = '<p class="a2hs-help-lead">Safariで開いている場合の手順です。</p>'
+      + '<ol>'
+      + '<li>画面下（またはアドレスバー横）の「共有」アイコン（□に↑）をタップ</li>'
+      + '<li>メニューを下にスクロールし「ホーム画面に追加」をタップ</li>'
+      + '<li>右上の「追加」をタップ</li>'
+      + '</ol>';
+  } else {
+    steps = '<p class="a2hs-help-lead">Chromeで開いている場合の手順です。</p>'
+      + '<ol>'
+      + '<li>右上のメニュー（⋮）をタップ</li>'
+      + '<li>「ホーム画面に追加」または「アプリをインストール」をタップ</li>'
+      + '<li>「追加」をタップ</li>'
+      + '</ol>';
+  }
+  a2hsHelp.innerHTML = steps;
+  a2hsHelp.classList.toggle('show');
+});
 
 // 初期表示：保存済みの合言葉があれば自動で開く
 (function init() {
