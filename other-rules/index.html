@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>その他のお約束事 | 生田流筝曲正音会 狛江琴三味線教室</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png" />
+<link rel="icon" href="../images/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
+<meta name="theme-color" content="#7a5830" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../style.css?v=20260705" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.sched-section {
+  padding: 56px 0 96px;
+  background: var(--white);
+  min-height: 60vh;
+}
+.sched-container {
+  max-width: 720px; margin: 0 auto; padding: 0 24px;
+}
+.sched-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 24px; font-weight: 600;
+  color: var(--green-dark);
+  letter-spacing: .06em;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.sched-lead {
+  font-size: 15px; line-height: 1.9; color: var(--ink-mid);
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+/* ── 合言葉ゲート（lesson-schedule と共通デザイン・共通の合言葉） ── */
+.gate-box {
+  max-width: 420px; margin: 0 auto;
+  background: var(--green-pale);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px 28px;
+}
+.gate-note {
+  font-size: 14px; line-height: 1.9; color: var(--ink-mid);
+  text-align: center; margin-bottom: 22px;
+}
+.gate-form { display: flex; flex-direction: column; gap: 14px; }
+.gate-input {
+  width: 100%;
+  font-size: 20px;
+  letter-spacing: .08em;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--ink);
+  text-align: center;
+}
+.gate-input:focus { outline: 2px solid var(--green-mid); }
+.gate-btn {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 17px; font-weight: 500;
+  padding: 15px 18px;
+  border: none; border-radius: 10px;
+  background: var(--green-mid); color: var(--green-dark);
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.gate-btn:hover { background: var(--green-dark); color: var(--white); }
+.gate-btn:disabled { opacity: .6; cursor: default; }
+.gate-error {
+  display: none;
+  font-size: 14px; color: #a3402c;
+  text-align: center;
+}
+.gate-error.show { display: block; }
+.gate-help {
+  font-size: 13px; color: var(--ink-lt);
+  text-align: center; margin-top: 20px; line-height: 1.8;
+}
+.gate-loading {
+  text-align: center; font-size: 15px; color: var(--ink-mid);
+  padding: 40px 0;
+}
+.gate-again {
+  display: block; text-align: center; margin-top: 40px;
+  font-size: 13px; color: var(--ink-lt); text-decoration: underline;
+  background: none; border: none; cursor: pointer;
+  text-underline-offset: 3px;
+}
+
+/* ── お約束事の内容表示 ── */
+#rulesView { display: none; }
+.rules-section { margin-bottom: 30px; }
+.rules-heading {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 16px; font-weight: 600;
+  color: var(--green-dark);
+  border-left: 3px solid var(--green);
+  padding-left: 12px;
+  margin-bottom: 10px;
+  letter-spacing: .05em;
+}
+.rules-body {
+  font-size: 14.5px; line-height: 2.1;
+  color: var(--ink-mid);
+  padding-left: 15px;
+}
+.rules-empty {
+  text-align: center; color: var(--ink-lt); font-size: 15px; padding: 40px 0;
+}
+.rules-crosslinks {
+  margin-top: 44px; padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 10px;
+  align-items: center;
+}
+.rules-crosslinks a {
+  font-size: 13.5px; color: var(--green); text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.rules-crosslinks a:hover { color: var(--green-dark); }
+
+@media (max-width: 480px) {
+  .sched-title { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="global-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-school">生田流筝曲正音会</span>
+      <span class="nav-logo-jp">狛江琴三味線教室</span>
+      <span class="nav-logo-en">Komae Koto &amp; Shamisen School</span>
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">トップ</a></li>
+        <li><a href="../lesson/index.html">レッスン</a></li>
+        <li><a href="../hajimete/index.html">はじめての方へ</a></li>
+        <li><a href="../faq/index.html">よくあるご質問</a></li>
+        <li><a href="../profile/index.html">講師紹介</a></li>
+        <li><a href="../contact/index.html" class="nav-cta">お問い合わせ</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<section class="sched-section">
+  <div class="sched-container">
+    <p class="sched-title">その他のお約束事</p>
+    <p class="sched-lead">生徒の皆様専用のページです。</p>
+
+    <!-- 合言葉ゲート -->
+    <div class="gate-box" id="gateBox">
+      <p class="gate-note">教室でお伝えしている合言葉を入力してください。<br>レッスン日程ページと同じ合言葉です。</p>
+      <form class="gate-form" id="gateForm" autocomplete="off">
+        <input type="password" inputmode="text" class="gate-input" id="pwInput" placeholder="合言葉" autocomplete="off" />
+        <button type="submit" class="gate-btn" id="gateBtn">開く</button>
+        <p class="gate-error" id="gateError">合言葉が違います。もう一度お確かめください。</p>
+      </form>
+      <p class="gate-help">合言葉がわからない場合は、教室内の掲示をご確認いただくか、先生までお尋ねください。</p>
+    </div>
+    <div class="gate-loading" id="gateLoading" style="display:none;">読み込み中…</div>
+
+    <!-- お約束事の内容 -->
+    <div id="rulesView">
+      <div id="rulesContent"></div>
+
+      <div class="rules-crosslinks">
+        <a href="../lesson-schedule/index.html#rules">レッスン日・欠席・振替について →</a>
+        <a href="../lesson-schedule/index.html">レッスン日程を見る →</a>
+      </div>
+
+      <button type="button" class="gate-again" id="btnRelock">別の合言葉で開き直す</button>
+    </div>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer class="global-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-logo-jp"><span class="footer-logo-school">生田流筝曲正音会</span>狛江琴三味線教室</p>
+        <span class="footer-logo-en">Komae Koto &amp; Shamisen School</span>
+      </div>
+      <nav class="footer-nav">
+        <a href="../lesson/index.html">レッスン</a>
+        <a href="../hajimete/index.html">はじめての方へ</a>
+        <a href="../faq/index.html">よくあるご質問</a>
+        <a href="../profile/index.html">講師紹介</a>
+        <a href="../omenjo/index.html">お免状について</a>
+        <a href="../cd/index.html">楽譜・CD</a>
+        <a href="../contact/index.html">お問い合わせ</a>
+        <a href="../privacy/index.html">個人情報の取扱い</a>
+        <a href="https://www.instagram.com/masako_w112/" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:komaekotoshamisen@gmail.com">メール</a>
+      </nav>
+    </div>
+    <p class="footer-copy">Copyright &copy; 生田流筝曲正音会 狛江琴三味線教室 Masako Watanabe. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="../common.js"></script>
+<script>
+// レッスン日程ページと同じ GAS ウェブアプリ URL（合言葉・デプロイ先とも共通）
+var GAS_URL = "https://script.google.com/macros/s/AKfycbyZXcPHWFE1n8mN3hV7uMhgNvEac9SCV2lfTLq02dtqiKW7QA9h-7OXBaxeUbGSalOlow/exec";
+var STORAGE_KEY = 'lesson_pw'; // レッスン日程ページと共通の合言葉を使い回す
+var PAGE_KEY = 'other-rules';
+
+var gateBox = document.getElementById('gateBox');
+var gateLoading = document.getElementById('gateLoading');
+var gateForm = document.getElementById('gateForm');
+var gateBtn = document.getElementById('gateBtn');
+var gateError = document.getElementById('gateError');
+var pwInput = document.getElementById('pwInput');
+var rulesView = document.getElementById('rulesView');
+var rulesContent = document.getElementById('rulesContent');
+
+async function tryUnlock(pw, isAuto) {
+  if (!isAuto) {
+    gateBtn.disabled = true;
+    gateBtn.textContent = '確認中…';
+    gateError.classList.remove('show');
+  }
+  try {
+    var res = await fetch(GAS_URL + '?pw=' + encodeURIComponent(pw) + '&type=rules&page=' + PAGE_KEY);
+    var data = await res.json();
+
+    if (!data.ok) {
+      if (isAuto) {
+        localStorage.removeItem(STORAGE_KEY);
+        showGate();
+        return;
+      }
+      gateError.textContent = '合言葉が違います。もう一度お確かめください。';
+      gateError.classList.add('show');
+      gateBtn.disabled = false;
+      gateBtn.textContent = '開く';
+      return;
+    }
+
+    localStorage.setItem(STORAGE_KEY, pw);
+    renderRules(data.sections || []);
+    showRules();
+  } catch (err) {
+    if (isAuto) {
+      showGate();
+      return;
+    }
+    gateError.textContent = '通信に失敗しました。時間をおいて再度お試しください。';
+    gateError.classList.add('show');
+    gateBtn.disabled = false;
+    gateBtn.textContent = '開く';
+  }
+}
+
+function renderRules(sections) {
+  rulesContent.innerHTML = '';
+
+  if (!sections.length) {
+    var empty = document.createElement('p');
+    empty.className = 'rules-empty';
+    empty.textContent = '現在ご案内できる内容がありません。';
+    rulesContent.appendChild(empty);
+    return;
+  }
+
+  sections.forEach(function (sec) {
+    var wrap = document.createElement('div');
+    wrap.className = 'rules-section';
+
+    if (sec.heading) {
+      var h = document.createElement('p');
+      h.className = 'rules-heading';
+      h.textContent = sec.heading;
+      wrap.appendChild(h);
+    }
+
+    var body = document.createElement('p');
+    body.className = 'rules-body';
+    (sec.body || []).forEach(function (line, i) {
+      if (i > 0) body.appendChild(document.createElement('br'));
+      body.appendChild(document.createTextNode(line));
+    });
+    wrap.appendChild(body);
+
+    rulesContent.appendChild(wrap);
+  });
+}
+
+function showGate() {
+  gateLoading.style.display = 'none';
+  gateBox.style.display = 'block';
+  rulesView.style.display = 'none';
+  gateBtn.disabled = false;
+  gateBtn.textContent = '開く';
+}
+
+function showRules() {
+  gateLoading.style.display = 'none';
+  gateBox.style.display = 'none';
+  rulesView.style.display = 'block';
+}
+
+gateForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  var pw = pwInput.value.trim();
+  if (!pw) return;
+  tryUnlock(pw, false);
+});
+
+document.getElementById('btnRelock').addEventListener('click', function () {
+  localStorage.removeItem(STORAGE_KEY);
+  pwInput.value = '';
+  gateError.classList.remove('show');
+  showGate();
+});
+
+// 初期表示：レッスン日程ページ等で保存済みの合言葉があれば自動で開く
+(function init() {
+  var saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    gateBox.style.display = 'none';
+    gateLoading.style.display = 'block';
+    tryUnlock(saved, true);
+  } else {
+    showGate();
+  }
+})();
+</script>
+</body>
+</html>

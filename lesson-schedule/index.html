@@ -214,6 +214,38 @@
   text-underline-offset: 3px;
 }
 
+/* ── レッスン日・欠席・振替について（ページ下部に統合） ── */
+.rules-panel {
+  margin-top: 56px; padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.rules-panel-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 19px; font-weight: 600;
+  color: var(--green-dark);
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: .06em;
+}
+.rules-section { margin-bottom: 30px; }
+.rules-heading {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 16px; font-weight: 600;
+  color: var(--green-dark);
+  border-left: 3px solid var(--green);
+  padding-left: 12px;
+  margin-bottom: 10px;
+  letter-spacing: .05em;
+}
+.rules-body {
+  font-size: 14.5px; line-height: 2.1;
+  color: var(--ink-mid);
+  padding-left: 15px;
+}
+.rules-empty {
+  text-align: center; color: var(--ink-lt); font-size: 15px; padding: 20px 0;
+}
+
 /* ── ホーム画面に追加 ── */
 .a2hs-box {
   display: none;
@@ -474,6 +506,11 @@
         <div class="a2hs-help" id="a2hsHelp"></div>
       </div>
 
+      <div class="rules-panel" id="rules">
+        <p class="rules-panel-title">レッスン日・欠席・振替について</p>
+        <div id="rulesContent"></div>
+      </div>
+
       <button type="button" class="gate-again" id="btnRelock">別の合言葉で開き直す</button>
     </div>
   </div>
@@ -507,7 +544,7 @@
 <script src="../common.js"></script>
 <script>
 // ここに GAS デプロイ後の「ウェブアプリのURL」（.../exec で終わるもの）を貼り付ける
-var GAS_URL = "https://script.google.com/macros/s/AKfycbxzf6ytabgip2u57EZCWMyiiV6tV0s4aAH0kQ7JjkJVJXSrqRUeE5dRdnpRND5Hmz9ikg/exec";
+var GAS_URL = "https://script.google.com/macros/s/AKfycbyZXcPHWFE1n8mN3hV7uMhgNvEac9SCV2lfTLq02dtqiKW7QA9h-7OXBaxeUbGSalOlow/exec";
 
 var STORAGE_KEY = 'lesson_pw';
 var FILTER_KEY = 'lesson_filter';
@@ -586,6 +623,10 @@ async function tryUnlock(pw, isAuto) {
     gateError.classList.remove('show');
   }
   try {
+    // 「レッスン日・欠席・振替について」は別リクエストで並行取得する。
+    // ここが失敗してもカレンダー表示（本来の機能）は妨げないよう、catchで握りつぶす。
+    var rulesResP = fetch(GAS_URL + '?pw=' + encodeURIComponent(pw) + '&type=rules&page=lesson-rules').catch(function () { return null; });
+
     var res = await fetch(GAS_URL + '?pw=' + encodeURIComponent(pw));
     var data = await res.json();
 
@@ -606,7 +647,21 @@ async function tryUnlock(pw, isAuto) {
     allEvents = (data.events || []).map(function (ev) {
       return { title: ev.title, start: new Date(ev.start), end: new Date(ev.end), color: ev.color || '' };
     });
+
+    var rulesRes = await rulesResP;
+    var rulesSections = [];
+    if (rulesRes) {
+      try {
+        var rulesData = await rulesRes.json();
+        if (rulesData.ok) rulesSections = rulesData.sections || [];
+      } catch (e) {
+        // 内容の取得・解析に失敗しても致命的ではないので無視する
+      }
+    }
+    renderRules(rulesSections);
+
     showSchedule();
+    scrollToHashTarget();
   } catch (err) {
     if (isAuto) {
       showGate();
@@ -617,6 +672,52 @@ async function tryUnlock(pw, isAuto) {
     gateBtn.disabled = false;
     gateBtn.textContent = '開く';
   }
+}
+
+// ── レッスン日・欠席・振替について（下部パネル）を描画 ──
+function renderRules(sections) {
+  var rulesContent = document.getElementById('rulesContent');
+  rulesContent.innerHTML = '';
+
+  if (!sections.length) {
+    var empty = document.createElement('p');
+    empty.className = 'rules-empty';
+    empty.textContent = '現在ご案内できる内容がありません。';
+    rulesContent.appendChild(empty);
+    return;
+  }
+
+  sections.forEach(function (sec) {
+    var wrap = document.createElement('div');
+    wrap.className = 'rules-section';
+
+    if (sec.heading) {
+      var h = document.createElement('p');
+      h.className = 'rules-heading';
+      h.textContent = sec.heading;
+      wrap.appendChild(h);
+    }
+
+    var body = document.createElement('p');
+    body.className = 'rules-body';
+    (sec.body || []).forEach(function (line, i) {
+      if (i > 0) body.appendChild(document.createElement('br'));
+      body.appendChild(document.createTextNode(line));
+    });
+    wrap.appendChild(body);
+
+    rulesContent.appendChild(wrap);
+  });
+}
+
+// LINEリッチメニュー等から #rules 付きでアクセスされた場合、内容表示後にその位置へスクロールする
+function scrollToHashTarget() {
+  if (location.hash !== '#rules') return;
+  var target = document.getElementById('rules');
+  if (!target) return;
+  requestAnimationFrame(function () {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 }
 
 function showGate() {
