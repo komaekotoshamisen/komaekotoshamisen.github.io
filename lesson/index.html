@@ -25,10 +25,10 @@
 .lesson-detail dl { display:grid; grid-template-columns:80px 1fr; gap:8px 16px; font-size:13px; }
 .lesson-detail dt { color:var(--green-dark); font-weight:500; }
 .lesson-detail dd { color:var(--ink-mid); }
-.kodomo-ss { position:relative; width:100%; aspect-ratio:4/3; border:1px solid var(--border); overflow:hidden; }
-.kodomo-ss .kss-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1.2s ease; }
-.kodomo-ss .kss-img.is-active { opacity:1; }
-.kodomo-ss .kss-dots { display:none; }
+.photo-ss { position:relative; width:100%; aspect-ratio:4/3; border:1px solid var(--border); overflow:hidden; }
+.photo-ss .pss-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1.2s ease; }
+.photo-ss .pss-img.is-active { opacity:1; }
+.photo-ss .pss-dots { display:none; }
 .divider { border:none; border-top:1px solid var(--border); margin:56px 0; }
 .photo-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:32px; }
 .photo-row img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; border:1px solid var(--border); }
@@ -100,7 +100,16 @@
 
     <!-- 個人レッスン -->
     <div class="lesson-block" data-anim>
-      <img src="../images/lesson_individual_group.jpg" alt="個人レッスン／グループレッスン" class="lesson-block-img" />
+      <div class="photo-ss" aria-label="個人レッスン／グループレッスンの様子">
+        <img src="../images/lesson_individual_group01.jpg" alt="個人レッスンの様子" class="pss-img is-active" />
+        <img src="../images/lesson_individual_group02.jpg" alt="個人レッスンの様子" class="pss-img" />
+        <img src="../images/lesson_individual_group03.jpg" alt="グループレッスンの様子" class="pss-img" />
+        <div class="pss-dots">
+          <span class="pss-dot is-active"></span>
+          <span class="pss-dot"></span>
+          <span class="pss-dot"></span>
+        </div>
+      </div>
       <div>
         <span class="lesson-tag">Individual &amp; Group Lesson</span>
         <h2 class="lesson-h2">個人レッスン／グループレッスン</h2>
@@ -150,16 +159,16 @@
 
     <!-- 子ども琴三味線合奏団 -->
     <div class="lesson-block reverse" data-anim>
-      <div class="kodomo-ss" aria-label="子ども琴三味線合奏団の活動写真">
-        <img src="../images/lesson_ensemble01.jpg" alt="子ども琴三味線合奏団" class="kss-img is-active" />
-        <img src="../images/lesson_ensemble02.jpg" alt="子ども琴三味線合奏団" class="kss-img" />
-        <img src="../images/lesson_ensemble03.jpg" alt="子ども琴三味線合奏団" class="kss-img" />
-        <img src="../images/lesson_ensemble04.jpg" alt="子ども琴三味線合奏団" class="kss-img" />
-        <div class="kss-dots">
-          <span class="kss-dot is-active"></span>
-          <span class="kss-dot"></span>
-          <span class="kss-dot"></span>
-          <span class="kss-dot"></span>
+      <div class="photo-ss" aria-label="子ども琴三味線合奏団の活動写真">
+        <img src="../images/lesson_ensemble01.jpg" alt="子ども琴三味線合奏団" class="pss-img is-active" />
+        <img src="../images/lesson_ensemble02.jpg" alt="子ども琴三味線合奏団" class="pss-img" />
+        <img src="../images/lesson_ensemble03.jpg" alt="子ども琴三味線合奏団" class="pss-img" />
+        <img src="../images/lesson_ensemble04.jpg" alt="子ども琴三味線合奏団" class="pss-img" />
+        <div class="pss-dots">
+          <span class="pss-dot is-active"></span>
+          <span class="pss-dot"></span>
+          <span class="pss-dot"></span>
+          <span class="pss-dot"></span>
         </div>
       </div>
       <div>
@@ -273,20 +282,20 @@
 </footer>
 <script>
 (function(){
-  var ss = document.querySelector('.kodomo-ss');
-  if(!ss) return;
-  var imgs = ss.querySelectorAll('.kss-img');
-  var dots = ss.querySelectorAll('.kss-dot');
-  if(imgs.length < 2) return;
   if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var i = 0;
-  setInterval(function(){
-    imgs[i].classList.remove('is-active');
-    if(dots[i]) dots[i].classList.remove('is-active');
-    i = (i + 1) % imgs.length;
-    imgs[i].classList.add('is-active');
-    if(dots[i]) dots[i].classList.add('is-active');
-  }, 4000);
+  document.querySelectorAll('.photo-ss').forEach(function(ss){
+    var imgs = ss.querySelectorAll('.pss-img');
+    var dots = ss.querySelectorAll('.pss-dot');
+    if(imgs.length < 2) return;
+    var i = 0;
+    setInterval(function(){
+      imgs[i].classList.remove('is-active');
+      if(dots[i]) dots[i].classList.remove('is-active');
+      i = (i + 1) % imgs.length;
+      imgs[i].classList.add('is-active');
+      if(dots[i]) dots[i].classList.add('is-active');
+    }, 4000);
+  });
 })();
 </script>
 <script src="../common.js"></script>
