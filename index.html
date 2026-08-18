@@ -117,7 +117,8 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
 @keyframes floaty3 { 0%,100%{transform:translateY(0) rotate(3deg);} 50%{transform:translateY(-11px) rotate(-8deg);} }
 
 /* ── お知らせバナー（内容がある時だけ先生専用Googleドキュメントから表示） ── */
-.announce-banner { background:var(--green-pale); border-bottom:1px solid var(--border); padding:34px 0; }
+.announce-banner { background:var(--green-pale); border-bottom:1px solid var(--border); padding:34px 0; opacity:0; transform:translateY(-14px); transition:opacity .7s cubic-bezier(0.16,1,0.3,1), transform .7s cubic-bezier(0.16,1,0.3,1); }
+.announce-banner.is-visible { opacity:1; transform:none; }
 .announce-inner { max-width:760px; margin:0 auto; }
 .announce-label { display:inline-block; font-family:'Shippori Mincho',serif; font-size:12px; letter-spacing:.2em; color:#fff; background:var(--green-mid); padding:4px 16px; margin-bottom:16px; }
 .announce-body { font-size:13.5px; line-height:2.1; color:var(--ink-mid); }
@@ -704,7 +705,11 @@ document.querySelectorAll('[data-anim], .reveal-mask, .sec-head').forEach(functi
           body.appendChild(p);
         }
       });
-      document.getElementById('announceBanner').style.display = '';
+      var banner = document.getElementById('announceBanner');
+      banner.style.display = 'block';
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){ banner.classList.add('is-visible'); });
+      });
     })
     .catch(function(){ /* 取得失敗時はバナーを出さないだけで、他の表示には影響させない */ });
 })();
