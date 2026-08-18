@@ -8,6 +8,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
 <link rel="icon" href="images/favicon.ico" sizes="any" />
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+<link rel="canonical" href="https://komaekotoshamisen.github.io/" />
 <meta property="og:site_name" content="狛江琴三味線教室" />
 <meta property="og:title" content="生田流筝曲正音会 狛江琴三味線教室 | こども・大人の初心者歓迎（渡辺正子）" />
 <meta property="og:description" content="東京都狛江市の琴・三味線教室。こどもから大人まで初心者歓迎、楽器の貸出あり。喜多見駅南口から徒歩7分。体験レッスン受付中。" />
@@ -115,6 +116,17 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
 .sb { position:absolute; pointer-events:none; z-index:0; animation:floaty 9s ease-in-out infinite; }
 @keyframes floaty2 { 0%,100%{transform:translateY(0) rotate(-4deg);} 50%{transform:translateY(-18px) rotate(7deg);} }
 @keyframes floaty3 { 0%,100%{transform:translateY(0) rotate(3deg);} 50%{transform:translateY(-11px) rotate(-8deg);} }
+
+/* ── お知らせバナー（内容がある時だけ先生専用Googleドキュメントから表示） ── */
+.announce-banner { background:var(--green-pale); border-bottom:1px solid var(--border); padding:34px 0; opacity:0; transform:translateY(-14px); transition:opacity .7s cubic-bezier(0.16,1,0.3,1), transform .7s cubic-bezier(0.16,1,0.3,1); }
+.announce-banner.is-visible { opacity:1; transform:none; }
+.announce-inner { max-width:760px; margin:0 auto; }
+.announce-label { display:inline-block; font-family:'Shippori Mincho',serif; font-size:12px; letter-spacing:.2em; color:#fff; background:var(--green-mid); padding:4px 16px; margin-bottom:16px; }
+.announce-body { font-size:13.5px; line-height:2.1; color:var(--ink-mid); }
+.announce-body p { margin-bottom:14px; white-space:pre-line; }
+.announce-body p:last-child { margin-bottom:0; }
+.announce-body img { max-width:100%; height:auto; display:block; margin:6px auto 14px; box-shadow:0 8px 24px rgba(46,38,32,0.12); }
+.announce-body a { color:var(--green-dark); text-decoration:underline; text-underline-offset:2px; word-break:break-all; }
 
 /* ── セクション共通 ── */
 .container { max-width:1000px; margin:0 auto; padding:0 28px; }
@@ -311,6 +323,16 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var
     </div>
   </div>
   <div class="hero-scroll"><span>SCROLL</span><i></i></div>
+</section>
+
+<!-- ── お知らせバナー（先生専用Googleドキュメントに内容がある時だけ表示） ── -->
+<section class="announce-banner" id="announceBanner" style="display:none;">
+  <div class="container">
+    <div class="announce-inner">
+      <span class="announce-label">お知らせ</span>
+      <div class="announce-body" id="announceBody"></div>
+    </div>
+  </div>
 </section>
 
 <div class="seigaiha-band"></div>
@@ -651,6 +673,47 @@ var io = new IntersectionObserver(function(entries){
   entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
 }, { threshold: 0.12 });
 document.querySelectorAll('[data-anim], .reveal-mask, .sec-head').forEach(function(el){ io.observe(el); });
+</script>
+<script>
+// お知らせバナー：先生専用Googleドキュメントの中身をGAS経由で取得し、あれば表示（無ければ何もしない）
+(function(){
+  var ANNOUNCE_URL = "https://script.google.com/macros/s/AKfycbyZXcPHWFE1n8mN3hV7uMhgNvEac9SCV2lfTLq02dtqiKW7QA9h-7OXBaxeUbGSalOlow/exec";
+  fetch(ANNOUNCE_URL + '?type=announcement')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if (!data || !data.ok || !data.hasContent || !data.blocks || !data.blocks.length) return;
+      var body = document.getElementById('announceBody');
+      var urlRe = /(https?:\/\/[^\s]+)/g;
+      data.blocks.forEach(function(block){
+        if (block.type === 'image' && block.dataUrl) {
+          var img = document.createElement('img');
+          img.src = block.dataUrl;
+          img.alt = 'お知らせ画像';
+          body.appendChild(img);
+        } else if (block.type === 'text' && block.text) {
+          var p = document.createElement('p');
+          var text = block.text;
+          var lastIndex = 0, m;
+          urlRe.lastIndex = 0;
+          while ((m = urlRe.exec(text)) !== null) {
+            if (m.index > lastIndex) p.appendChild(document.createTextNode(text.slice(lastIndex, m.index)));
+            var a = document.createElement('a');
+            a.href = m[0]; a.textContent = m[0]; a.target = '_blank'; a.rel = 'noopener';
+            p.appendChild(a);
+            lastIndex = m.index + m[0].length;
+          }
+          if (lastIndex < text.length) p.appendChild(document.createTextNode(text.slice(lastIndex)));
+          body.appendChild(p);
+        }
+      });
+      var banner = document.getElementById('announceBanner');
+      banner.style.display = 'block';
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){ banner.classList.add('is-visible'); });
+      });
+    })
+    .catch(function(){ /* 取得失敗時はバナーを出さないだけで、他の表示には影響させない */ });
+})();
 </script>
 </body>
 </html>
